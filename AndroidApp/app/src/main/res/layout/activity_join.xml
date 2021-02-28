@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:isScrollContainer="true"
+    tools:context=".view.Login.JoinActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Toolbar_join"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionButtonStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/LL_joinForm"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/LL_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Toolbar_join">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_border"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:gravity="bottom|center|left"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
+                android:text="회원정보 입력"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/TV_joinProgress"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="7"
+                android:gravity="bottom|center|left"
+                android:paddingBottom="10dp"
+                android:text="(1 / 3)"
+                android:textColor="#C5C5C5"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:id="@+id/LL_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_border"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/TV_email"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="이메일"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/ET_joinEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="#00FFFFFF"
+                android:ems="10"
+                android:hint="이메일"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/BT_checkEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="#00FFFFFF"
+                android:text="중복확인"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LL_nick"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_border"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/TV_nick"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="닉네임"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/ET_nick"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="#00FFFFFF"
+                android:ems="10"
+                android:hint="닉네임"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/BT_checkNick"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="#00FFFFFF"
+                android:text="중복확인"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LL_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_border"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/LL_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/TV_pw"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="비밀번호"
+                    android:textColor="#000000"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/ET_joinPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="9"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="비밀번호"
+                    android:inputType="textPassword"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_passwordChk"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/TV_pwchk"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/ET_joinPasswordChk"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="9"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="비밀번호확인"
+                    android:inputType="textPassword"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="56dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LL_join"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/BT_doJoin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_border_green"
+                android:text="완료" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/BT_previousMenu"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_border_gray"
+            android:text="이전" />
+
+        <Button
+            android:id="@+id/BT_nextMenu"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_border_gray"
+            android:text="다음" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".view.Board.BoardFragment">
+
+    <ProgressBar
+        android:id="@+id/PB_board"
+        style="@android:style/Widget.Material.Light.ProgressBar.Small.Title"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateTint="#B14375" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/boardToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionButtonStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/TL_board"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/TI_board"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시판" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/TI_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공지사항" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/LL_board"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="true"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RV_board"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_notification"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="true"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <ListView
+                    android:id="@+id/LV_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
+                android:id="@+id/FAB_writePost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="20dp"
+                android:fallbackLineSpacing="true"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="글쓰기"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#050505"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:backgroundTint="#CDFFD54B"
+                app:fabIcon="@drawable/pencil_black_24dp"
+                app:fabIconColor="#000000"
+                app:fabSize="normal"
+                app:fabType="roundedSquare" />
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL_snackContainer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</FrameLayout>
