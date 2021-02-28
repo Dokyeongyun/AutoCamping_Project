@@ -6,6 +6,7 @@ import ROOT.VO.Chabak.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service("MemberService")
@@ -18,8 +19,21 @@ public class MemberServiceImpl implements MemberService {
      * 로그인
      */
     @Override
-    public String select(String id, String password) {
-        return memberDAO.select(id, password);
+    public String select(String id, String password, HttpSession session) {
+        String loginResult = memberDAO.select(id, password);
+        if(loginResult.equals(id)){
+            session.setAttribute("id", id);
+        }
+        return loginResult;
+    }
+
+    /**
+     * 로그아웃
+     */
+    @Override
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "logout";
     }
 
     /**

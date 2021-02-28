@@ -23,3 +23,8 @@
     flex: 1 1 auto;
     padding: 1.25rem;
 }
+
+.greeting {
+    color: white;
+    padding: 15px;
+}

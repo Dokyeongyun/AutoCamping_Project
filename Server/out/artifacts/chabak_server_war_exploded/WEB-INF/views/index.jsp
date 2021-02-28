@@ -6,6 +6,7 @@
 <div class="container">
     <h3>베이직 네비게이션입니다.</h3>
     <p>상단 네비게이션 바입니다.</p>
+    <p>${sessionScope.get("id")} 세션</p>
 </div>
 
 <jsp:include page="footer.jsp"/>

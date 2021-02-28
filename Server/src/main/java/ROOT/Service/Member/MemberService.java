@@ -5,6 +5,7 @@ import ROOT.VO.Chabak.Review;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,13 @@ public interface MemberService {
      * 로그인
      */
     @RequestMapping(value = "/login.do")
-    String select(String id, String password);
+    String select(String id, String password, HttpSession session);
+
+    /**
+     * 로그아웃
+     */
+    @RequestMapping("/logout.do")
+    String logout(HttpSession session);
 
     /**
      * 회원가입

@@ -66,6 +66,7 @@ public class MemberDAO {
         List<String> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getString("nickName"), nickName);
 
+        System.out.println(result);
         if(result.size() > 0){
             return "0";
         }else{
@@ -80,6 +81,8 @@ public class MemberDAO {
         String sql = "SELECT memberId FROM cb_member WHERE memberId = ?";
         List<String> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getString("memberId"), memberId);
+
+        System.out.println(memberId+ " 아이디 "+result);
 
         if(result.size() > 0){
             return "0";
