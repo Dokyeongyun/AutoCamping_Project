@@ -4,15 +4,45 @@
 
 <div class="full_container">
     <div class="left_container">
+        <h3>나의활동</h3>
+        <div class="myInfo_container">
+            <div class="myInfo_top">
+                <div class="myInfo_img">
+                    <img src="/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
+                </div>
+                <div class="myInfo_txt">
+                    <div class="profile_txt">${sessionScope.get("id")} 님</div>
+                </div>
+            </div>
+            <div class="myInfo_bottom">
+                <div class="small_txt"><a href="/board/showMyArticle">내가 쓴 글 보기</a></div>
+                <div class="small_txt"><a href="/board/showMyComment">내가 쓴 댓글 보기</a></div>
+                <button class="btn button_left" type="button" style="width: 100%">글 작성하기</button>
+            </div>
+        </div>
 
+        <h3>게시판</h3>
+        <div class="board_container">
+            <div class="board_list_region">
+                <ul class="list-group">
+                    <li class="list-group-item board_list_title">전체글보기</li>
+                    <div class="board_list_space"></div>
+                    <li class="list-group-item">게시판1</li>
+                    <li class="list-group-item">게시판2</li>
+                    <li class="list-group-item">게시판3</li>
+                    <li class="list-group-item">게시판4</li>
+                    <li class="list-group-item">게시판5</li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="right_container">
         <div class="page_title_region">
             <div class="title_txt">전체글보기</div>
             <div class="small_txt">5,000 개의 글</div>
         </div>
-        <div class="board_list_region">
-            <table class="board_list_table">
+        <div class="article_list_region">
+            <table class="article_list_table">
                 <thead>
                 <tr>
                     <th width="10%">게시판이름</th>
@@ -44,7 +74,7 @@
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </div>
-        <div class="board_search_region">
+        <div class="article_search_region">
             <form name="frmSearch" action="" onsubmit="return false;">
                 <select id="searchDate" class="form-control" style="width: 150px; display: inline-block">
                     <option value="all">전체기간</option>
@@ -65,7 +95,6 @@
                 <button class="btn" type="button" style="background-color: #77b7b4; color: white">검색</button>
             </form>
         </div>
-
     </div>
 </div>
 
@@ -86,19 +115,19 @@
         font-size: 15px;
         font-weight: bold;
     }
-    .board_list_region {
+    .article_list_region {
         margin: 0 20px;
         border-bottom: 1px solid black;
     }
-    .board_list_table {
+    .article_list_table {
         width: 100%;
         text-align-last: center;
     }
-    .board_list_table > thead > tr {
+    .article_list_table > thead > tr {
         height: 40px;
         border-bottom: 2px solid #ddd;
     }
-    .board_list_table > tbody > tr {
+    .article_list_table > tbody > tr {
         height: 40px;
         border-bottom: 1px solid #ddd;
     }
@@ -109,10 +138,20 @@
         background-color: #f9f9f8;
         padding: 16px 0 5px;
     }
-    .board_search_region {
+    .article_search_region {
         padding: 16px 0 16px;
         border-top: 1px solid #ebebea;
         background-color: #f9f9f8;
         text-align: center;
+    }
+    .board_list_title {
+        border-top: 2px solid black;
+        padding: 10px 20px;
+        font-size: 17px;
+        font-weight: bold;
+        background-color: white;
+    }
+    .board_list_space {
+        border: 1px solid #ddd;
     }
 </style>
