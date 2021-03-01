@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../header.jsp"/>
@@ -53,13 +54,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>공지사항</td>
-                    <td>게시글 테스트 제목</td>
-                    <td>도경윤</td>
-                    <td>2021-03-01</td>
-                    <td>1</td>
-                </tr>
+                <c:forEach var="i" items="${allArticleList}">
+                    <tr>
+                        <td>게시판이름</td>
+                        <td>${i.title}</td>
+                        <td>${i.nickName}</td>
+                        <td>${i.createTime}</td>
+                        <td>1</td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
