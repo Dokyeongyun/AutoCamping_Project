@@ -58,7 +58,7 @@
                             <%-- 제출하기, 비밀번호 찾기 버튼 --%>
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" id="submitBtn" class="btn btn-primary"> Register </button>
-                                <a href="#" class="btn btn-link">
+                                <a href="/member/login" class="btn btn-link">
                                     Already have an account?
                                 </a>
                             </div>
