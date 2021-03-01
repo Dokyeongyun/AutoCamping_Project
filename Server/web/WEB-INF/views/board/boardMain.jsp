@@ -17,7 +17,7 @@
             <div class="myInfo_bottom">
                 <div class="small_txt"><a href="/board/showMyArticle">내가 쓴 글 보기</a></div>
                 <div class="small_txt"><a href="/board/showMyComment">내가 쓴 댓글 보기</a></div>
-                <button class="btn button_left" type="button" style="width: 100%">글 작성하기</button>
+                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/writeArticle'">글 작성하기</button>
             </div>
         </div>
 
@@ -99,59 +99,3 @@
 </div>
 
 <jsp:include page="../footer.jsp"/>
-
-<style>
-    .page_title_region{
-        border-bottom: 1px solid black;
-        margin: 10px 20px;
-    }
-    .title_txt {
-        padding: 10px;
-        font-size: 25px;
-        font-weight: bolder;
-    }
-    .small_txt {
-        padding: 10px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    .article_list_region {
-        margin: 0 20px;
-        border-bottom: 1px solid black;
-    }
-    .article_list_table {
-        width: 100%;
-        text-align-last: center;
-    }
-    .article_list_table > thead > tr {
-        height: 40px;
-        border-bottom: 2px solid #ddd;
-    }
-    .article_list_table > tbody > tr {
-        height: 40px;
-        border-bottom: 1px solid #ddd;
-    }
-    .pagination_region {
-        margin-top: 30px;
-        width: 100%;
-        text-align-last: center;
-        background-color: #f9f9f8;
-        padding: 16px 0 5px;
-    }
-    .article_search_region {
-        padding: 16px 0 16px;
-        border-top: 1px solid #ebebea;
-        background-color: #f9f9f8;
-        text-align: center;
-    }
-    .board_list_title {
-        border-top: 2px solid black;
-        padding: 10px 20px;
-        font-size: 17px;
-        font-weight: bold;
-        background-color: white;
-    }
-    .board_list_space {
-        border: 1px solid #ddd;
-    }
-</style>

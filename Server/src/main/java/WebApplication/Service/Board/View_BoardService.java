@@ -10,6 +10,12 @@ public interface View_BoardService {
     /**
      * 게시판 메인화면
      */
-    @RequestMapping(value = "/main")
+    @RequestMapping("/main")
     String main();
+
+    /**
+     * 게시글 작성하기
+     */
+    @RequestMapping("/writeArticle")
+    String writeArticle();
 }

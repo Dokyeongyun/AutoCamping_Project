@@ -12,4 +12,12 @@ public class View_BoardServiceImpl implements View_BoardService{
     public String main() {
         return "/board/boardMain";
     }
+
+    /**
+     * 게시글 작성하기
+     */
+    @Override
+    public String writeArticle() {
+        return "/board/writeArticle";
+    }
 }
