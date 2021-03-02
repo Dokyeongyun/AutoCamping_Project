@@ -1,7 +1,9 @@
 package WebApplication.Service.Board;
 
+import ROOT.VO.Article.Article;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -19,4 +21,10 @@ public interface View_BoardService {
      */
     @RequestMapping("/writeArticle")
     String writeArticle();
+
+    /**
+     * 게시글 읽기
+     */
+    @RequestMapping("/showArticle/{articleId}")
+    String showArticle(@PathVariable int articleId, Model model);
 }

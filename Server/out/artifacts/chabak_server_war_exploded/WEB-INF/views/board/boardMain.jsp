@@ -57,7 +57,7 @@
                 <c:forEach var="i" items="${allArticleList}">
                     <tr>
                         <td>게시판이름</td>
-                        <td>${i.title}</td>
+                        <td><a href="/board/showArticle/${i.articleId}">${i.title}</a></td>
                         <td>${i.nickName}</td>
                         <td>${i.createTime}</td>
                         <td>1</td>

@@ -3,6 +3,7 @@ package ROOT.Service.Member;
 import ROOT.DAO.MemberDAO;
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
+import ROOT.VO.Member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
