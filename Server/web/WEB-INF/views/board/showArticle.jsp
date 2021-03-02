@@ -92,3 +92,53 @@
 </div>
 <jsp:include page="../footer.jsp"/>
 
+<script>
+    <%--  댓글쓰기 작업 DB Insert 수행  --%>
+    $("#writeCommentBtn").click(function(){
+        if(!invalidate_check()) {
+            return false;
+        }
+
+        if(${sessionScope.get("id") == null}){
+            alert('로그인 후 이용해주세요.');
+            location.href='/member/login';
+        }
+
+        var comment = {
+            articleId : '${article[0].articleId}',
+            memberId : '${sessionScope.get("id")}',
+            content : $("#commentContent").val()
+        };
+
+        $.ajax({
+            url : "/article/writeComment.do",
+            data : comment,
+            type : "post",
+            dataType : "json",
+            async : true,
+            success : function(resp) {
+                console.log("댓글 작성하기 결과: " + resp);
+                if(resp == "1"){
+                    alert("댓글이 성공적으로 작성되었습니다.");
+                    window.location.reload();
+                }else{
+                    alert("댓글 작성에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+                }
+            },
+            error : function() {
+                alert("error")
+            }
+        });
+    });
+
+    <!-- 유효성 검사 -->
+    function invalidate_check(){
+        // 댓글 내용 공백 확인
+        if($("#commentContent").val() == ""){
+            alert("내용을 입력해주세요.");
+            $("#commentContent").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
