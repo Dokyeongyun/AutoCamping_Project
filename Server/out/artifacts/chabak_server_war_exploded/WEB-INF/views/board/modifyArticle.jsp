@@ -4,8 +4,8 @@
 
 <div class="container">
     <div class="page_title_region">
-        <div class="title_txt">글 작성하기</div>
-        <button type="button" class="btn button_right" style="margin-top: 10px;" id="writeArticleBtn">등록</button>
+        <div class="title_txt">글 수정하기</div>
+        <button type="button" class="btn button_right" style="margin-top: 10px;" id="modifyArticleBtn">수정하기</button>
     </div>
     <div class="page_content_region">
         <select id="board_type" class="form-control input_box" style="width: 50%">
@@ -17,8 +17,9 @@
             <option value="board4">게시판4</option>
             <option value="board5">게시판5</option>
         </select>
-        <input type="text" class="form-control input_box" id="title" placeholder="제목을 입력해 주세요."/>
-        <textarea id="content" class="form-control" rows="20" placeholder="내용을 입력해 주세요." style="padding: 20px; margin-bottom: 20px;"></textarea>
+        <input type="text" class="form-control input_box" id="title" placeholder="제목을 입력해 주세요."
+            value="${article[0].title}"/>
+        <textarea id="content" class="form-control" rows="20" placeholder="내용을 입력해 주세요." style="padding: 20px; margin-bottom: 20px;">${article[0].content}</textarea>
     </div>
 </div>
 
@@ -26,7 +27,7 @@
 
 <script>
     <%--  글쓰기 작업 DB Insert 수행  --%>
-    $("#writeArticleBtn").click(function(){
+    $("#modifyArticleBtn").click(function(){
         if(!invalidate_check()) {
             return false;
         }
@@ -40,21 +41,21 @@
             title : $("#title").val(),
             content : $("#content").val(),
             fileName : "",
-            memberId : '${sessionScope.get("id")}'
+            articleId : '${article[0].articleId}'
         };
         $.ajax({
-            url : "/article/writeArticle.do",
+            url : "/article/updateArticle.do",
             data : article,
             type : "post",
             dataType : "json",
             async : true,
             success : function(resp) {
-                console.log("글 작성하기 결과: " + resp);
+                console.log("글 수정하기 결과: " + resp);
                 if(resp == "1"){
-                    alert("게시글이 성공적으로 작성되었습니다.");
+                    alert("게시글이 성공적으로 수정되었습니다.");
                     location.href="/board/main";
                 }else{
-                    alert("게시글 작성에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+                    alert("게시글 수정에 실패했습니다. 잠시 후 다시 시도해 주세요.");
                 }
             },
             error : function() {

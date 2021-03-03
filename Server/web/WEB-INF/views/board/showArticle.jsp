@@ -49,6 +49,28 @@
                     <img src="/static/img/profile.PNG" class="profile_sm"/>
                     <div class="article_writer_txt">${article[0].nickName}</div>
                     <div class="article_reg_time_txt">${article[0].createTime}    조회수 : 1</div>
+                    <div class="ArticleTool">
+                        <ul style="list-style: none">
+                            <li style="float: left; margin-right: 10px;">
+                                <button type="button" class="btn btn-primary">댓글  ${commentList.size()}개</button>
+                            </li>
+                            <li style="float: left; margin-right: 10px;">
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">메뉴</button>
+                                    <ul class="dropdown-menu">
+                                        <c:if test="${article[0].memberId == sessionScope.get('id')}">
+                                            <li><a class="dropdown-item" href="/board/modifyArticle/${article[0].articleId}">수정하기</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="deleteArticle()">삭제하기</a></li>
+                                        </c:if>
+                                        <c:if test="${article[0].memberId != sessionScope.get('id')}">
+                                            <li><a class="dropdown-item" href="#">스크랩하기</a></li>
+                                            <li><a class="dropdown-item" href="#">URL복사</a></li>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="article_info_content_region">
@@ -56,7 +78,7 @@
             </div>
             <div class="article_comment_region">
                 <div class="article_comment_header_region">
-                    <div class="article_comment_header_txt">댓글</div>
+                    <div class="article_comment_header_txt">댓글  ${commentList.size()}개</div>
                 </div>
                 <div class="article_comment_list_region">
                     <c:forEach var="i" items="${commentList}">
@@ -91,6 +113,15 @@
     </div>
 </div>
 <jsp:include page="../footer.jsp"/>
+<style>
+    .ArticleTool {
+        position: absolute;
+        right: 70px;
+        bottom: 15px;
+        font-size: 13px;
+        line-height: 18px;
+    }
+</style>
 
 <script>
     <%--  댓글쓰기 작업 DB Insert 수행  --%>
@@ -140,5 +171,34 @@
             return false;
         }
         return true;
+    }
+
+    function deleteArticle() {
+        if(${sessionScope.get("id") == null}){
+            alert('로그인 후 이용해주세요.');
+            location.href='/member/login';
+        }
+        var article = {
+            articleId : '${article[0].articleId}'
+        };
+        $.ajax({
+            url : "/article/deleteArticle.do",
+            data : article,
+            type : "post",
+            dataType : "json",
+            async : true,
+            success : function(resp) {
+                console.log("글 삭제하기 결과: " + resp);
+                if(resp == "1"){
+                    alert("게시글이 성공적으로 삭제되었습니다.");
+                    location.href="/board/main";
+                }else{
+                    alert("게시글 삭제에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+                }
+            },
+            error : function() {
+                alert("error")
+            }
+        });
     }
 </script>

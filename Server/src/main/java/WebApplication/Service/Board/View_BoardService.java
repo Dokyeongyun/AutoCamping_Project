@@ -27,4 +27,10 @@ public interface View_BoardService {
      */
     @RequestMapping("/showArticle/{articleId}")
     String showArticle(@PathVariable int articleId, Model model);
+
+    /**
+     * 게시글 수정하기
+     */
+    @RequestMapping("/modifyArticle/{articleId}")
+    String modifyArticle(@PathVariable int articleId, Model model);
 }

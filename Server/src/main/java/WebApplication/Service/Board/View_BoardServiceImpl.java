@@ -46,4 +46,17 @@ public class View_BoardServiceImpl implements View_BoardService{
         model.addAttribute("commentList", commentList);
         return "/board/showArticle";
     }
+
+    /**
+     * 게시글 수정하기
+     * @param articleId 수정할 게시글 ID
+     * @param model View로 보여줄 게시글 정보
+     * @return View Name
+     */
+    @Override
+    public String modifyArticle(int articleId, Model model) {
+        List<Article> article = articleDAO.getArticle(articleId);
+        model.addAttribute("article", article);
+        return "/board/modifyArticle";
+    }
 }

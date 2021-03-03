@@ -24,16 +24,6 @@
 
 <jsp:include page="../footer.jsp"/>
 
-<style>
-    .page_content_region {
-        padding: 20px;
-    }
-    .input_box {
-        height: 40px;
-        margin-bottom: 10px;
-    }
-</style>
-
 <script>
     <%--  글쓰기 작업 DB Insert 수행  --%>
     $("#writeArticleBtn").click(function(){
