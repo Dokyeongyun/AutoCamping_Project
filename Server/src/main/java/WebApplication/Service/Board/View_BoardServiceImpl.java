@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("View_BoardService")
 public class View_BoardServiceImpl implements View_BoardService{
@@ -58,5 +59,18 @@ public class View_BoardServiceImpl implements View_BoardService{
         List<Article> article = articleDAO.getArticle(articleId);
         model.addAttribute("article", article);
         return "/board/modifyArticle";
+    }
+
+    /**
+     * 게시글 검색하기 (제목+내용)
+     */
+    @Override
+    public String getArticleByKeyword(String keyword, Model model) {
+        List<Article> list = articleDAO.get().stream().filter(article -> {
+            String text = article.getContent() + article.getTitle();
+            return text.contains(keyword);
+        }).collect(Collectors.toList());
+        model.addAttribute("allArticleList", list);
+        return "/board/boardSearchResult";
     }
 }

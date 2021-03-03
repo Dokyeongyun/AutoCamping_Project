@@ -40,7 +40,7 @@
     <div class="right_container">
         <div class="page_title_region">
             <div class="title_txt">전체글보기</div>
-            <div class="small_txt">5,000 개의 글</div>
+            <div class="small_txt">${allArticleList.size()}개의 글</div>
         </div>
         <div class="article_list_region">
             <table class="article_list_table">
@@ -78,7 +78,7 @@
             </ul>
         </div>
         <div class="article_search_region">
-            <form name="frmSearch" action="" onsubmit="return false;">
+            <form name="frmSearch" action="/board/getArticleByKeyword" method="get">
                 <select id="searchDate" class="form-control" style="width: 150px; display: inline-block">
                     <option value="all">전체기간</option>
                     <option value="1d">1일</option>
@@ -94,11 +94,32 @@
                     <option value="comment">댓글내용</option>
                     <option value="comment_writer">댓글작성자</option>
                 </select>
-                <input type="text" id="searchWord" class="form-control" placeholder="검색어를 입력해주세요" style="width: 200px; display: inline-block"/>
-                <button class="btn" type="button" style="background-color: #77b7b4; color: white">검색</button>
+                <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요" style="width: 200px; display: inline-block"/>
+                <button class="btn" type="button" id="searchArticleBtn" style="background-color: #77b7b4; color: white">검색</button>
             </form>
         </div>
     </div>
 </div>
 
 <jsp:include page="../footer.jsp"/>
+
+<script>
+    $("#searchArticleBtn").click(function(){
+        if(!invalidate_check()) {
+            return false;
+        }
+        var keyword = $("#searchKeyword").val();
+        location.href='/board/getArticleByKeyword/'+keyword;
+    });
+
+    <!-- 유효성 검사 -->
+    function invalidate_check(){
+        // 댓글 내용 공백 확인
+        if($("#searchKeyword").val() == ""){
+            alert("검색어을 입력해주세요.");
+            $("#searchKeyword").focus();
+            return false;
+        }
+        return true;
+    }
+</script>

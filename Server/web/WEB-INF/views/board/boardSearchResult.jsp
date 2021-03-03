@@ -39,7 +39,7 @@
     </div>
     <div class="right_container">
         <div class="page_title_region">
-            <div class="title_txt">전체글보기</div>
+            <div class="title_txt">검색결과</div>
             <div class="small_txt">${allArticleList.size()}개의 글</div>
         </div>
         <div class="article_list_region">
