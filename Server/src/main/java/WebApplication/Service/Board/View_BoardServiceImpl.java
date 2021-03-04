@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,5 +73,17 @@ public class View_BoardServiceImpl implements View_BoardService{
         }).collect(Collectors.toList());
         model.addAttribute("allArticleList", list);
         return "/board/boardSearchResult";
+    }
+
+    /**
+     * 내가 쓴 글 보기
+     * @param model
+     * @return
+     */
+    @Override
+    public String getArticleByKeyword(Model model, HttpSession session) {
+        List<Article> list = articleDAO.getArticles((String) session.getAttribute("id"));
+        model.addAttribute("myArticleList", list);
+        return "/board/showMyArticle";
     }
 }

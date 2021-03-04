@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/board")
 public interface View_BoardService {
@@ -39,4 +41,10 @@ public interface View_BoardService {
      */
     @RequestMapping("/getArticleByKeyword/{keyword}")
     String getArticleByKeyword(@PathVariable String keyword, Model model);
+
+    /**
+     * 내가 쓴 글 보기
+     */
+    @RequestMapping("/showMyArticle")
+    String getArticleByKeyword(Model model, HttpSession session);
 }

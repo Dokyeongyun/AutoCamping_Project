@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="myInfo_bottom">
-                <div class="small_txt"><a href="/board/showMyArticle">내가 쓴 글 보기</a></div>
-                <div class="small_txt"><a href="/board/showMyComment">내가 쓴 댓글 보기</a></div>
+                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyArticle'">내가 쓴 글 보기</button>
+                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyComment'">내가 쓴 댓글 보기</button>
                 <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/writeArticle'">글 작성하기</button>
             </div>
         </div>

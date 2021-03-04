@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <jsp:include page="../header.jsp"/>
 
 <div class="full_container">
@@ -39,8 +38,8 @@
     </div>
     <div class="right_container">
         <div class="page_title_region">
-            <div class="title_txt">전체글보기</div>
-            <div class="small_txt">${allArticleList.size()}개의 글</div>
+            <div class="title_txt">내가 쓴 글</div>
+            <div class="small_txt">${myArticleList.size()}개의 글</div>
         </div>
         <div class="article_list_region">
             <table class="article_list_table">
@@ -54,7 +53,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="i" items="${allArticleList}">
+                <c:forEach var="i" items="${myArticleList}">
                     <tr>
                         <td>게시판이름</td>
                         <td><a href="/board/showArticle/${i.articleId}">${i.title}</a></td>

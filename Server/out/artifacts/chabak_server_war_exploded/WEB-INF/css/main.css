@@ -63,6 +63,7 @@
     background-color: #77b7b4;
     color: white;
     font-weight: bolder;
+    margin-bottom: 10px;
 }
 .button_left {
     float: left;
@@ -70,5 +71,6 @@
     background-color: #77b7b4;
     color: white;
     font-weight: bolder;
+    margin-bottom: 10px;
 }
 

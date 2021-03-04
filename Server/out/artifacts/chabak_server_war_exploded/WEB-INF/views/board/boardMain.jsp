@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="myInfo_bottom">
-                <div class="small_txt"><a href="/board/showMyArticle">내가 쓴 글 보기</a></div>
-                <div class="small_txt"><a href="/board/showMyComment">내가 쓴 댓글 보기</a></div>
+                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyArticle'">내가 쓴 글 보기</button>
+                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyComment'">내가 쓴 댓글 보기</button>
                 <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/writeArticle'">글 작성하기</button>
             </div>
         </div>
@@ -78,25 +78,23 @@
             </ul>
         </div>
         <div class="article_search_region">
-            <form name="frmSearch" action="/board/getArticleByKeyword" method="get">
-                <select id="searchDate" class="form-control" style="width: 150px; display: inline-block">
-                    <option value="all">전체기간</option>
-                    <option value="1d">1일</option>
-                    <option value="1w">1주</option>
-                    <option value="1m">1개월</option>
-                    <option value="6m">6개월</option>
-                    <option value="1y">1년</option>
-                </select>
-                <select id="searchBy" class="form-control" style="width: 150px; display: inline-block">
-                    <option value="titleAndContent">제목+내용</option>
-                    <option value="title">제목만</option>
-                    <option value="writer">글작성자</option>
-                    <option value="comment">댓글내용</option>
-                    <option value="comment_writer">댓글작성자</option>
-                </select>
-                <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요" style="width: 200px; display: inline-block"/>
-                <button class="btn" type="button" id="searchArticleBtn" style="background-color: #77b7b4; color: white">검색</button>
-            </form>
+            <select id="searchDate" class="form-control" style="width: 150px; display: inline-block">
+                <option value="all">전체기간</option>
+                <option value="1d">1일</option>
+                <option value="1w">1주</option>
+                <option value="1m">1개월</option>
+                <option value="6m">6개월</option>
+                <option value="1y">1년</option>
+            </select>
+            <select id="searchBy" class="form-control" style="width: 150px; display: inline-block">
+                <option value="titleAndContent">제목+내용</option>
+                <option value="title">제목만</option>
+                <option value="writer">글작성자</option>
+                <option value="comment">댓글내용</option>
+                <option value="comment_writer">댓글작성자</option>
+            </select>
+            <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요" style="width: 200px; display: inline-block"/>
+            <button class="btn" type="button" id="searchArticleBtn" style="background-color: #77b7b4; color: white">검색</button>
         </div>
     </div>
 </div>
