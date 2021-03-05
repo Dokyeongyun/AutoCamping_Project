@@ -2,6 +2,7 @@
     width: 100%;
     min-height: 100%;
     padding: 0 30px;
+    overflow: hidden;
 }
 .left_container {
     width: 20%;
