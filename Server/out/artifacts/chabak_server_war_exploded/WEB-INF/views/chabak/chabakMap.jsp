@@ -42,6 +42,54 @@
 
     <!-- 지도 표시할 div태그 -->
     <div id="map" class="map_container"></div>
+
+    <%-- 검색 결과를 출력할 container --%>
+    <c:if test="${searchProvince != 'all'}">
+        <div>
+            <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">검색 결과</div>
+            <c:if test="${searchResult.size()!=0}">
+                <div class="title_sub_txt">"${searchProvince}" 검색 결과 : 총 ${searchResult.size()} 개의 결과가 있습니다.</div>
+            </c:if>
+            <c:if test="${searchResult.size()==0}">
+                <div class="title_sub_txt">"${searchProvince}" 검색 결과가 없습니다.</div>
+            </c:if>
+        </div>
+
+        <%-- 차박지 정보 한 줄에 3개씩 출력하기 --%>
+        <div class="chabakjiList_row">
+            <c:forEach items="${searchResult}" var="i">
+                <div class="chabakjiInfo">
+                    <div class="chabakji_img_region" >
+                        <c:if test="${i.filePath == 'No image'}">
+                            <img class="chabakji_img" src="/static/img/no_image_icon.PNG"/>
+                        </c:if>
+                        <c:if test="${i.filePath != 'No image'}">
+                            <img class="chabakji_img" src="${i.filePath}"/>
+                        </c:if>
+                    </div>
+                    <div class="chabakji_info_region">
+                        <div class="chabakji_name_txt">${i.placeName}</div>
+                        <div class="iconAndText_Region">
+                            <img class="icon" src="/static/img/address_icon.PNG">
+                            <div class="icon_text">${i.address}</div>
+                        </div>
+                        <div class="iconAndText_Region">
+                            <img class="icon" src="/static/img/star_icon.PNG">
+                            <div class="icon_text">${i.avg_point} / 5.0</div>
+                        </div>
+                        <div class="iconAndText_Region">
+                            <img class="icon" src="/static/img/phone_icon.PNG">
+                            <div class="icon_text">${i.phone_number}</div>
+                        </div>
+                        <div class="iconAndText_Region">
+                            <img class="icon" src="/static/img/message_icon.PNG">
+                            <div class="icon_text">${i.introduce}</div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </c:if>
 </div>
 </body>
 
@@ -80,7 +128,7 @@
 
     // 8) 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤 생성
     var mapTypeControl = new kakao.maps.MapTypeControl();
-    map.addControl(mapTypeControl, kakao.maps.ControlPosition.RIGHT);
+    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
     // 9) 지도 확대 축소를 제어할 수 있는 줌 컨트롤 생성
     var zoomControl = new kakao.maps.ZoomControl();
@@ -184,7 +232,7 @@
                 '    <ul>' +
                 '        <li class="up">' +
                 '            <span class="number">총 ' + count + '개의 차박지</span>' +
-                '            <input type="button" value="클릭" onclick="searchInAndroid()"/>' +
+                '            <input type="button" value="클릭" onclick="provinceSearch()"/>' +
                 '        </li>' +
                 '    </ul>' +
                 '</div>';
@@ -227,13 +275,11 @@
         return new kakao.maps.LatLng(x/area, y/area);
     }
 
-    // 4) 안드로이드 앱에서 각 도의 차박지 정보 보기 버튼 클릭시
-    function searchInAndroid() {
-        console.log(nameTemp);
-        var temp = 'app://_' + encodeURI(nameTemp, "UTF-8");
-        console.log(temp);
-        window.location.href = temp;
+    // 4) 도, 특별시, 광역시 별 차박지 리스트 읽어오기
+    function provinceSearch() {
+        location.href = "/chabak/map?province="+encodeURI(nameTemp, "UTF-8");
     }
+
 </script>
 
 <%--작업 수행--%>

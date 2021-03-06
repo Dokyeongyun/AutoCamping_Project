@@ -7,7 +7,7 @@
     <div style="border-top: 1px solid black; border-bottom: 1px solid black; margin-top: -22px;">
         <ul class="ul_center">
             <li class="li_center"><a href="#">차박지검색</a></li>
-            <li class="li_center"><a href="/chabak/map">차박지지도</a></li>
+            <li class="li_center"><a href="/chabak/map?province=all">차박지지도</a></li>
             <li class="li_center"><a href="#">차박지순위</a></li>
             <li class="li_center"><a href="#">차박후기</a></li>
         </ul>

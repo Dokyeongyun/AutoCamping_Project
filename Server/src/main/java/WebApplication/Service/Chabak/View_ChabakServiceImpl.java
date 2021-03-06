@@ -34,9 +34,12 @@ public class View_ChabakServiceImpl implements View_ChabakService{
      * 차박지 지도화면
      */
     @Override
-    public String chabakMap(Model model) {
+    public String chabakMap(Model model, String province) {
         Map<String, BestAndCount> map = chabakDAO.getBestAndCount();
-        model.addAttribute("BestAndCount", map );
+        List<Chabak> list = chabakDAO.getProvinceChabakList(province);
+        model.addAttribute("BestAndCount", map);
+        model.addAttribute("searchResult", list);
+        model.addAttribute("searchProvince", province);
         return "/chabak/chabakMap";
     }
 }
