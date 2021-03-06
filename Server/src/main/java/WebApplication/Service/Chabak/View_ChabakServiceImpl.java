@@ -2,14 +2,17 @@ package WebApplication.Service.Chabak;
 
 import ROOT.DAO.ArticleDAO;
 import ROOT.DAO.ChabakDAO;
+import ROOT.VO.Chabak.BestAndCount;
 import ROOT.VO.Chabak.Chabak;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("View_ChabakService")
 public class View_ChabakServiceImpl implements View_ChabakService{
@@ -25,5 +28,15 @@ public class View_ChabakServiceImpl implements View_ChabakService{
         List<Chabak> list = chabakDAO.getAllChabakList();
         model.addAttribute("chabakList", list);
         return "/chabak/chabakMain";
+    }
+
+    /**
+     * 차박지 지도화면
+     */
+    @Override
+    public String chabakMap(Model model) {
+        Map<String, BestAndCount> map = chabakDAO.getBestAndCount();
+        model.addAttribute("BestAndCount", map );
+        return "/chabak/chabakMap";
     }
 }

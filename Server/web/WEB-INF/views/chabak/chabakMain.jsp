@@ -3,22 +3,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../header.jsp"/>
+<jsp:include page="../chabakHeader.jsp"/>
+
 <body style="background-color: black">
-<nav class="navbar">
-    <div style="border-top: 1px solid black; border-bottom: 1px solid black; margin-top: -22px;">
-        <ul class="ul_center">
-            <li class="li_center"><a href="#">차박지검색</a></li>
-            <li class="li_center"><a href="#">차박지지도</a></li>
-            <li class="li_center"><a href="#">차박지순위</a></li>
-            <li class="li_center"><a href="#">차박후기</a></li>
-        </ul>
-    </div>
-</nav>
-<div class="sub_bg_w">
-    <div class="search_bg_01">
-        <span class="skip">캠핑장검색의 배경이미지</span>
-    </div>
-</div>
 <div class="container chabakMain_Container">
     <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">차박지를 검색해보세요.</div>
     <div class="small_txt">지역</div>
@@ -56,13 +43,21 @@
 <%-- 추천 차박지 보여주기, 차박지 랭킹 등 --%>
 <div class="container chabakMain_Container">
     <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">추천 차박지</div>
+    <div class="title_sub_txt">총 ${chabakList.size()} 개의 차박지가 있습니다.</div>
 
     <%-- 차박지 정보 한 줄에 3개씩 출력하기 --%>
     <div class="chabakjiList_row">
         <c:forEach items="${chabakList}" var="i">
             <div class="chabakjiInfo">
                 <div class="chabakji_img_region" >
-                    <img class="chabakji_img" src="/static/img/camping1.PNG"/>
+                    <c:if test="${i.filePath == 'No image'}">
+                        <img class="chabakji_img" src="/static/img/no_image_icon.PNG"/>
+                    </c:if>
+                    <c:if test="${i.filePath != 'No image'}">
+                        <img class="chabakji_img" src="${i.filePath}"/>
+                    </c:if>
+                </div>
+                <div class="chabakji_info_region">
                     <div class="chabakji_name_txt">${i.placeName}</div>
                     <div class="iconAndText_Region">
                         <img class="icon" src="/static/img/address_icon.PNG">

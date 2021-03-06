@@ -6,7 +6,7 @@
     <h3>Login</h3>
     <main class="login-form">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="margin-bottom: 30px;">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">Login</div>

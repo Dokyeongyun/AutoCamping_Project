@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface View_ChabakService {
 
     /**
-     * 게시판 메인화면
+     * 차박지 메인화면
      */
     @RequestMapping("/main")
     String main(Model model);
+
+    /**
+     * 차박지 지도화면
+     */
+    @RequestMapping("/map")
+    String chabakMap(Model model);
 }
