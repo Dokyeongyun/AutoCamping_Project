@@ -4,6 +4,8 @@ import ROOT.DAO.ArticleDAO;
 import ROOT.DAO.ChabakDAO;
 import ROOT.VO.Chabak.BestAndCount;
 import ROOT.VO.Chabak.Chabak;
+import ROOT.VO.Chabak.facility.Fishing;
+import ROOT.VO.Chabak.facility.Toilet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -44,12 +46,16 @@ public class View_ChabakServiceImpl implements View_ChabakService{
     }
 
     /**
-     * 차박지 상세정보
+     * 차박지 상세정보 + 주변 시설 정보
      */
     @Override
     public String detailInfo(Model model, int placeId) {
         List<Chabak> chabakDetail = chabakDAO.getOne(placeId);
+        List<Toilet> toiletList = chabakDAO.getToilets(placeId);
+        List<Fishing> fishingList = chabakDAO.getFishings(placeId);
         model.addAttribute("chabakDetail", chabakDetail);
+        model.addAttribute("toiletList", toiletList);
+        model.addAttribute("fishingList", fishingList);
         return "/chabak/chabakDetail";
     }
 }

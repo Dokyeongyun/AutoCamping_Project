@@ -77,9 +77,12 @@
 
 <jsp:include page="../footer.jsp"/>
 <script>
+    // 차박지 위치
+    var placePosition = new kakao.maps.LatLng(${chabakDetail[0].latitude}, ${chabakDetail[0].longitude});
+
     // 지도 요소 띄우기
     var mapContainer = document.getElementById('map');
-    var mapOption = {center: new kakao.maps.LatLng(${chabakDetail[0].latitude}, ${chabakDetail[0].longitude})}; // 지도의 중심좌표
+    var mapOption = {center: placePosition, level: 4}; // 지도의 중심좌표
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
     // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤 생성
@@ -89,101 +92,113 @@
     // 지도 확대 축소를 제어할 수 있는 줌 컨트롤 생성
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-</script>
-<style>
-    @font-face {
-        src : url("/static/fonts/BMJUA_ttf.ttf");
-        font-family: "BM_Jua";
-    }
-    .cbj_detail_top {
-        background-image: url('/static/img/img2.PNG');
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-position: center center;
-        border-radius: 10px;
-        overflow: hidden;
-        margin: 20px 0;
-        opacity: 90%;
-        padding: 20px 30px;
-    }
-    .cbj_detail_top_upper {
-        border-bottom: 2px solid lavenderblush;
-        padding: 40px 10px;
-    }
-    .cbj_placeName_txt {
-        font-size: 45px;
-        font-family: "BM_Jua";
-        line-height: 40px;
-        color: black !important;
-        text-shadow: 5px 5px 5px darkgrey;
-    }
-    .cbj_detail_top_lower {
-        padding: 20px;
-    }
-    .circle_img {
-        border-radius: 15px;
-        object-fit: cover;
-        width: 50px;
-        background-color: white;
-        padding: 12px;
-        overflow: hidden;
-        cursor: pointer;
-    }
-    .cbj_detail_bottom{
-        overflow: hidden;
-    }
-    .cbj_detail_map_region{
-        overflow: hidden;
-    }
-    .cbj_detail_img_region {
-        width: 50%;
-        padding: 10px;
-        float: left;
-    }
-    .cbj_detail_info_region {
-        padding: 10px;
-        width: 50%;
-        float: right;
-    }
-    .cbj_detail_info_table {
-        width: 100%;
-        font-size: 14px;
-    }
-    .cbj_detail_info_table > tbody > tr{
-        width: 100%;
-        font-size: 14px;
-    }
-    .cbj_detail_info_table > tbody > tr > th {
-        padding: 11px 10px;
-        border-bottom: 1px solid #c8c8c8;
-        text-align: left;
-        color: #000;
-        line-height: 25px;
-        width: 40%;
-    }
-    .cbj_detail_info_table > tbody > tr > td {
-        padding: 11px 10px;
-        border-bottom: 1px solid #c8c8c8;
-        line-height: 25px;
-    }
-    .cbj_detail_img {
-        width: 100%;
-        border-radius: 10px;
-    }
-    .cbj_detail_btn_region {
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-    }
-    .cbj_detail_btn {
-        width: 45%;
-        border-radius: 10px;
-        margin: 0 10px;
-        height: 40px;
-        opacity: 80%;
-    }
-    .sub_title_txt {
-        font-size: 18px; font-family: 'BM_Jua';
-    }
-</style>
 
+    // 차박지 위치에 커스텀 마커 띄우기
+    var imageSrc = '/static/img/campingcar_marker_icon.PNG',
+        imageSize = new kakao.maps.Size(48, 60),
+        imageOption = {};
+
+    // 마커 이미지정보를 가지고 있는 마커이미지 생성
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+    // 마커 생성
+    var marker = new kakao.maps.Marker({
+        position: placePosition,
+        image: markerImage
+    });
+
+    // 지도 위에 마커 설정
+    marker.setMap(map);
+
+    // 커스텀 오버레이 내용
+    var content = '<div class="customoverlay">' +
+        '  <a href="" target="_blank">' +
+        '    <span class="title">${chabakDetail[0].placeName}</span>' +
+        '  </a>' +
+        '</div>';
+
+    // 커스텀 오버레이 생성
+    var customOverlay = new kakao.maps.CustomOverlay({
+        map: map,
+        position: placePosition,
+        content: content,
+        yAnchor: 1
+    });
+
+    // 화장실 마커 표시 및 정보 띄우기
+    var toiletPositions = [];
+
+    <c:forEach var="i" items="${toiletList}">
+    toiletPositions.push({
+        content: '<div style="padding:5px; background-color: white; border: 1px solid black">'+
+            '<div>주소: ${i.address}</div>' +
+            '<div>개방시간: ${i.open_time}</div></div>',
+        title: '${i.address}',
+        latlng: new kakao.maps.LatLng(${i.latitude}, ${i.longitude})
+    });
+    </c:forEach>
+
+    var toiletImageSrc = '/static/img/toilet_marker_icon.PNG';
+
+    for (var i = 0; i < toiletPositions.length; i ++) {
+        var toiletImageSize = new kakao.maps.Size(36, 42);
+        var toiletImage = new kakao.maps.MarkerImage(toiletImageSrc, toiletImageSize);
+        var toiletMarker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: toiletPositions[i].latlng, // 마커의 위치
+            image : toiletImage // 마커 이미지
+        });
+
+        var toiletInfowindow = new kakao.maps.InfoWindow({
+            content: toiletPositions[i].content // 인포윈도우에 표시할 내용
+        });
+
+        (function(toiletMarker, toiletInfowindow) {
+            kakao.maps.event.addListener(toiletMarker, 'mouseover', function() {
+                toiletInfowindow.open(map, toiletMarker);
+            });
+            kakao.maps.event.addListener(toiletMarker, 'mouseout', function() {
+                toiletInfowindow.close();
+            });
+        })(toiletMarker, toiletInfowindow);
+    }
+
+    // 낚시터 마커 표시 및 정보 띄우기
+    var fishingPositions = [];
+
+    <c:forEach var="i" items="${fishingList}">
+    fishingPositions.push({
+        content: '<div style="padding:5px; background-color: white; border: 1px solid black">'+
+            '<div>낚시터명: ${i.name}</div>' +
+            '<div>낚시터유형: ${i.type}</div>' +
+            '<div>전화번호: ${i.phone}</div></div>',
+        title: '${i.address}',
+        latlng: new kakao.maps.LatLng(${i.latitude}, ${i.longitude})
+    });
+    </c:forEach>
+
+    var fishingImageSrc = '/static/img/fishing_marker_icon.PNG';
+
+    for (var j = 0; j < fishingPositions.length; j++) {
+        var fishingImageSize = new kakao.maps.Size(36, 42);
+        var fishingImage = new kakao.maps.MarkerImage(fishingImageSrc, fishingImageSize);
+        var fishingMarker = new kakao.maps.Marker({
+            map: map, // 마커를 표시할 지도
+            position: fishingPositions[j].latlng, // 마커의 위치
+            image: fishingImage // 마커 이미지
+        });
+
+        var fishingInfowindow = new kakao.maps.InfoWindow({
+            content: fishingPositions[j].content // 인포윈도우에 표시할 내용
+        });
+
+        (function(fishingMarker, fishingInfowindow) {
+            kakao.maps.event.addListener(fishingMarker, 'mouseover', function() {
+                fishingInfowindow.open(map, fishingMarker);
+            });
+            kakao.maps.event.addListener(fishingMarker, 'mouseout', function() {
+                fishingInfowindow.close();
+            });
+        })(fishingMarker, fishingInfowindow);
+    }
+</script>
