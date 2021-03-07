@@ -48,7 +48,7 @@
     <%-- 차박지 정보 한 줄에 3개씩 출력하기 --%>
     <div class="chabakjiList_row">
         <c:forEach items="${chabakList}" var="i">
-            <div class="chabakjiInfo">
+            <div class="chabakjiInfo" onclick="location.href='/chabak/detailInfo/${i.placeId}'">
                 <div class="chabakji_img_region" >
                     <c:if test="${i.filePath == 'No image'}">
                         <img class="chabakji_img" src="/static/img/no_image_icon.PNG"/>

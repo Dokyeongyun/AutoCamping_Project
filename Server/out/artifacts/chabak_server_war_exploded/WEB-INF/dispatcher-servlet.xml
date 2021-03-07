@@ -17,6 +17,7 @@
     <mvc:resources mapping="/static/js/**" location="/WEB-INF/js/"/>
     <mvc:resources mapping="/static/css/**" location="/WEB-INF/css/"/>
     <mvc:resources mapping="/static/img/**" location="/WEB-INF/img/"/>
+    <mvc:resources mapping="/static/fonts/**" location="/WEB-INF/fonts/"/>
     <context:component-scan base-package="ROOT"/>
     <context:component-scan base-package="WebApplication"/>
 

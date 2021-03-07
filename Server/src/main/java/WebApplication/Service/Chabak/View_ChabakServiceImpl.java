@@ -42,4 +42,14 @@ public class View_ChabakServiceImpl implements View_ChabakService{
         model.addAttribute("searchProvince", province);
         return "/chabak/chabakMap";
     }
+
+    /**
+     * 차박지 상세정보
+     */
+    @Override
+    public String detailInfo(Model model, int placeId) {
+        List<Chabak> chabakDetail = chabakDAO.getOne(placeId);
+        model.addAttribute("chabakDetail", chabakDetail);
+        return "/chabak/chabakDetail";
+    }
 }

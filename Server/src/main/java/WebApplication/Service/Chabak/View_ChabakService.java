@@ -21,4 +21,10 @@ public interface View_ChabakService {
      */
     @RequestMapping("/map")
     String chabakMap(Model model, @RequestParam("province") String province);
+
+    /**
+     * 차박지 상세정보
+     */
+    @RequestMapping("/detailInfo/{placeId}")
+    String detailInfo(Model model, @PathVariable int placeId);
 }
