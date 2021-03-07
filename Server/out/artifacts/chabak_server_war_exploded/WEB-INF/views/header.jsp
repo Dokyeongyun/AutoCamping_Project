@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/static/css/chabakmain.css?ver=2" type="text/css">
     <link rel="stylesheet" href="/static/css/footer.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/custom_overlay.css?ver=1" type="text/css">
+    <link rel="stylesheet" href="/static/css/chabakMap.css?ver=1" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>

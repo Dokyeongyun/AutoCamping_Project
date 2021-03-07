@@ -9,27 +9,6 @@
 <jsp:include page="../chabakHeader.jsp"/>
 <body style="background-color: black">
 
-<style>
-    .notice_ul {
-        margin: 0 40px;
-        padding: 20px 35px;
-        list-style: circle;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        background-color: #f3f2ff;
-    }
-    .notice_li {
-        font-size: 13px;
-        font-weight: 500;
-        padding: 3px 0;
-    }
-    .map_container {
-        border: 2px solid black;
-        border-radius: 10px;
-        margin: 20px;
-        height: 100%
-    }
-</style>
 <div class="container chabakMain_Container">
     <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">차박지 지도</div>
     <div class="title_sub_txt">지도를 통해 차박지를 검색하실 수 있습니다.</div>
