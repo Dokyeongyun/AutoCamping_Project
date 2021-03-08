@@ -75,6 +75,10 @@
             <!-- 지도 위에 표시될 마커 카테고리 -->
             <div class="category">
                 <ul>
+                    <li id="locationMenu" onclick="panTo()">
+                        <span class="cur_location_icon"></span>
+                        <div>차박지위치</div>
+                    </li>
                     <li id="allMenu" onclick="changeMarker('all')">
                         <span class="all_icon"></span>
                         <div>모두</div>
@@ -91,6 +95,62 @@
             </div>
         </div>
     </div>
+    <hr style="border-top: 2px solid black">
+    <div class="cbj_detail_review_region">
+        <div class="iconAndText_Region">
+            <img class="icon" src="/static/img/review_icon.PNG">
+            <div class="icon_text sub_title_txt">차박지 리뷰</div>
+            <div class="article_comment_region">
+                <div class="article_comment_header_region">
+                    <div class="article_comment_header_txt">리뷰  ${reviewList.size()}개</div>
+                </div>
+                <div class="article_comment_list_region">
+                    <c:forEach var="i" items="${reviewList}">
+                        <div class="article_writer_info_region">
+                            <img src="/static/img/profile.PNG" class="profile_sm"/>
+                            <div style="overflow: hidden">
+                                <div style="float: left; margin-right: 10px;" class="article_writer_txt">${i.nickName}</div>
+                                <c:forEach begin="1" end="${i.evaluation_point}">
+                                    <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
+                                </c:forEach>
+                            </div>
+                            <div class="comment_content_txt">${i.review_content}</div>
+                            <div class="article_reg_time_txt">${i.eval_time}</div>
+                            <div class="horizontal_gray"></div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="article_comment_write_region">
+                    <div style="overflow: hidden">
+                        <div class="article_writer_txt" style="float: left; margin-right: 10px;">
+                            <c:if test="${sessionScope.get('id')==null}">
+                                손님
+                            </c:if>
+                            <c:if test="${sessionScope.get('id')!=null}">
+                                ${sessionScope.get("id")}
+                            </c:if>
+                        </div>
+                        <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
+                        <select id="evalPoint" class="form-control" style="float: left; width: 100px;margin-left: 10px;height: 30px;">
+                            <option value="0">점수</option>
+                            <option value="1">1점</option>
+                            <option value="2">2점</option>
+                            <option value="3">3점</option>
+                            <option value="4">4점</option>
+                            <option value="5">5점</option>
+                        </select>
+                    </div>
+
+                    <div class="article_comment_write_content">
+                        <textarea class="form-control noresize" rows="5" placeholder="차박지에 대한 느낀점을 남겨보세요." id="reviewContent" style="padding: 20px"></textarea>
+                    </div>
+                    <div class="article_comment_menu">
+                        <button type="button" class="btn button_right" id="writeReviewBtn">등록</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 
@@ -104,7 +164,7 @@
 
     // 지도 요소 띄우기
     var mapContainer = document.getElementById('map');
-    var mapOption = {center: placePosition, level: 4}; // 지도의 중심좌표
+    var mapOption = {center: placePosition, level: 5}; // 지도의 중심좌표
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
     // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤 생성
@@ -166,15 +226,15 @@
         var toiletImageSize = new kakao.maps.Size(36, 42);
         var toiletImage = new kakao.maps.MarkerImage(toiletImageSrc, toiletImageSize);
         var toiletMarker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: toiletPositions[i].latlng, // 마커의 위치
-            image : toiletImage // 마커 이미지
+            map: map,
+            position: toiletPositions[i].latlng,
+            image : toiletImage
         });
 
         toiletMarkers.push(toiletMarker);
 
         var toiletInfowindow = new kakao.maps.InfoWindow({
-            content: toiletPositions[i].content // 인포윈도우에 표시할 내용
+            content: toiletPositions[i].content
         });
 
         (function(toiletMarker, toiletInfowindow) {
@@ -207,15 +267,15 @@
         var fishingImageSize = new kakao.maps.Size(36, 42);
         var fishingImage = new kakao.maps.MarkerImage(fishingImageSrc, fishingImageSize);
         var fishingMarker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: fishingPositions[j].latlng, // 마커의 위치
-            image: fishingImage // 마커 이미지
+            map: map,
+            position: fishingPositions[j].latlng,
+            image: fishingImage
         });
 
         fishingMarkers.push(fishingMarker);
 
         var fishingInfowindow = new kakao.maps.InfoWindow({
-            content: fishingPositions[j].content // 인포윈도우에 표시할 내용
+            content: fishingPositions[j].content
         });
 
         (function(fishingMarker, fishingInfowindow) {
@@ -238,7 +298,13 @@
         var fishingMenu = document.getElementById('fishingMenu');
         var allMenu = document.getElementById('allMenu');
 
-        if (type === 'toilet') {
+        if(type === 'all') {
+            allMenu.className = 'menu_selected';
+            toiletMenu.className = '';
+            fishingMenu.className = '';
+
+            showAllMarkers();
+        }else if (type === 'toilet') {
             allMenu.className = '';
             toiletMenu.className = 'menu_selected';
             fishingMenu.className = '';
@@ -252,32 +318,87 @@
 
             setToiletMarkers(null);
             setFishingMarkers(map);
-        } else {
-            allMenu.className = 'menu_selected';
-            toiletMenu.className = '';
-            fishingMenu.className = '';
-
-            showAllMarkers();
         }
     }
-
     // 모든 마커 보여주기
     function showAllMarkers(){
         setToiletMarkers(map);
         setFishingMarkers(map);
     }
-
-    // 화장실 마커들의 지도 표시 여부를 설정하는 함수입니다
+    // 화장실 마커들의 지도 표시 여부를 설정하는 함수
     function setToiletMarkers(map) {
         for (var i = 0; i < toiletMarkers.length; i++) {
             toiletMarkers[i].setMap(map);
         }
     }
-    // 낚시터 마커들의 지도 표시 여부를 설정하는 함수입니다
+    // 낚시터 마커들의 지도 표시 여부를 설정하는 함수
     function setFishingMarkers(map) {
         for (var i = 0; i < fishingMarkers.length; i++) {
             fishingMarkers[i].setMap(map);
         }
     }
+    // 차박지 위치로 지도 이동하기
+    function panTo() {
+        map.setLevel(5);
+        map.panTo(placePosition);
+    }
 </script>
+<script>
+    <%--  리뷰작성 작업 DB Insert 수행  --%>
+    $("#writeReviewBtn").click(function(){
+        if(!invalidate_check()) {
+            return false;
+        }
 
+        if(${sessionScope.get("id") == null}){
+            alert('로그인 후 이용해주세요.');
+            location.href='/member/login';
+        }
+
+        var review = {
+            memberId : '${sessionScope.get("id")}',
+            placeId : ${chabakDetail[0].placeId},
+            placeName : '${chabakDetail[0].placeName}',
+            eval : $("#evalPoint").val(),
+            review : $("#reviewContent").val()
+        };
+
+        $.ajax({
+            url : "/chabak/eval.do",
+            data : review,
+            type : "post",
+            dataType : "json",
+            async : true,
+            success : function(resp) {
+                if(resp != "1"){
+                    alert("리뷰가 성공적으로 작성되었습니다.");
+                    window.location.reload();
+                }else{
+                    alert("리뷰 작성에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+                }
+            },
+            error : function() {
+                alert("error")
+            }
+        });
+    });
+
+    <!-- 유효성 검사 -->
+    function invalidate_check(){
+        // 리뷰 내용 공백 확인
+        if($("#reviewContent").val() == ""){
+            alert("내용을 입력해주세요.");
+            $("#reviewContent").focus();
+            return false;
+        }
+        if($("#evalPoint").val() == 0){
+            alert("점수를 선택해주세요.");
+            $("#evalPoint").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<style>
+
+</style>

@@ -4,6 +4,7 @@ import ROOT.DAO.ArticleDAO;
 import ROOT.DAO.ChabakDAO;
 import ROOT.VO.Chabak.BestAndCount;
 import ROOT.VO.Chabak.Chabak;
+import ROOT.VO.Chabak.Review;
 import ROOT.VO.Chabak.facility.Fishing;
 import ROOT.VO.Chabak.facility.Toilet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,11 @@ public class View_ChabakServiceImpl implements View_ChabakService{
         List<Chabak> chabakDetail = chabakDAO.getOne(placeId);
         List<Toilet> toiletList = chabakDAO.getToilets(placeId);
         List<Fishing> fishingList = chabakDAO.getFishings(placeId);
+        List<Review> reviewList = chabakDAO.getReviews(placeId);
         model.addAttribute("chabakDetail", chabakDetail);
         model.addAttribute("toiletList", toiletList);
         model.addAttribute("fishingList", fishingList);
+        model.addAttribute("reviewList", reviewList);
         return "/chabak/chabakDetail";
     }
 }

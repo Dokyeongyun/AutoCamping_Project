@@ -1,98 +1,21 @@
-@font-face {
-    src : url("/static/fonts/BMJUA_ttf.ttf");
-    font-family: "BM_Jua";
-}
-.cbj_detail_top {
-    background-image: url('/static/img/img2.PNG');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center center;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 20px 0;
-    opacity: 90%;
-    padding: 20px 30px;
-}
-.cbj_detail_top_upper {
-    border-bottom: 2px solid lavenderblush;
-    padding: 40px 10px;
-}
-.cbj_placeName_txt {
-    font-size: 45px;
-    font-family: "BM_Jua";
-    line-height: 40px;
-    color: black !important;
-    text-shadow: 5px 5px 5px darkgrey;
-}
-.cbj_detail_top_lower {
-    padding: 20px;
-}
-.circle_img {
-    border-radius: 15px;
-    object-fit: cover;
-    width: 50px;
-    background-color: white;
-    padding: 12px;
-    overflow: hidden;
-    cursor: pointer;
-}
-.cbj_detail_bottom{
-    overflow: hidden;
-}
-.cbj_detail_map_region{
-    overflow: hidden;
-}
-.cbj_detail_img_region {
-    width: 50%;
-    padding: 10px;
-    float: left;
-}
-.cbj_detail_info_region {
-    padding: 10px;
-    width: 50%;
-    float: right;
-}
-.cbj_detail_info_table {
-    width: 100%;
-    font-size: 14px;
-}
-.cbj_detail_info_table > tbody > tr{
-    width: 100%;
-    font-size: 14px;
-}
-.cbj_detail_info_table > tbody > tr > th {
-    padding: 11px 10px;
-    border-bottom: 1px solid #c8c8c8;
-    text-align: left;
-    color: #000;
-    line-height: 25px;
-    width: 40%;
-}
-.cbj_detail_info_table > tbody > tr > td {
-    padding: 11px 10px;
-    border-bottom: 1px solid #c8c8c8;
-    line-height: 25px;
-}
-.cbj_detail_img {
-    width: 100%;
-    border-radius: 10px;
-}
-.cbj_detail_btn_region {
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-}
-.cbj_detail_btn {
-    width: 45%;
-    border-radius: 10px;
-    margin: 0 10px;
-    height: 40px;
-    opacity: 80%;
-}
-.sub_title_txt {
-    font-size: 18px; font-family: 'BM_Jua';
-}
-
+@font-face {  src : url("/static/fonts/BMJUA_ttf.ttf");  font-family: "BM_Jua";  =}
+.cbj_detail_top {background-image: url('/static/img/img2.PNG');background-repeat: no-repeat;background-size: 100% 100%;background-position: center center;border-radius: 10px;overflow: hidden;margin: 20px 0;opacity: 90%;padding: 20px 30px;}
+.cbj_detail_top_upper {border-bottom: 2px solid lavenderblush;padding: 40px 10px;}
+.cbj_placeName_txt {font-size: 45px;font-family: "BM_Jua";line-height: 40px;color: black !important;text-shadow: 5px 5px 5px darkgrey;}
+.cbj_detail_top_lower {padding: 20px;}
+.circle_img {border-radius: 15px;object-fit: cover;width: 50px;background-color: white;padding: 12px;overflow: hidden;cursor: pointer;}
+.cbj_detail_bottom{overflow: hidden;}
+.cbj_detail_map_region{overflow: hidden;}
+.cbj_detail_img_region {width: 50%;padding: 10px;float: left;}
+.cbj_detail_info_region {padding: 10px;width: 50%;float: right;}
+.cbj_detail_info_table {width: 100%;font-size: 14px;}
+.cbj_detail_info_table > tbody > tr{width: 100%;font-size: 14px;}
+.cbj_detail_info_table > tbody > tr > th {padding: 11px 10px;border-bottom: 1px solid #c8c8c8;text-align: left;color: #000;line-height: 25px;width: 40%;}
+.cbj_detail_info_table > tbody > tr > td {padding: 11px 10px;border-bottom: 1px solid #c8c8c8;line-height: 25px;}
+.cbj_detail_img {width: 100%;border-radius: 10px;}
+.cbj_detail_btn_region {width: 100%;text-align: center;padding: 10px 0;}
+.cbj_detail_btn {width: 45%;border-radius: 10px;margin: 0 10px;height: 40px;opacity: 80%;}
+.sub_title_txt {font-size: 18px; font-family: 'BM_Jua';}
 
 /* 마커 toggle */
  #mapwrap{position:relative;overflow:hidden;}
@@ -103,3 +26,8 @@
 .category .all_icon {display:block;margin:0 auto;width:22px;height:26px;background:url('/static/img/all_text_icon.PNG') no-repeat; background-size: 100%}
 .category .toilet_icon {display:block;margin:0 auto;width:22px;height:26px;background:url('/static/img/toilet_icon.PNG') no-repeat; background-size: 100%}
 .category .fishing_icon {display:block;margin:0 auto;width:22px;height:26px;background:url('/static/img/fishing_icon.PNG') no-repeat; background-size: 100%}
+.category .cur_location_icon {display:block;margin:0 auto;width:22px;height:26px;background:url('/static/img/cur_location_icon.PNG') no-repeat; background-size: 100%}
+
+/* 차박지 리뷰 */
+.cbj_detail_review_region {overflow: hidden;}
+.cbj_detail_review_star {width: 20px;float:left;}
