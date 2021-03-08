@@ -92,3 +92,14 @@
 .sub_title_txt {
     font-size: 18px; font-family: 'BM_Jua';
 }
+
+
+/* 마커 toggle */
+ #mapwrap{position:relative;overflow:hidden;}
+.category, .category *{margin:0;padding:0;color:#000;}
+.category {position:absolute;overflow:hidden;top:40px;left:50px;height:fit-content;z-index:10;border:1px solid black;font-family:"BM_Jua";font-size:12px;text-align:center;background-color:#fff;}
+.category .menu_selected {background: #77b7b4;color:#fff;border-left:1px solid #915B2F;border-right:1px solid #915B2F;margin:0 -1px;}
+.category li{list-style:none;float:left;width:50px;height:45px;padding-top:5px;cursor:pointer;}
+.category .all_icon {display:block;margin:0 auto;width:22px;height:26px;background:url('/static/img/all_text_icon.PNG') no-repeat; background-size: 100%}
+.category .toilet_icon {display:block;margin:0 auto;width:22px;height:26px;background:url('/static/img/toilet_icon.PNG') no-repeat; background-size: 100%}
+.category .fishing_icon {display:block;margin:0 auto;width:22px;height:26px;background:url('/static/img/fishing_icon.PNG') no-repeat; background-size: 100%}

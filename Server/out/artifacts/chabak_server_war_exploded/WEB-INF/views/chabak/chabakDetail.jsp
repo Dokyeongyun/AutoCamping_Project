@@ -70,13 +70,35 @@
             <img class="icon" src="/static/img/address_icon.PNG">
             <div class="icon_text sub_title_txt">위치 및 주변정보</div>
         </div>
-        <div id="map" class="map_container" style="height: 500px;"></div>
+        <div id="mapwrap">
+            <div id="map" class="map_container" style="height: 500px;"></div>
+            <!-- 지도 위에 표시될 마커 카테고리 -->
+            <div class="category">
+                <ul>
+                    <li id="allMenu" onclick="changeMarker('all')">
+                        <span class="all_icon"></span>
+                        <div>모두</div>
+                    </li>
+                    <li id="toiletMenu" onclick="changeMarker('toilet')">
+                        <span class="toilet_icon"></span>
+                        <div>화장실</div>
+                    </li>
+                    <li id="fishingMenu" onclick="changeMarker('fishing')">
+                        <span class="fishing_icon"></span>
+                        <div>낚시터</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 </body>
 
 <jsp:include page="../footer.jsp"/>
 <script>
+    var toiletMarkers = [];
+    var fishingMarkers = [];
+
     // 차박지 위치
     var placePosition = new kakao.maps.LatLng(${chabakDetail[0].latitude}, ${chabakDetail[0].longitude});
 
@@ -149,6 +171,8 @@
             image : toiletImage // 마커 이미지
         });
 
+        toiletMarkers.push(toiletMarker);
+
         var toiletInfowindow = new kakao.maps.InfoWindow({
             content: toiletPositions[i].content // 인포윈도우에 표시할 내용
         });
@@ -188,6 +212,8 @@
             image: fishingImage // 마커 이미지
         });
 
+        fishingMarkers.push(fishingMarker);
+
         var fishingInfowindow = new kakao.maps.InfoWindow({
             content: fishingPositions[j].content // 인포윈도우에 표시할 내용
         });
@@ -202,3 +228,56 @@
         })(fishingMarker, fishingInfowindow);
     }
 </script>
+<script>
+
+    changeMarker('all');
+
+    // 카테고리를 클릭했을 때 type에 따라 카테고리의 스타일과 지도에 표시되는 마커를 변경
+    function changeMarker(type){
+        var toiletMenu = document.getElementById('toiletMenu');
+        var fishingMenu = document.getElementById('fishingMenu');
+        var allMenu = document.getElementById('allMenu');
+
+        if (type === 'toilet') {
+            allMenu.className = '';
+            toiletMenu.className = 'menu_selected';
+            fishingMenu.className = '';
+
+            setToiletMarkers(map);
+            setFishingMarkers(null);
+        } else if (type === 'fishing') {
+            allMenu.className = '';
+            toiletMenu.className = '';
+            fishingMenu.className = 'menu_selected';
+
+            setToiletMarkers(null);
+            setFishingMarkers(map);
+        } else {
+            allMenu.className = 'menu_selected';
+            toiletMenu.className = '';
+            fishingMenu.className = '';
+
+            showAllMarkers();
+        }
+    }
+
+    // 모든 마커 보여주기
+    function showAllMarkers(){
+        setToiletMarkers(map);
+        setFishingMarkers(map);
+    }
+
+    // 화장실 마커들의 지도 표시 여부를 설정하는 함수입니다
+    function setToiletMarkers(map) {
+        for (var i = 0; i < toiletMarkers.length; i++) {
+            toiletMarkers[i].setMap(map);
+        }
+    }
+    // 낚시터 마커들의 지도 표시 여부를 설정하는 함수입니다
+    function setFishingMarkers(map) {
+        for (var i = 0; i < fishingMarkers.length; i++) {
+            fishingMarkers[i].setMap(map);
+        }
+    }
+</script>
+
