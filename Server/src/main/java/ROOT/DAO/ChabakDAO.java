@@ -72,9 +72,7 @@ public class ChabakDAO {
     public int userEval(String memberId, int placeId, String placeName, double eval, String review) {
         String sql = "INSERT INTO user_evaluation (memberId,placeId,placeName,evaluation_point,review_content)" +
                 " VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE evaluation_point = ?, review_content = ?";
-        int result = jdbcTemplate.update(sql, memberId, placeId, placeName, eval, review, eval, review);
-        System.out.println(result);
-        return result;
+        return jdbcTemplate.update(sql, memberId, placeId, placeName, eval, review, eval, review);
     }
 
     /**

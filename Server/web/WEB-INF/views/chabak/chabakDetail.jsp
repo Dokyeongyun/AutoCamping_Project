@@ -10,6 +10,7 @@
 
 <body style="background-color: black">
 <div class="container chabakMain_Container">
+    <%-- 차박지 이름 및 각종 메뉴 --%>
     <div class="cbj_detail_top">
         <div class="cbj_detail_top_upper">
             <p class="cbj_placeName_txt">${chabakDetail[0].placeName}</p>
@@ -22,7 +23,8 @@
             </div>
         </div>
     </div>
-    <hr style="border-top: 2px solid black">
+    <hr style="border-top: 2px solid black"/>
+    <%-- 차박지 사진 및 상세 정보 --%>
     <div class="cbj_detail_bottom">
         <div class="iconAndText_Region">
             <img class="icon" src="/static/img/information_icon.PNG">
@@ -55,7 +57,7 @@
                 </tr>
                 <tr>
                     <th>평점</th>
-                    <td>${chabakDetail[0].avg_point} / 5.0 점</td>
+                    <td>${chabakDetail[0].avg_point} / 5.0 점 (${reviewList.size()})</td>
                 </tr>
                 <tr>
                     <th>이 차박지를 찜한 사람</th>
@@ -64,7 +66,8 @@
             </table>
         </div>
     </div>
-    <hr style="border-top: 2px solid black">
+    <hr style="border-top: 2px solid black"/>
+    <%-- 차박지 위치 및 주변 정보 지도상 표시 --%>
     <div class="cbj_detail_map_region">
         <div class="iconAndText_Region">
             <img class="icon" src="/static/img/address_icon.PNG">
@@ -94,63 +97,107 @@
                 </ul>
             </div>
         </div>
+        <div class="cbj_detail_facility">
+            <div class="cbj_detail_toilet">
+                <div class="cbj_detail_facility_name">화장실 정보 (${toiletList.size()})</div>
+                <c:if test="${toiletList.size()==0}">
+                    <div style="padding: 10px">차박지 주변의 화장실 정보가 없습니다.</div>
+                </c:if>
+                <c:if test="${toiletList.size()!=0}">
+                    <table class="cbj_detail_info_table">
+                        <tr><th>번호</th><td id="toilet_num">1</td></tr>
+                        <tr><th>주소</th><td id="toilet_address">${toiletList[0].address}</td></tr>
+                        <tr><th>개방시간</th><td id="toilet_openTime">${toiletList[0].open_time}</td></tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <button id="toilet_previous" onclick="toiletPrevious()" type="button" class="btn btn-default" style="width: 100px;">이전</button>
+                                <button id="toilet_next" onclick="toiletNext()" type="button" class="btn btn-default" style="width: 100px;">이후</button>
+                            </td>
+                        </tr>
+                    </table>
+                </c:if>
+            </div>
+            <div class="cbj_detail_fishing">
+                <c:set var="fishing_index" value="0"/>
+                <div class="cbj_detail_facility_name">낚시터 정보 (${fishingList.size()})</div>
+                <c:if test="${fishingList.size()==0}">
+                    <div style="padding: 10px">차박지 주변의 낚시터 정보가 없습니다.</div>
+                </c:if>
+                <c:if test="${fishingList.size()!=0}">
+                    <table class="cbj_detail_info_table">
+                        <tr><th>번호</th><td id="fishing_num">1</td></tr>
+                        <tr><th>낚시터명</th><td id="fishing_name">${fishingList[0].name}</td></tr>
+                        <tr><th>주소</th><td id="fishing_address">${fishingList[0].address}</td></tr>
+                        <tr><th>유형</th><td id="fishing_type">${fishingList[0].type}</td></tr>
+                        <tr><th>전화번호</th><td id="fishing_phone">${fishingList[0].phone}</td></tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <button id="fishing_previous" onclick="fishingPrevious()" type="button" class="btn btn-default" style="width: 100px;">이전</button>
+                                <button id="fishing_next" onclick="fishingNext()" type="button" class="btn btn-default" style="width: 100px;">이후</button>
+                            </td>
+                        </tr>
+                    </table>
+                </c:if>
+            </div>
+        </div>
     </div>
     <hr style="border-top: 2px solid black">
+    <%-- 차박지 리뷰 --%>
     <div class="cbj_detail_review_region">
-        <div class="iconAndText_Region">
-            <img class="icon" src="/static/img/review_icon.PNG">
-            <div class="icon_text sub_title_txt">차박지 리뷰</div>
-            <div class="article_comment_region">
-                <div class="article_comment_header_region">
-                    <div class="article_comment_header_txt">리뷰  ${reviewList.size()}개</div>
-                </div>
-                <div class="article_comment_list_region">
-                    <c:forEach var="i" items="${reviewList}">
-                        <div class="article_writer_info_region">
-                            <img src="/static/img/profile.PNG" class="profile_sm"/>
-                            <div style="overflow: hidden">
-                                <div style="float: left; margin-right: 10px;" class="article_writer_txt">${i.nickName}</div>
-                                <c:forEach begin="1" end="${i.evaluation_point}">
-                                    <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
-                                </c:forEach>
+            <div class="iconAndText_Region">
+                <img class="icon" src="/static/img/review_icon.PNG">
+                <div class="icon_text sub_title_txt">차박지 리뷰</div>
+                <div class="article_comment_region">
+                    <div class="article_comment_header_region">
+                        <div class="article_comment_header_txt">리뷰  ${reviewList.size()}개</div>
+                    </div>
+                    <div class="article_comment_list_region">
+                        <c:forEach var="i" items="${reviewList}">
+                            <div class="article_writer_info_region">
+                                <img src="/static/img/profile.PNG" class="profile_sm"/>
+                                <div style="overflow: hidden">
+                                    <div style="float: left; margin-right: 10px;" class="article_writer_txt">${i.nickName}</div>
+                                    <c:forEach begin="1" end="${i.evaluation_point}">
+                                        <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
+                                    </c:forEach>
+                                </div>
+                                <div class="comment_content_txt">${i.review_content}</div>
+                                <div class="article_reg_time_txt">${i.eval_time}</div>
+                                <div class="horizontal_gray"></div>
                             </div>
-                            <div class="comment_content_txt">${i.review_content}</div>
-                            <div class="article_reg_time_txt">${i.eval_time}</div>
-                            <div class="horizontal_gray"></div>
-                        </div>
-                    </c:forEach>
-                </div>
-                <div class="article_comment_write_region">
-                    <div style="overflow: hidden">
-                        <div class="article_writer_txt" style="float: left; margin-right: 10px;">
-                            <c:if test="${sessionScope.get('id')==null}">
-                                손님
-                            </c:if>
-                            <c:if test="${sessionScope.get('id')!=null}">
-                                ${sessionScope.get("id")}
-                            </c:if>
-                        </div>
-                        <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
-                        <select id="evalPoint" class="form-control" style="float: left; width: 100px;margin-left: 10px;height: 30px;">
-                            <option value="0">점수</option>
-                            <option value="1">1점</option>
-                            <option value="2">2점</option>
-                            <option value="3">3점</option>
-                            <option value="4">4점</option>
-                            <option value="5">5점</option>
-                        </select>
+                        </c:forEach>
                     </div>
+                    <div class="article_comment_write_region">
+                        <div style="overflow: hidden">
+                            <div class="article_writer_txt" style="float: left; margin-right: 10px;">
+                                <c:if test="${sessionScope.get('id')==null}">
+                                    손님
+                                </c:if>
+                                <c:if test="${sessionScope.get('id')!=null}">
+                                    ${sessionScope.get("id")}
+                                </c:if>
+                            </div>
+                            <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
+                            <select id="evalPoint" class="form-control" style="float: left; width: 100px;margin-left: 10px;height: 30px;">
+                                <option value="0">점수</option>
+                                <option value="1">1점</option>
+                                <option value="2">2점</option>
+                                <option value="3">3점</option>
+                                <option value="4">4점</option>
+                                <option value="5">5점</option>
+                            </select>
+                        </div>
 
-                    <div class="article_comment_write_content">
-                        <textarea class="form-control noresize" rows="5" placeholder="차박지에 대한 느낀점을 남겨보세요." id="reviewContent" style="padding: 20px"></textarea>
-                    </div>
-                    <div class="article_comment_menu">
-                        <button type="button" class="btn button_right" id="writeReviewBtn">등록</button>
+                        <div class="article_comment_write_content">
+                            <textarea class="form-control noresize" rows="5" placeholder="차박지에 대한 느낀점을 남겨보세요." id="reviewContent" style="padding: 20px"></textarea>
+                        </div>
+                        <div class="article_comment_menu">
+                            <button type="button" class="btn button_right" id="writeReviewBtn">등록</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 </body>
 
@@ -399,6 +446,88 @@
         return true;
     }
 </script>
-<style>
+<script>
+    var fishingIndex = 0;
+    var fishingSize = ${fishingList.size()};
+    var fishingList = [];
 
-</style>
+    <c:forEach var="i" items="${fishingList}">
+    var fishing = {
+        fishingspotId : '${i.fishingspotId}',
+        name : '${i.name}',
+        address : '${i.address}',
+        type : '${i.type}',
+        phone : '${i.phone}',
+        latitude : '${i.latitude}',
+        longitude : '${i.longitude}'
+    };
+    fishingList.push(fishing);
+    </c:forEach>
+
+    var toiletIndex = 0;
+    var toiletSize = ${toiletList.size()};
+    var toiletList = [];
+
+    <c:forEach var="i" items="${toiletList}">
+    var toilet = {
+        toiletId : '${i.toiletId}',
+        address : '${i.address}',
+        open_time : '${i.open_time}',
+        latitude : '${i.latitude}',
+        longitude : '${i.longitude}'
+    };
+    toiletList.push(toilet);
+    </c:forEach>
+
+    function toiletPrevious(){
+        if(toiletIndex-1 < 0){
+            toiletIndex = 0;
+        }else{
+            toiletIndex--;
+        }
+        setToiletInfo();
+    }
+
+    function toiletNext(){
+        if(toiletIndex+1 >= toiletSize){
+            toiletIndex = toiletSize-1;
+        }else{
+            toiletIndex++;
+        }
+        setToiletInfo();
+    }
+
+    function fishingPrevious(){
+        if(fishingIndex-1 < 0){
+            fishingIndex = 0;
+        }else{
+            fishingIndex--;
+        }
+        setFishingInfo();
+    }
+
+    function fishingNext(){
+        if(fishingIndex+1 >= fishingSize){
+            fishingIndex = fishingSize-1;
+        }else{
+            fishingIndex++;
+        }
+        setFishingInfo();
+    }
+
+    function setFishingInfo(){
+        $("#fishing_num").html(fishingIndex+1);
+        $("#fishing_name").html(fishingList[fishingIndex].name);
+        $("#fishing_address").html(fishingList[fishingIndex].address);
+        $("#fishing_type").html(fishingList[fishingIndex].type);
+        $("#fishing_phone").html(fishingList[fishingIndex].phone);
+    }
+
+    function setToiletInfo(){
+        $("#toilet_num").html(toiletIndex+1);
+        $("#toilet_address").html(toiletList[toiletIndex].address);
+        $("#toilet_openTime").html(toiletList[toiletIndex].open_time);
+    }
+
+</script>
+
