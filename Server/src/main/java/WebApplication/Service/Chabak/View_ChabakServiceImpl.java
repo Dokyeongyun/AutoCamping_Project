@@ -61,4 +61,14 @@ public class View_ChabakServiceImpl implements View_ChabakService{
         model.addAttribute("reviewList", reviewList);
         return "/chabak/chabakDetail";
     }
+
+    /**
+     * 차박지 순위화면
+     */
+    @Override
+    public String ranking(Model model) {
+        List<Chabak> list = chabakDAO.getPopularList();
+        model.addAttribute("popularList", list);
+        return "/chabak/chabakRanking";
+    }
 }

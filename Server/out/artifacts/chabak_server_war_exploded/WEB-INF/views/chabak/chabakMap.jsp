@@ -12,7 +12,7 @@
 <div class="container chabakMain_Container">
     <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">차박지 지도</div>
     <div class="title_sub_txt">지도를 통해 차박지를 검색하실 수 있습니다.</div>
-    <div class="page_notice_txt">    </div>
+    <div class="page_notice_txt"></div>
     <ul class="notice_ul">
         <li class="notice_li">도 단위의 지역을 선택하시면 해당 지역이 확대되며, 인기있는 차박지를 확인하실 수 있습니다.</li>
         <li class="notice_li">> 버튼을 누르면, 해당 지역의 모든 차박지 정보를 확인할 수 있습니다.</li>
@@ -37,7 +37,7 @@
         <%-- 차박지 정보 한 줄에 3개씩 출력하기 --%>
         <div class="chabakjiList_row">
             <c:forEach items="${searchResult}" var="i">
-                <div class="chabakjiInfo">
+                <div class="chabakjiInfo" onclick="location.href='/chabak/detailInfo/${i.placeId}'">
                     <div class="chabakji_img_region" >
                         <c:if test="${i.filePath == 'No image'}">
                             <img class="chabakji_img" src="/static/img/no_image_icon.PNG"/>

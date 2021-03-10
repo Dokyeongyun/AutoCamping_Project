@@ -200,7 +200,6 @@
         </div>
 </div>
 </body>
-
 <jsp:include page="../footer.jsp"/>
 <script>
     var toiletMarkers = [];
@@ -480,38 +479,26 @@
     </c:forEach>
 
     function toiletPrevious(){
-        if(toiletIndex-1 < 0){
-            toiletIndex = 0;
-        }else{
-            toiletIndex--;
-        }
+        if(toiletIndex-1 < 0){toiletIndex = 0;
+        }else{toiletIndex--;}
         setToiletInfo();
     }
 
     function toiletNext(){
-        if(toiletIndex+1 >= toiletSize){
-            toiletIndex = toiletSize-1;
-        }else{
-            toiletIndex++;
-        }
+        if(toiletIndex+1 >= toiletSize){toiletIndex = toiletSize-1;
+        }else{toiletIndex++;}
         setToiletInfo();
     }
 
     function fishingPrevious(){
-        if(fishingIndex-1 < 0){
-            fishingIndex = 0;
-        }else{
-            fishingIndex--;
-        }
+        if(fishingIndex-1 < 0){fishingIndex = 0;
+        }else{fishingIndex--;}
         setFishingInfo();
     }
 
     function fishingNext(){
-        if(fishingIndex+1 >= fishingSize){
-            fishingIndex = fishingSize-1;
-        }else{
-            fishingIndex++;
-        }
+        if(fishingIndex+1 >= fishingSize){fishingIndex = fishingSize-1;
+        }else{fishingIndex++;}
         setFishingInfo();
     }
 
@@ -528,6 +515,5 @@
         $("#toilet_address").html(toiletList[toiletIndex].address);
         $("#toilet_openTime").html(toiletList[toiletIndex].open_time);
     }
-
 </script>
 

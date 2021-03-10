@@ -27,4 +27,10 @@ public interface View_ChabakService {
      */
     @RequestMapping("/detailInfo/{placeId}")
     String detailInfo(Model model, @PathVariable int placeId);
+
+    /**
+     * 차박지 순위화면
+     */
+    @RequestMapping("/ranking")
+    String ranking(Model model);
 }

@@ -2,7 +2,7 @@
 .cbj_detail_top {background-image: url('/static/img/img2.PNG');background-repeat: no-repeat;background-size: 100% 100%;background-position: center center;border-radius: 10px;overflow: hidden;margin: 20px 0;opacity: 90%;padding: 20px 30px;}
 .cbj_detail_top_upper {border-bottom: 2px solid lavenderblush;padding: 40px 10px;}
 .cbj_placeName_txt {font-size: 45px;font-family: "BM_Jua";line-height: 40px;color: black !important;text-shadow: 5px 5px 5px darkgrey;}
-.cbj_detail_top_lower {padding: 20px;}
+.cbj_detail_top_lower {padding: 20px; overflow: hidden;}
 .circle_img {border-radius: 15px;object-fit: cover;width: 50px;background-color: white;padding: 12px;overflow: hidden;cursor: pointer;}
 .cbj_detail_bottom{overflow: hidden;}
 .cbj_detail_map_region{overflow: hidden;}
