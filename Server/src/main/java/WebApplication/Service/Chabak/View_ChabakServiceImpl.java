@@ -2,6 +2,7 @@ package WebApplication.Service.Chabak;
 
 import ROOT.DAO.ArticleDAO;
 import ROOT.DAO.ChabakDAO;
+import ROOT.DAO.MemberDAO;
 import ROOT.VO.Chabak.BestAndCount;
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,9 @@ public class View_ChabakServiceImpl implements View_ChabakService{
 
     @Autowired
     ChabakDAO chabakDAO;
+
+    @Autowired
+    MemberDAO memberDAO;
 
     /**
      * 게시판 메인화면
@@ -50,15 +55,20 @@ public class View_ChabakServiceImpl implements View_ChabakService{
      * 차박지 상세정보 + 주변 시설 정보
      */
     @Override
-    public String detailInfo(Model model, int placeId) {
+    public String detailInfo(Model model, int placeId, HttpSession session) {
         List<Chabak> chabakDetail = chabakDAO.getOne(placeId);
         List<Toilet> toiletList = chabakDAO.getToilets(placeId);
         List<Fishing> fishingList = chabakDAO.getFishings(placeId);
         List<Review> reviewList = chabakDAO.getReviews(placeId);
+        String isJjimPlace = "0";
+        if(session.getAttribute("id") != null){
+            isJjimPlace = memberDAO.isJJim((String) session.getAttribute("id"), String.valueOf(placeId));
+        }
         model.addAttribute("chabakDetail", chabakDetail);
         model.addAttribute("toiletList", toiletList);
         model.addAttribute("fishingList", fishingList);
         model.addAttribute("reviewList", reviewList);
+        model.addAttribute("isJjimPlace", isJjimPlace);
         return "/chabak/chabakDetail";
     }
 

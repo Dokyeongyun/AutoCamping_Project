@@ -17,7 +17,7 @@
         </div>
         <div class="cbj_detail_top_lower">
             <div class="cbj_detail_menu_img_region" style="float: right">
-                <img src="/static/img/star_icon.PNG" class="circle_img">
+                <img src="/static/img/star_icon.PNG" class="circle_img star_icon_region" id="star_icon" onclick="changeStarIcon();">
                 <img src="/static/img/share_icon.PNG" class="circle_img">
                 <img src="/static/img/link_icon.PNG" class="circle_img">
             </div>
@@ -202,6 +202,76 @@
 </body>
 <jsp:include page="../footer.jsp"/>
 <script>
+    var starImgSrc = '/static/img/star_icon.PNG';
+    var starFillImgSrc = '/static/img/star_fill_icon.PNG';
+
+    if(${isJjimPlace != "0"}){
+        $("#star_icon").attr("src", starFillImgSrc);
+        $(".star_icon_region").css("backgroundColor", '#e6e8a9');
+    }
+
+    function changeStarIcon() {
+        var src = jQuery('#star_icon').attr("src");
+        if(src === starImgSrc){
+            if(jjim() === "success"){
+                $("#star_icon").attr("src", starFillImgSrc);
+                $(".star_icon_region").css("backgroundColor", '#e6e8a9');
+            }
+        }else{
+            if(unjjim() === "success"){
+                $("#star_icon").attr("src", starImgSrc);
+                $(".star_icon_region").css("backgroundColor", '#fff');
+            }
+        }
+    }
+    function isLoginMember(){
+        if(${sessionScope.get("id") == null}){
+            alert('로그인 후 이용해주세요.');
+            location.href='/member/login';
+            return false;
+        }
+        return true;
+    }
+    function jjim() {
+        var result = '';
+        if(!isLoginMember()) {return false;}
+        var jjim = {
+            id : '${sessionScope.get("id")}',
+            placeName : '${chabakDetail[0].placeName}',
+            placeId : '${chabakDetail[0].placeId}'
+        };
+
+        $.ajax({
+            url : "/member/jjim.do",
+            data : jjim,
+            type : "post",
+            dataType : "json",
+            async : false,
+            success : function(resp) {result = resp;},
+            error : function() {alert("error")}
+        });
+        return result;
+    }
+    function unjjim() {
+        var result = '';
+        if(!isLoginMember()) {return false;}
+        var jjim = {
+            id : '${sessionScope.get("id")}',
+            placeName : '${chabakDetail[0].placeName}',
+            placeId : '${chabakDetail[0].placeId}'
+        };
+        $.ajax({
+            url : "/member/jjim.undo",
+            data : jjim,
+            type : "post",
+            dataType : "json",
+            async : false,
+            success : function(resp) {result = resp;},
+            error : function() {alert("error")}
+        });
+        return result;
+    }
+
     var toiletMarkers = [];
     var fishingMarkers = [];
 
