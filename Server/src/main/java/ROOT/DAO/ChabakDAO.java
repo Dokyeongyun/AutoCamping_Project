@@ -47,6 +47,14 @@ public class ChabakDAO {
     }
 
     /**
+     * 현재 인기있는 차박지 리스트 (찜 기준 상위 10개)
+     */
+    public List<Chabak> getPopularList2(){
+        String sql = "SELECT * FROM chabak_info_view ORDER BY jjim DESC LIMIT 10";
+        return jdbcTemplate.query(sql, new ChabakRowMapper());
+    }
+
+    /**
      * 차박지별 화장실 정보
      */
     public List<Toilet> getToilets(int placeId){

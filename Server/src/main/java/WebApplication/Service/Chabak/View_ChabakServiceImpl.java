@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -76,8 +77,13 @@ public class View_ChabakServiceImpl implements View_ChabakService{
      * 차박지 순위화면
      */
     @Override
-    public String ranking(Model model) {
-        List<Chabak> list = chabakDAO.getPopularList();
+    public String ranking(Model model, String order) {
+        List<Chabak> list = new ArrayList<>();
+        if(order.equals("avg_point")){
+            list = chabakDAO.getPopularList();
+        }else if (order.equals("jjim")){
+            list = chabakDAO.getPopularList2();
+        }
         model.addAttribute("popularList", list);
         return "/chabak/chabakRanking";
     }

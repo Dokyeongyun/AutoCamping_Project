@@ -34,6 +34,6 @@ public interface View_ChabakService {
     /**
      * 차박지 순위화면
      */
-    @RequestMapping("/ranking")
-    String ranking(Model model);
+    @RequestMapping("/ranking/{order}")
+    String ranking(Model model, @PathVariable String order);
 }

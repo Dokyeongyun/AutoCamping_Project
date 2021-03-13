@@ -9,11 +9,16 @@
     <div style="border: 1px solid;border-radius: 10px;padding: 10px; overflow: hidden">
         <div style="font-family: 'BM_Jua'; font-size: 18px; float: right">
             정렬방법
-            <select class="form-control" style="width: 200px; display: inline-block; margin:0 10px;">
-                <option>별점 순으로 보기</option>
-                <option>찜 개수 순으로 보기</option>
+            <select id="sortMethod" class="form-control" style="width: 200px; display: inline-block; margin:0 10px;">
+                <option value="avg_point">별점 순으로 보기</option>
+                <option value="jjim">찜 개수 순으로 보기</option>
             </select>
-            <button type="button" class="btn btn-primary">확인</button>
+            <button type="button" class="btn btn-primary" onclick="function ChangeSortMethod() {
+                var method = $('#sortMethod').val();
+                if(method === 'avg_point') location.href='/chabak/ranking/avg_point';
+                if(method === 'jjim') location.href='/chabak/ranking/jjim';
+            }
+            ChangeSortMethod();">확인</button>
         </div>
     </div>
     <%-- 차박지 별점 순서대로 나열 --%>

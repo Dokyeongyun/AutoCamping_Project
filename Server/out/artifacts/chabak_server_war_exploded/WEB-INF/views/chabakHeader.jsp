@@ -7,7 +7,7 @@
         <ul class="ul_center">
             <li class="li_center"><a href="/chabak/main">차박지검색</a></li>
             <li class="li_center"><a href="/chabak/map?province=all">차박지지도</a></li>
-            <li class="li_center"><a href="/chabak/ranking">차박지순위</a></li>
+            <li class="li_center"><a href="/chabak/ranking/avg_point">차박지순위</a></li>
             <li class="li_center"><a href="#">차박후기</a></li>
         </ul>
     </div>

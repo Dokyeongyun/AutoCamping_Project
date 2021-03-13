@@ -38,6 +38,12 @@ public class ChabakServiceImpl implements ChabakService {
     public List<Chabak> getPopularList() { return chabakDAO.getPopularList(); }
 
     /**
+     * 현재 인기있는 차박지 리스트 (별점 기준 상위 10개)
+     */
+    @Override
+    public List<Chabak> getPopularList2() { return chabakDAO.getPopularList2(); }
+
+    /**
      * 차박지별 화장실 정보
      */
     @Override
