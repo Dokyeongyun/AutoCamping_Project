@@ -57,11 +57,11 @@
 <%-- 추천 차박지 보여주기, 차박지 랭킹 등 --%>
 <div class="container chabakMain_Container">
     <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">추천 차박지</div>
-    <div class="title_sub_txt">총 ${chabakList.size()} 개의 차박지가 있습니다.</div>
+    <div class="title_sub_txt">총 ${searchResult.size()} 개의 차박지가 있습니다.</div>
 
     <%-- 차박지 정보 한 줄에 3개씩 출력하기 --%>
     <div class="chabakjiList_row">
-        <c:forEach items="${chabakList}" var="i">
+        <c:forEach items="${searchResult}" var="i">
             <div class="chabakjiInfo" onclick="location.href='/chabak/detailInfo/${i.placeId}'">
                 <div class="chabakji_img_region" >
                     <c:if test="${i.filePath == 'No image'}">

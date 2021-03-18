@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service("View_ChabakService")
 public class View_ChabakServiceImpl implements View_ChabakService{
@@ -86,5 +88,44 @@ public class View_ChabakServiceImpl implements View_ChabakService{
         }
         model.addAttribute("popularList", list);
         return "/chabak/chabakRanking";
+    }
+
+    /**
+     * 차박지 검색 (필터)
+     */
+    @Override
+    public String chabakSearch(Model model, String region, String facility, String keyword) {
+        String[] regions = region.split("_");
+        String[] facilities = facility.split("_");
+
+        System.out.println(Arrays.toString(regions));
+        System.out.println(Arrays.toString(facilities));
+
+        List<Chabak> filterResult = chabakDAO.getFilteredList(regions, facilities);
+
+        System.out.println(filterResult);
+
+        List<Chabak> keywordResult = chabakDAO.getAllChabakList().stream().filter(cha -> {
+            String text = cha.getAddress() + cha.getIntroduce() + cha.getPhone_number() +
+                    cha.getPlaceName() + cha;
+            return text.contains(keyword);
+        }).collect(Collectors.toList());
+
+        System.out.println(keywordResult);
+
+        List<Chabak> finalResult = new ArrayList<>();
+        for(int i=0; i<filterResult.size(); i++){
+            for(int j=0; j<keywordResult.size(); j++){
+                if(filterResult.get(i).getPlaceId() == keywordResult.get(j).getPlaceId()){
+                    finalResult.add(filterResult.get(i));
+                    break;
+                }
+            }
+        }
+
+        System.out.println(finalResult);
+
+        model.addAttribute("searchResult", finalResult);
+        return "/chabak/searchResult";
     }
 }

@@ -10,33 +10,47 @@
     <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">차박지를 검색해보세요.</div>
     <div class="small_txt">지역</div>
     <div class="search_option_region">
-        <input type="checkbox" name="region_check" value="전지역"/>전지역
-        <input type="checkbox" name="region_check" value="수도권"/>수도권
-        <input type="checkbox" name="region_check" value="강원도"/>강원도
-        <input type="checkbox" name="region_check" value="충청도"/>충청도
-        <input type="checkbox" name="region_check" value="경상도"/>경상도
-        <input type="checkbox" name="region_check" value="전라도"/>전라도
-        <input type="checkbox" name="region_check" value="제주도"/>제주도
+        <table style="width: 100%; font-size: 14px;">
+            <tr>
+                <td><input type="checkbox" name="region_check" value="전지역"/>전지역</td>
+                <td><input type="checkbox" name="region_check" value="서울"/>서울</td>
+                <td><input type="checkbox" name="region_check" value="인천"/>인천</td>
+                <td><input type="checkbox" name="region_check" value="경기"/>경기도</td>
+                <td><input type="checkbox" name="region_check" value="충북"/>충청북도</td>
+                <td><input type="checkbox" name="region_check" value="충남"/>충청남도</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="region_check" value="대전"/>대전</td>
+                <td><input type="checkbox" name="region_check" value="세종"/>세종</td>
+                <td><input type="checkbox" name="region_check" value="강원"/>강원도</td>
+                <td><input type="checkbox" name="region_check" value="경북"/>경상북도</td>
+                <td><input type="checkbox" name="region_check" value="경남"/>경상남도</td>
+                <td><input type="checkbox" name="region_check" value="대구"/>대구</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="region_check" value="부산"/>부산</td>
+                <td><input type="checkbox" name="region_check" value="울산"/>울산</td>
+                <td><input type="checkbox" name="region_check" value="전북"/>전라북도</td>
+                <td><input type="checkbox" name="region_check" value="전남"/>전라남도</td>
+                <td><input type="checkbox" name="region_check" value="광주"/>광주</td>
+                <td><input type="checkbox" name="region_check" value="제주도"/>제주도</td>
+            </tr>
+        </table>
     </div>
     <div class="small_txt">옵션</div>
     <div class="search_option_region">
-        <input type="checkbox" name="option_check" value="화장실"/>화장실
-        <input type="checkbox" name="option_check" value="낚시터"/>낚시터
-        <input type="checkbox" name="option_check" value="편의점/마트"/>편의점/마트
+        <table style="width: 100%; font-size: 14px;">
+            <tr>
+                <td><input type="checkbox" name="option_check" value="F"/>화장실</td>
+                <td><input type="checkbox" name="option_check" value="F"/>낚시터</td>
+                <td><input type="checkbox" name="option_check" value="F"/>편의점/마트</td>
+            </tr>
+        </table>
     </div>
     <div class="small_txt">검색어</div>
     <div class="article_search_region">
-        <select id="searchRegion" class="form-control" style="width: 150px; display: inline-block">
-            <option value="all">전지역</option>
-            <option value="1">수도권</option>
-            <option value="2">강원도</option>
-            <option value="3">충청도</option>
-            <option value="4">경상도</option>
-            <option value="5">전라도</option>
-            <option value="6">제주도</option>
-        </select>
         <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요" style="width: 200px; display: inline-block"/>
-        <button class="btn" type="button" id="searchChabakBtn" style="background-color: #77b7b4; color: white">검색</button>
+        <button class="btn" type="button" id="searchChabakBtn" onclick="filterSearch()" style="background-color: #77b7b4; color: white">검색</button>
     </div>
 </div>
 

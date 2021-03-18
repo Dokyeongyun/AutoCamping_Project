@@ -40,4 +40,9 @@ public class Chabak {
     public void setLongitude(double longitude) { this.longitude = longitude; }
     public void setAvg_point(double avg_point) { this.avg_point = avg_point; }
     public void setUtilityCount(Map<String, Integer> utilityCount) { this.utilityCount = utilityCount; }
+
+    @Override
+    public String toString() {
+        return placeName;
+    }
 }

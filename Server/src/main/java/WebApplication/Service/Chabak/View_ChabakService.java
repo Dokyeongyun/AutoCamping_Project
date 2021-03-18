@@ -36,4 +36,13 @@ public interface View_ChabakService {
      */
     @RequestMapping("/ranking/{order}")
     String ranking(Model model, @PathVariable String order);
+
+    /**
+     * 차박지 검색 (필터)
+     */
+    @RequestMapping("/chabakSearch")
+    String chabakSearch(Model model,
+                        @RequestParam("region") String region,
+                        @RequestParam("facility") String facility,
+                        @RequestParam("keyword") String keyword);
 }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="/static/js/chabak.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28c7a8a13fd45258a42b15ec36bd466f"></script>
 
 <nav class="navbar">

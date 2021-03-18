@@ -90,6 +90,8 @@ public class ChabakDAO {
         String queryPrefix = "SELECT * FROM chabak_info_view WHERE (";
         String querySuffix = parsingAddressQuery(addresses) + parsingFilterQuery(flags);
         String sql = queryPrefix + querySuffix;
+
+        System.out.println(sql);
         return jdbcTemplate.query(sql, new ChabakRowMapper());
     }
 
