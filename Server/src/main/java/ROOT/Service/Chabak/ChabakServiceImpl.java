@@ -29,19 +29,13 @@ public class ChabakServiceImpl implements ChabakService {
      * 하나의 차박지 정보
      */
     @Override
-    public List<Chabak> getOne(int placeId) { return chabakDAO.getOne(placeId); }
+    public Chabak getOne(int placeId) { return chabakDAO.getOne(placeId); }
 
     /**
      * 현재 인기있는 차박지 리스트 (별점 기준 상위 10개)
      */
     @Override
-    public List<Chabak> getPopularList() { return chabakDAO.getPopularList(); }
-
-    /**
-     * 현재 인기있는 차박지 리스트 (별점 기준 상위 10개)
-     */
-    @Override
-    public List<Chabak> getPopularList2() { return chabakDAO.getPopularList2(); }
+    public List<Chabak> getPopularList(String sortBy) { return chabakDAO.getPopularList(sortBy); }
 
     /**
      * 차박지별 화장실 정보
@@ -67,18 +61,18 @@ public class ChabakServiceImpl implements ChabakService {
      * 사용자가 설정한 조건에 따른 차박지 필터링
      */
     @Override
-    public List<Chabak> getFilteredList(String add, String flags) {
-        String[] addresses = add.split("/");
-        String[] split = flags.split("/");
-        return chabakDAO.getFilteredList(addresses, split);
+    public List<Chabak> getFilteredList(String region, String facility) {
+        String[] regions = region.split("_");
+        String[] facilities = facility.split("_");
+        return chabakDAO.getFilteredList(regions, facilities);
     }
 
     /**
      * 특별시, 광역시, 도 단위 차박지 리스트
      */
     @Override
-    public List<Chabak> getProvinceChabakList(String province) {
-        return chabakDAO.getProvinceChabakList(province);
+    public List<Chabak> getProvinceChabakList(String provinceName) {
+        return chabakDAO.getProvinceChabakList(provinceName);
     }
 
     /**

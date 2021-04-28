@@ -2,6 +2,7 @@ package ROOT.Service.Member;
 
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

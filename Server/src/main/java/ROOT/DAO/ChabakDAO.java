@@ -33,25 +33,17 @@ public class ChabakDAO {
     /**
      * 하나의 차박지 정보
      */
-    public List<Chabak> getOne(int placeId){
+    public Chabak getOne(int placeId){
         String sql = "SELECT * FROM chabak_info_view WHERE placeId = ?";
-        return jdbcTemplate.query(sql, new ChabakRowMapper(), placeId);
+        return jdbcTemplate.queryForObject(sql, new ChabakRowMapper(), placeId);
     }
 
     /**
-     * 현재 인기있는 차박지 리스트 (별점 기준 상위 10개)
+     * 현재 인기있는 차박지 리스트 (기준별 상위 10개)
      */
-    public List<Chabak> getPopularList(){
-        String sql = "SELECT * FROM chabak_info_view ORDER BY avg_point DESC LIMIT 10";
-        return jdbcTemplate.query(sql, new ChabakRowMapper());
-    }
-
-    /**
-     * 현재 인기있는 차박지 리스트 (찜 기준 상위 10개)
-     */
-    public List<Chabak> getPopularList2(){
-        String sql = "SELECT * FROM chabak_info_view ORDER BY jjim DESC LIMIT 10";
-        return jdbcTemplate.query(sql, new ChabakRowMapper());
+    public List<Chabak> getPopularList(String sortBy){
+        String sql = "SELECT * FROM chabak_info_view ORDER BY ? DESC LIMIT 10";
+        return jdbcTemplate.query(sql, new ChabakRowMapper(), sortBy);
     }
 
     /**
@@ -86,9 +78,9 @@ public class ChabakDAO {
     /**
      * 사용자가 설정한 조건에 따른 차박지 필터링
      */
-    public List<Chabak> getFilteredList(String[] addresses, String[] flags) {
+    public List<Chabak> getFilteredList(String[] regions, String[] facilities) {
         String queryPrefix = "SELECT * FROM chabak_info_view WHERE (";
-        String querySuffix = parsingAddressQuery(addresses) + parsingFilterQuery(flags);
+        String querySuffix = parsingAddressQuery(regions) + parsingFilterQuery(facilities);
         String sql = queryPrefix + querySuffix;
 
         System.out.println(sql);
