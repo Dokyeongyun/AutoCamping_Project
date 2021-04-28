@@ -1,0 +1,37 @@
+#footer {clear: both; width: 100%; height: auto; bottom: 0; position: relative}
+.optr_link{display:none;}
+.f_info_w { position:relative; width:100%; float:left; background:#2e2f31; border-bottom:1px solid #4a4a4c; min-height:90px; z-index:10; }
+.f_info_w .f_logo{position:absolute; top:27px; left:0; width:209px; height:42px;}
+.f_menu { padding:35px  0 12px 247px; }
+.f_menu li { display:inline-block; background:url("/static/img/line.gif") no-repeat left 8px; }
+.f_menu li:first-child{background:none;}
+.f_menu li a { display:inline-block; margin:0 18px 0 18px; font-size:13px; color:#fff; text-decoration:none; }
+.f_menu li.privacy a{color:#ff9b2f !important;}
+
+.f_info_w .f_sns_w{position:absolute; right:0; top:36px;}
+.f_info_w .f_sns_w li{float:left; height:21px; margin:0 0 0 34px;}
+.f_info_w .f_sns_w li:first-child{ margin:0 0 0 0;}
+.f_info_w .f_sns_w li a{font-size:0; line-height:0; float:left;}
+.f_info_w .f_sns_w li.sns00 a{width:22px; height:21px; background:url("/static/img/all_icon.PNG") no-repeat -95px -418px;}
+.f_info_w .f_sns_w li.sns01 a{width:10px; height:21px; background:url("/static/img/all_icon.PNG") no-repeat 0 -418px;}
+.f_info_w .f_sns_w li.sns02 a{width:13px; height:21px; background:url("/static/img/all_icon.PNG") no-repeat -16px -418px;}
+.f_info_w .f_sns_w li.sns03 a{width:21px; height:21px; background:url("/static/img/all_icon.PNG") no-repeat -33px -418px;}
+
+
+.f_link_w{ position:relative; width:100%; float:left; background:#2e2f31;  padding:30px 0;}
+.f_addr{font-size:13px; line-height:22px; color:#c0c0c0; padding:0 450px 0 0;}
+.f_addr .f_mail{font-size:13px; line-height:22px; color:#c0c0c0 !important; text-decoration:none; letter-spacing:0;}
+.f_addr div{float:left; margin-right:22px; display:inline-block;}
+.f_link{float:left; position:absolute; right:0; top:0; background: #393a3b;}
+.f_link .camping_login_btn{background:#222324; text-align:center; margin-right:8px; float:left;}
+.f_link .camping_login_btn a{color:#d0d0d0; display:block;padding:0 20px; line-height:38px; text-decoration:none;}
+.f_link .dropdown{float:left; background:#393a3b;}
+.f_link button{font-size:13px; color:#d0d0d0; display:block; width:170px; line-height:38px; height:38px; text-align:left; padding:0 20px; background:url("/img/2018/main/icon_moreWs1.png") no-repeat 90% center;}
+
+.f_link2{position:absolute; right:180px; top:0; background:#393a3b;}
+.f_link2 button{font-size:13px; color:#d0d0d0; display:block; width:140px; line-height:38px; height:38px; text-align:center; padding:0 20px; }
+.copyright{clear:both; letter-spacing:0px;}
+
+.btn_top{position:absolute; width:60px; height:60px; top:57px; right:-80px; cursor:pointer; background:url("/static/img/btn_top.PNG") no-repeat 0 0; font-size:0; line-height:0;}
+
+.layout {display: block; position: relative; width: 1200px; margin: 0 auto;}
