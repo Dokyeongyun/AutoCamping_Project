@@ -23,7 +23,7 @@
 </head>
 <body>
 
-<c:set var="loginId" value="${sessionScope.get('id')}"/>
+<c:set var="loginId" value="${sessionScope.get('loginMember').memberId}"/>
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -36,36 +36,16 @@
                 <li><a href="/chabak/main">차박지</a></li>
                 <c:if test="${loginId != null}">
                     <li><div class="greeting">${loginId} 님, 환영합니다.</div></li>
-                    <li class="active"><a href="/member/modifyInfo">Modify</a></li>
-                    <li><a onclick="logout();">Logout</a></li>
+                    <li class="active"><a href="/member/modifyInfo">회원정보</a></li>
+                    <li><a href="/member/logout">로그아웃</a></li>
                 </c:if>
                 <c:if test="${loginId == null}">
-                    <li class="active"><a href="/member/login">Login</a></li>
-                    <li><a href="/member/join">Register</a></li>
+                    <li class="active"><a href="/member/loginForm">로그인</a></li>
+                    <li><a href="/member/joinForm">회원가입</a></li>
                 </c:if>
             </ul>
         </div>
     </div>
 </nav>
-
-<script>
-    function logout(){
-        $.ajax({
-            url : "/member/logout.do",
-            type : "post",
-            dataType : "json",
-            async : true,
-            success : function(resp) {
-                if(resp === "logout"){
-                    location.href="/";
-                }
-            },
-            error : function() {
-                alert("error")
-            }
-        });
-    }
-</script>
-
 <body>
 

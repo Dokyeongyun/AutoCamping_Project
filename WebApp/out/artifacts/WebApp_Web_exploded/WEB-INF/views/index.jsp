@@ -12,7 +12,7 @@
                     <img src="/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
                 </div>
                 <div class="myInfo_txt">
-                    <div class="profile_txt">${sessionScope.get("id")} 님</div>
+                    <div class="profile_txt">${sessionScope.get("loginMember").memberId} 님</div>
                 </div>
             </div>
             <div class="myInfo_bottom">

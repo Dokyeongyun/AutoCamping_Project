@@ -20,14 +20,12 @@ public class ChabakServiceImpl implements ChabakService {
     @Autowired
     RestOperations restOperations;
 
-    String serverContextPath = APIServerInfo.API_SERVER_CONTEXT;
-
     /**
      * 모든 차박지 리스트
      */
     @Override
     public List<Chabak> getAllChabakList() {
-        return restOperations.getForObject(serverContextPath + "/chabak/chabaks", List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/chabaks", List.class);
     }
 
     /**
@@ -35,7 +33,7 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public Chabak getOne(int placeId) {
-        return restOperations.getForObject(serverContextPath + "/chabak/" + placeId, Chabak.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/" + placeId, Chabak.class);
     }
 
     /**
@@ -43,7 +41,7 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public List<Chabak> getPopularList(String sortBy) {
-        return restOperations.getForObject(serverContextPath + "/chabak/popular/" + sortBy, List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/popular/" + sortBy, List.class);
     }
 
     /**
@@ -51,7 +49,7 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public List<Toilet> getToilets(int placeId) {
-        return restOperations.getForObject(serverContextPath + "/chabak/toilets/" + placeId, List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/toilets/" + placeId, List.class);
     }
 
     /**
@@ -59,7 +57,7 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public List<Fishing> getFishings(int placeId) {
-        return restOperations.getForObject(serverContextPath + "/chabak/fishings/" + placeId, List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/fishings/" + placeId, List.class);
     }
 
     /**
@@ -69,7 +67,7 @@ public class ChabakServiceImpl implements ChabakService {
     @Override
     public Chabak[] chabakSearch(String region, String facility) {
         return restOperations.getForObject(
-                UriComponentsBuilder.fromUriString(serverContextPath + "/chabak/search")
+                UriComponentsBuilder.fromUriString(APIServerInfo.API_SERVER_CONTEXT + "/chabak/search")
                         .queryParam("region", region)
                         .queryParam("facility", facility)
                         .build().toUriString(), Chabak[].class);
@@ -80,7 +78,7 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public List<Chabak> getProvinceChabakList(String provinceName) {
-        return restOperations.getForObject(serverContextPath + "/chabak/province/" + provinceName, List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/province/" + provinceName, List.class);
     }
 
     /**
@@ -88,7 +86,7 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public List<Review> getReviews(int placeId) {
-        return restOperations.getForObject(serverContextPath + "/chabak/reviews/" + placeId, List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/reviews/" + placeId, List.class);
     }
 
     /**
@@ -96,6 +94,6 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public Map<String, BestAndCount> getBestAndCount() {
-        return restOperations.getForObject(serverContextPath + "/chabak/bestAndCount", Map.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/bestAndCount", Map.class);
     }
 }

@@ -1,8 +1,14 @@
-package ROOT.VO.Member;
+package ROOT.VO.Form;
 
-public class Member {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+public class LoginForm {
+
+    @Email(message = "아이디를 다시 확인해주세요.")
     private String memberId;
-    private String nickName;
+
+    @NotBlank(message = "비밀번호를 다시 확인해주세요.")
     private String password;
 
     public String getMemberId() {
@@ -11,14 +17,6 @@ public class Member {
 
     public void setMemberId(String memberId) {
         this.memberId = memberId;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getPassword() {
@@ -31,9 +29,8 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return "LoginForm{" +
                 "memberId='" + memberId + '\'' +
-                ", nickName='" + nickName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
