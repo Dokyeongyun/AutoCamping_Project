@@ -2,14 +2,17 @@ package ROOT.DAO;
 
 import ROOT.RowMapper.Chabak.ChabakRowMapper;
 import ROOT.RowMapper.Chabak.ReviewRowMapper;
+import ROOT.RowMapper.Member.MemberRowMapper;
 import ROOT.Util.crypto.CryptoUtil;
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
+import ROOT.VO.Member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class MemberDAO {
@@ -17,45 +20,41 @@ public class MemberDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public MemberDAO(JdbcTemplate jdbcTemplate){ this.jdbcTemplate = jdbcTemplate; }
+    public MemberDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     /**
      * 로그인
      */
-    public String select(String id, String password) {
-        try{
-            String encrypted = CryptoUtil.encryptAES256(password, password.hashCode() + "");
+    public Member login(Member member) {
+        Member result = new Member();
+        try {
             String sql = "SELECT * FROM cb_member WHERE memberId = ? AND password = ? AND isDeleted = 0";
-            List<String> result = jdbcTemplate.query(sql,
-                    (resultSet, i) -> resultSet.getString("memberId"), id, encrypted);
-            if(result.size() > 0){
-                return id;
-            }else{
-                return "false";
+            List<Member> temp = jdbcTemplate.query(sql, new MemberRowMapper(), member.getMemberId(), member.getPassword());
+            if(temp.size() == 1){
+                return temp.get(0);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return "false";
         }
+        return result;
     }
 
     /**
      * 회원가입
      */
-    public String insert(String id, String nickName, String password){
-        try{
-            String encryptedPw = CryptoUtil.encryptAES256(password, password.hashCode() + "");
+    public Member join(Member member) {
+        try {
             String sql = "INSERT INTO cb_member(memberId,nickName,password) VALUES (?,?,?)";
-            int result = jdbcTemplate.update(sql, id, nickName, encryptedPw);
-            if(result == 1){
-                return "success";
-            }else{
-                return "fail";
+            int result = jdbcTemplate.update(sql, member.getMemberId(), member.getNickName(), member.getPassword());
+            if (result == 1) {
+                return member;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "fail";
+        return new Member();
     }
 
     /**
@@ -67,9 +66,9 @@ public class MemberDAO {
                 (resultSet, i) -> resultSet.getString("nickName"), nickName);
 
         System.out.println(result);
-        if(result.size() > 0){
+        if (result.size() > 0) {
             return "0";
-        }else{
+        } else {
             return "1";
         }
     }
@@ -82,11 +81,11 @@ public class MemberDAO {
         List<String> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getString("memberId"), memberId);
 
-        System.out.println(memberId+ " 아이디 "+result);
+        System.out.println(memberId + " 아이디 " + result);
 
-        if(result.size() > 0){
+        if (result.size() > 0) {
             return "0";
-        }else{
+        } else {
             return "1";
         }
     }
@@ -116,7 +115,7 @@ public class MemberDAO {
     /**
      * 회원 탈퇴
      */
-    public int withdraw(String memberId){
+    public int withdraw(String memberId) {
         String sql = "UPDATE cb_member SET isDeleted = 1 WHERE memberId = ?";
         return jdbcTemplate.update(sql, memberId);
     }
@@ -127,9 +126,9 @@ public class MemberDAO {
     public String jjimDo(String id, int placeId, String placeName) {
         String sql = "INSERT INTO cb_jjim_list values (?,?,?)";
         int result = jdbcTemplate.update(sql, id, placeId, placeName);
-        if(result>0){
+        if (result > 0) {
             return "success";
-        }else{
+        } else {
             return "false";
         }
     }
@@ -140,9 +139,9 @@ public class MemberDAO {
     public String jjimUndo(String memberId, int placeId) {
         String sql = "DELETE FROM cb_jjim_list where memberId = ? AND placeId = ?";
         int result = jdbcTemplate.update(sql, memberId, placeId);
-        if(result > 0){
+        if (result > 0) {
             return "success";
-        }else{
+        } else {
             return "false";
         }
     }
@@ -165,9 +164,9 @@ public class MemberDAO {
         List<Integer> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getInt(1), memberId, placeId);
 
-        if(result.size() > 0){
+        if (result.size() > 0) {
             return String.valueOf(result.get(0));
-        }else{
+        } else {
             return "0";
         }
     }
@@ -180,9 +179,9 @@ public class MemberDAO {
         List<String> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getString("evaluation_point"), memberId, placeId);
 
-        if(result.size() > 0){
+        if (result.size() > 0) {
             return String.valueOf(result.get(0));
-        }else{
+        } else {
             return "0";
         }
     }

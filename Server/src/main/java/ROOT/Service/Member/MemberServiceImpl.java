@@ -20,12 +20,8 @@ public class MemberServiceImpl implements MemberService {
      * 로그인
      */
     @Override
-    public String select(String id, String password, HttpSession session) {
-        String loginResult = memberDAO.select(id, password);
-        if(loginResult.equals(id)){
-            session.setAttribute("id", id);
-        }
-        return loginResult;
+    public Member login(Member member) {
+        return memberDAO.login(member);
     }
 
     /**
@@ -41,8 +37,8 @@ public class MemberServiceImpl implements MemberService {
      * 회원가입
      */
     @Override
-    public String insert(String id, String nickName, String password) {
-        return memberDAO.insert(id, nickName, password);
+    public Member join(Member member) {
+        return memberDAO.join(member);
     }
 
     /**

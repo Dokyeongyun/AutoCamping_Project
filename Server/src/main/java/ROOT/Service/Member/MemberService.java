@@ -2,9 +2,8 @@ package ROOT.Service.Member;
 
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import ROOT.VO.Member.Member;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -16,8 +15,8 @@ public interface MemberService {
     /**
      * 로그인
      */
-    @RequestMapping(value = "/login.do")
-    String select(String id, String password, HttpSession session);
+    @PostMapping( "/login")
+    Member login(@RequestBody Member member);
 
     /**
      * 로그아웃
@@ -28,8 +27,8 @@ public interface MemberService {
     /**
      * 회원가입
      */
-    @RequestMapping(value = "/insert.do")
-    String insert(String id, String nickName, String password);
+    @PostMapping("/join")
+    Member join(@RequestBody Member member);
 
     /**
      * 닉네임 중복확인
