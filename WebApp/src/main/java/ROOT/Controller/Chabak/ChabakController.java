@@ -1,6 +1,6 @@
 package ROOT.Controller.Chabak;
 
-import ROOT.Utils.APIServerInfo;
+import ROOT.Service.Chabak.ChabakService;
 import ROOT.VO.Chabak.BestAndCount;
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -24,16 +22,14 @@ import java.util.*;
 public class ChabakController {
 
     @Autowired
-    RestOperations restOperations;
-
-    String serverContextPath = APIServerInfo.API_SERVER_CONTEXT;
+    ChabakService chabakService;
 
     /**
      * 차박지 탭 메인화면
      */
     @GetMapping("/main")
     public String main(Model model) {
-        List<Chabak> chabaks = restOperations.getForObject(serverContextPath + "/chabak/chabaks", List.class);
+        List<Chabak> chabaks = chabakService.getAllChabakList();
         model.addAttribute("chabakList", chabaks);
         return "/chabak/chabakMain";
     }
@@ -43,8 +39,8 @@ public class ChabakController {
      */
     @GetMapping("/map")
     public String chabakMap(Model model, @RequestParam("province") String province) {
-        Map<String, BestAndCount> map = restOperations.getForObject(serverContextPath + "/chabak/bestAndCount", Map.class);
-        List<Chabak> list = restOperations.getForObject(serverContextPath + "/chabak/province/" + province, List.class);
+        Map<String, BestAndCount> map = chabakService.getBestAndCount();
+        List<Chabak> list = chabakService.getProvinceChabakList(province);
         model.addAttribute("BestAndCount", map);
         model.addAttribute("searchResult", list);
         model.addAttribute("searchProvince", province);
@@ -57,10 +53,10 @@ public class ChabakController {
      */
     @GetMapping("/{placeId}")
     public String detailInfo(Model model, @PathVariable int placeId, HttpSession session) {
-        Chabak chabakDetail = restOperations.getForObject(serverContextPath + "/chabak/" + placeId, Chabak.class);
-        List<Toilet> toiletList = restOperations.getForObject(serverContextPath + "/chabak/toilets/" + placeId, List.class);
-        List<Fishing> fishingList = restOperations.getForObject(serverContextPath + "/chabak/fishings/" + placeId, List.class);
-        List<Review> reviewList = restOperations.getForObject(serverContextPath + "/chabak/reviews/" + placeId, List.class);
+        Chabak chabakDetail = chabakService.getOne(placeId);
+        List<Toilet> toiletList = chabakService.getToilets(placeId);
+        List<Fishing> fishingList = chabakService.getFishings(placeId);
+        List<Review> reviewList = chabakService.getReviews(placeId);
 
         String isJjimPlace = "0";
         if (session.getAttribute("id") != null) {
@@ -79,12 +75,12 @@ public class ChabakController {
      * 차박지 랭킹화면
      *
      * @param model 차박지 랭킹 정보 담을 리스트
-     * @param order 정렬 기준
+     * @param sortBy 정렬 기준
      * @return 차박지 랭킹화면 ViewName
      */
-    @RequestMapping("/ranking/{order}")
-    public String ranking(Model model, @PathVariable String order) {
-        List<Chabak> list = restOperations.getForObject(serverContextPath + "/chabak/popular/" + order, List.class);
+    @RequestMapping("/ranking/{sortBy}")
+    public String ranking(Model model, @PathVariable String sortBy) {
+        List<Chabak> list = chabakService.getPopularList(sortBy);
         model.addAttribute("popularList", list);
         return "/chabak/chabakRanking";
     }
@@ -104,15 +100,12 @@ public class ChabakController {
                                @RequestParam("facility") String facility,
                                @RequestParam("keyword") String keyword) {
 
-        Chabak[] filterResult = restOperations.getForObject(
-                UriComponentsBuilder.fromUriString(serverContextPath + "/chabak/search")
-                        .queryParam("region", region)
-                        .queryParam("facility", facility)
-                        .build().toUriString(), Chabak[].class);
+        Chabak[] filterResult = chabakService.chabakSearch(region, facility);
 
         System.out.println(Arrays.toString(filterResult));
 
-        Chabak[] chabaks = restOperations.getForObject(serverContextPath + "/chabak/chabaks", Chabak[].class);
+        List<Chabak> tempList = chabakService.getAllChabakList();
+        Chabak[] chabaks = tempList.toArray(new Chabak[tempList.size()]);
 
         System.out.println(Arrays.toString(chabaks));
         // TODO 수정필요
