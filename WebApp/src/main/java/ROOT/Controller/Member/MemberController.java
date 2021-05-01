@@ -6,7 +6,6 @@ import ROOT.VO.Form.LoginForm;
 import ROOT.VO.Member.Member;
 import ROOT.Validator.JoinValidator;
 import ROOT.Validator.LoginValidator;
-import com.mysql.cj.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,14 +15,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    Member sessionMember;
 
     @InitBinder("joinForm")
     public void joinInitBinder(WebDataBinder binder) {
@@ -74,10 +74,8 @@ public class MemberController {
     public String join(@Validated JoinForm form,
                        BindingResult result,
                        Errors errors,
-                       Model model,
-                       HttpSession session
+                       Model model
     ) {
-
         // 입력값 검사 실패 시
         if (result.hasErrors() || errors.hasErrors()) {
             return "/member/joinForm";
@@ -98,7 +96,7 @@ public class MemberController {
             return "/member/joinForm";
         }
 
-        return "loginForm";
+        return "redirect:/member/loginForm";
     }
 
     /**
@@ -114,8 +112,7 @@ public class MemberController {
     public String login(@Validated LoginForm form,
                         BindingResult result,
                         Errors errors,
-                        Model model,
-                        HttpSession session
+                        Model model
     ) {
 
         // 입력값 검사 실패 시
@@ -137,14 +134,18 @@ public class MemberController {
             return "/member/loginForm";
         }
 
-        session.setAttribute("loginMember", loginMember);
+        sessionMember.setMemberId(loginMember.getMemberId());
+        sessionMember.setNickName(loginMember.getNickName());
+        sessionMember.setPassword(loginMember.getPassword());
 
-        return "/index";
+        return "redirect:/";
     }
 
     @RequestMapping("/logout")
-    public String logout(HttpSession session) {
-        memberService.logout(session);
-        return "/index";
+    public String logout() {
+        sessionMember.setMemberId(null);
+        sessionMember.setNickName(null);
+        sessionMember.setPassword(null);
+        return "redirect:/";
     }
 }

@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:eval expression="@sessionMember" var="sessionMember"/>
 
 <jsp:include page="header.jsp"/>
 
@@ -12,7 +15,7 @@
                     <img src="/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
                 </div>
                 <div class="myInfo_txt">
-                    <div class="profile_txt">${sessionScope.get("loginMember").memberId} 님</div>
+                    <div class="profile_txt">${sessionMember.memberId} 님</div>
                 </div>
             </div>
             <div class="myInfo_bottom">

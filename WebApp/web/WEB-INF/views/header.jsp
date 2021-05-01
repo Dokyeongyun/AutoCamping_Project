@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,7 +24,7 @@
 </head>
 <body>
 
-<c:set var="loginId" value="${sessionScope.get('loginMember').memberId}"/>
+<spring:eval expression="@sessionMember" var="sessionMember"/>
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -34,12 +35,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/board/main">게시판</a></li>
                 <li><a href="/chabak/main">차박지</a></li>
-                <c:if test="${loginId != null}">
-                    <li><div class="greeting">${loginId} 님, 환영합니다.</div></li>
+                <c:if test="${sessionMember.memberId != null}">
+                    <li><div class="greeting">${sessionMember.memberId} 님, 환영합니다.</div></li>
                     <li class="active"><a href="/member/modifyInfo">회원정보</a></li>
                     <li><a href="/member/logout">로그아웃</a></li>
                 </c:if>
-                <c:if test="${loginId == null}">
+                <c:if test="${sessionMember.memberId == null}">
                     <li class="active"><a href="/member/loginForm">로그인</a></li>
                     <li><a href="/member/joinForm">회원가입</a></li>
                 </c:if>
