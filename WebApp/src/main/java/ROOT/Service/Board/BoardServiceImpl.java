@@ -1,29 +1,29 @@
-package WebApplication.Service.Board;
+package ROOT.Service.Board;
 
-import ROOT.DAO.ArticleDAO;
 import ROOT.VO.Article.Article;
 import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.client.RestOperations;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("View_BoardService")
-public class View_BoardServiceImpl implements View_BoardService{
+@Service("boardService")
+public class BoardServiceImpl implements BoardService {
 
     @Autowired
-    ArticleDAO articleDAO;
+    RestOperations restOperations;
 
     /**
      * 게시판 메인화면
      */
     @Override
     public String main(Model model) {
-        List<Article> list = articleDAO.get();
-        model.addAttribute("allArticleList", list);
+//        List<Article> list = articleDAO.get();
+//        model.addAttribute("allArticleList", list);
         return "/board/boardMain";
     }
 
@@ -42,10 +42,10 @@ public class View_BoardServiceImpl implements View_BoardService{
      */
     @Override
     public String showArticle(int articleId, Model model) {
-        List<Article> article = articleDAO.getArticle(articleId);
-        List<Comment> commentList = articleDAO.getComments(articleId);
-        model.addAttribute("article", article);
-        model.addAttribute("commentList", commentList);
+//        List<Article> article = articleDAO.getArticle(articleId);
+//        List<Comment> commentList = articleDAO.getComments(articleId);
+//        model.addAttribute("article", article);
+//        model.addAttribute("commentList", commentList);
         return "/board/showArticle";
     }
 
@@ -57,8 +57,8 @@ public class View_BoardServiceImpl implements View_BoardService{
      */
     @Override
     public String modifyArticle(int articleId, Model model) {
-        List<Article> article = articleDAO.getArticle(articleId);
-        model.addAttribute("article", article);
+//        List<Article> article = articleDAO.getArticle(articleId);
+//        model.addAttribute("article", article);
         return "/board/modifyArticle";
     }
 
@@ -67,11 +67,11 @@ public class View_BoardServiceImpl implements View_BoardService{
      */
     @Override
     public String getArticleByKeyword(String keyword, Model model) {
-        List<Article> list = articleDAO.get().stream().filter(article -> {
-            String text = article.getContent() + article.getTitle();
-            return text.contains(keyword);
-        }).collect(Collectors.toList());
-        model.addAttribute("allArticleList", list);
+//        List<Article> list = articleDAO.get().stream().filter(article -> {
+//            String text = article.getContent() + article.getTitle();
+//            return text.contains(keyword);
+//        }).collect(Collectors.toList());
+//        model.addAttribute("allArticleList", list);
         return "/board/boardSearchResult";
     }
 
@@ -82,8 +82,8 @@ public class View_BoardServiceImpl implements View_BoardService{
      */
     @Override
     public String getArticleByKeyword(Model model, HttpSession session) {
-        List<Article> list = articleDAO.getArticles((String) session.getAttribute("id"));
-        model.addAttribute("myArticleList", list);
+//        List<Article> list = articleDAO.getArticles((String) session.getAttribute("id"));
+//        model.addAttribute("myArticleList", list);
         return "/board/showMyArticle";
     }
 }

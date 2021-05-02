@@ -112,7 +112,9 @@
 
     </div>
 </div>
+
 <jsp:include page="../footer.jsp"/>
+
 <style>
     .ArticleTool {
         position: absolute;

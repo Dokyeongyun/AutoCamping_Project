@@ -1,6 +1,5 @@
-package WebApplication.Service.Board;
+package ROOT.Service.Board;
 
-import ROOT.VO.Article.Article;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
-@RequestMapping("/board")
-public interface View_BoardService {
+public interface BoardService {
 
     /**
      * 게시판 메인화면
