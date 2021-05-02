@@ -14,16 +14,20 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
+@SessionAttributes("sessionMember")
 @RequestMapping("/member")
 public class MemberController {
 
-    @Autowired
-    MemberService memberService;
+    @ModelAttribute("sessionMember")
+    Member sessionMember() {
+        return new Member();
+    }
 
     @Autowired
-    Member sessionMember;
+    MemberService memberService;
 
     @InitBinder("joinForm")
     public void joinInitBinder(WebDataBinder binder) {
@@ -58,7 +62,8 @@ public class MemberController {
      * 로그인 화면
      */
     @GetMapping("/loginForm")
-    public void loginForm() {
+    public void loginForm(Model model) {
+        model.addAttribute("sessionMember", new Member());
     }
 
     /**
@@ -112,9 +117,9 @@ public class MemberController {
     public String login(@Validated LoginForm form,
                         BindingResult result,
                         Errors errors,
-                        Model model
+                        Model model,
+                        @SessionAttribute Member sessionMember
     ) {
-
         // 입력값 검사 실패 시
         if (result.hasErrors() || errors.hasErrors()) {
             return "/member/loginForm";
@@ -141,11 +146,9 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @RequestMapping("/logout")
-    public String logout() {
-        sessionMember.setMemberId(null);
-        sessionMember.setNickName(null);
-        sessionMember.setPassword(null);
+    @GetMapping("/logout")
+    public String logout(SessionStatus status) {
+        status.setComplete();
         return "redirect:/";
     }
 }
