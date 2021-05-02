@@ -1,37 +1,40 @@
 package ROOT.Service.Board;
 
-import org.springframework.stereotype.Controller;
+import ROOT.VO.Article.Article;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface BoardService {
 
     /**
-     * 게시판 메인화면
+     * 모든 게시글 읽어오기
+     * @return 모든 게시글 리스트
      */
-    @RequestMapping("/main")
-    String main(Model model);
+    List<Article> getAllArticleList();
 
     /**
      * 게시글 작성하기
      */
-    @RequestMapping("/writeArticle")
-    String writeArticle();
+    Integer writeArticle(Article article);
 
     /**
      * 게시글 읽기
      */
-    @RequestMapping("/showArticle/{articleId}")
-    String showArticle(@PathVariable int articleId, Model model);
+    Article getArticle(int articleId);
 
     /**
      * 게시글 수정하기
      */
-    @RequestMapping("/modifyArticle/{articleId}")
-    String modifyArticle(@PathVariable int articleId, Model model);
+    void updateArticle(Article article);
+
+    /**
+     * 게시글 삭제하기
+     */
+    void deleteArticle(int articleId);
 
     /**
      * 게시글 검색하기 (제목+내용)
@@ -44,4 +47,6 @@ public interface BoardService {
      */
     @RequestMapping("/showMyArticle")
     String getArticleByKeyword(Model model, HttpSession session);
+
+    // TODO 댓글읽기
 }

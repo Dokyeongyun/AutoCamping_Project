@@ -12,13 +12,19 @@
                     <img src="/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
                 </div>
                 <div class="myInfo_txt">
-                    <div class="profile_txt">${sessionScope.get("id")} 님</div>
+                    <div class="profile_txt">${sessionMember.memberId} 님</div>
                 </div>
             </div>
             <div class="myInfo_bottom">
-                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyArticle'">내가 쓴 글 보기</button>
-                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyComment'">내가 쓴 댓글 보기</button>
-                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/writeArticle'">글 작성하기</button>
+                <button class="btn button_left" type="button" style="width: 100%"
+                        onclick="location.href='/board/showMyArticle'">내가 쓴 글 보기
+                </button>
+                <button class="btn button_left" type="button" style="width: 100%"
+                        onclick="location.href='/board/showMyComment'">내가 쓴 댓글 보기
+                </button>
+                <button class="btn button_left" type="button" style="width: 100%"
+                        onclick="location.href='/board/articleWriteForm'">글 작성하기
+                </button>
             </div>
         </div>
 
@@ -57,7 +63,7 @@
                 <c:forEach var="i" items="${allArticleList}">
                     <tr>
                         <td>게시판이름</td>
-                        <td><a href="/board/showArticle/${i.articleId}">${i.title}</a></td>
+                        <td><a href="/board/article/${i.articleId}">${i.title}</a></td>
                         <td>${i.nickName}</td>
                         <td>${i.createTime}</td>
                         <td>1</td>
@@ -93,8 +99,10 @@
                 <option value="comment">댓글내용</option>
                 <option value="comment_writer">댓글작성자</option>
             </select>
-            <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요" style="width: 200px; display: inline-block"/>
-            <button class="btn" type="button" id="searchArticleBtn" style="background-color: #77b7b4; color: white">검색</button>
+            <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요"
+                   style="width: 200px; display: inline-block"/>
+            <button class="btn" type="button" id="searchArticleBtn" style="background-color: #77b7b4; color: white">검색
+            </button>
         </div>
     </div>
 </div>
@@ -102,18 +110,18 @@
 <jsp:include page="../footer.jsp"/>
 
 <script>
-    $("#searchArticleBtn").click(function(){
-        if(!invalidate_check()) {
+    $("#searchArticleBtn").click(function () {
+        if (!invalidate_check()) {
             return false;
         }
         var keyword = $("#searchKeyword").val();
-        location.href='/board/getArticleByKeyword/'+keyword;
+        location.href = '/board/getArticleByKeyword/' + keyword;
     });
 
     <!-- 유효성 검사 -->
-    function invalidate_check(){
+    function invalidate_check() {
         // 댓글 내용 공백 확인
-        if($("#searchKeyword").val() == ""){
+        if ($("#searchKeyword").val() == "") {
             alert("검색어을 입력해주세요.");
             $("#searchKeyword").focus();
             return false;

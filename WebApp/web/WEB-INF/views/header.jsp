@@ -33,14 +33,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/board/main">게시판</a></li>
                 <li><a href="/chabak/main">차박지</a></li>
-                <c:if test="${sessionMember != null}">
+                <c:if test="${sessionMember.memberId != null}">
                     <li>
                         <div class="greeting">${sessionMember.memberId} 님, 환영합니다.</div>
                     </li>
                     <li class="active"><a href="/member/modifyInfo">회원정보</a></li>
                     <li><a href="/member/logout">로그아웃</a></li>
                 </c:if>
-                <c:if test="${sessionMember == null}">
+                <c:if test="${sessionMember.memberId == null}">
                     <li class="active"><a href="/member/loginForm">로그인</a></li>
                     <li><a href="/member/joinForm">회원가입</a></li>
                 </c:if>

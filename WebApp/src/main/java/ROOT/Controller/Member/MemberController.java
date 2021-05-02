@@ -62,8 +62,7 @@ public class MemberController {
      * 로그인 화면
      */
     @GetMapping("/loginForm")
-    public void loginForm(Model model) {
-        model.addAttribute("sessionMember", new Member());
+    public void loginForm() {
     }
 
     /**

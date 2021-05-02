@@ -26,4 +26,17 @@ public class Article {
     public void setContent(String content) { this.content = content; }
     public void setUrlPath(String urlPath) { this.urlPath = urlPath; }
     public void setCreateTime(String createTime) { this.createTime = createTime; }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId=" + articleId +
+                ", memberId='" + memberId + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", urlPath='" + urlPath + '\'' +
+                ", createTime='" + createTime + '\'' +
+                '}';
+    }
 }

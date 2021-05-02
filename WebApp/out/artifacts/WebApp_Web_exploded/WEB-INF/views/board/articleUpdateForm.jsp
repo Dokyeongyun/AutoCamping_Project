@@ -1,32 +1,41 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fo" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../header.jsp"/>
 
 <div class="container">
-    <div class="page_title_region">
-        <div class="title_txt">글 수정하기</div>
-        <button type="button" class="btn button_right" style="margin-top: 10px;" id="modifyArticleBtn">수정하기</button>
-    </div>
-    <div class="page_content_region">
-        <select id="board_type" class="form-control input_box" style="width: 50%">
-            <option value="">게시판을 선택해 주세요.</option>
-            <option value="notice">공지사항</option>
-            <option value="board1">게시판1</option>
-            <option value="board2">게시판2</option>
-            <option value="board3">게시판3</option>
-            <option value="board4">게시판4</option>
-            <option value="board5">게시판5</option>
-        </select>
-        <input type="text" class="form-control input_box" id="title" placeholder="제목을 입력해 주세요."
-            value="${article[0].title}"/>
-        <textarea id="content" class="form-control" rows="20" placeholder="내용을 입력해 주세요." style="padding: 20px; margin-bottom: 20px;">${article[0].content}</textarea>
-    </div>
+    <form:form modelAttribute="articleForm" action="/board/article/${article.articleId}" method="post">
+        <div class="page_title_region">
+            <div class="title_txt">글 수정하기</div>
+            <input type="hidden" name="_method" value="PUT">
+            <form:hidden path="path" value=""/>
+            <form:hidden path="memberId" value="${sessionMember.memberId}"/>
+            <button type="submit" class="btn button_right" style="margin-top: 10px;">수정하기</button>
+        </div>
+        <div class="page_content_region">
+            <select id="board_type" class="form-control input_box" style="width: 50%">
+                <option value="">게시판을 선택해 주세요.</option>
+                <option value="notice">공지사항</option>
+                <option value="board1">게시판1</option>
+                <option value="board2">게시판2</option>
+                <option value="board3">게시판3</option>
+                <option value="board4">게시판4</option>
+                <option value="board5">게시판5</option>
+            </select>
+            <form:input path="title" cssClass="form-control input_box" value="${article.title}"
+                        placeholder="제목을 입력해주세요."/>
+            <form:textarea path="content" cssClass="form-control" rows="20" placeholder="내용을 입력해주세요."
+                           cssStyle="padding: 20px; margin-bottom: 20px;" value="${article.content}"/>
+        </div>
+    </form:form>
 </div>
 
 <jsp:include page="../footer.jsp"/>
+<%--
 
 <script>
-    <%--  글쓰기 작업 DB Insert 수행  --%>
+    &lt;%&ndash;  글쓰기 작업 DB Insert 수행  &ndash;%&gt;
     $("#modifyArticleBtn").click(function(){
         if(!invalidate_check()) {
             return false;
@@ -81,3 +90,4 @@
         return true;
     }
 </script>
+--%>

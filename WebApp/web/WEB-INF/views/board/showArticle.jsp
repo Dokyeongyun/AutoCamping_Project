@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../header.jsp"/>
@@ -12,13 +13,19 @@
                     <img src="/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
                 </div>
                 <div class="myInfo_txt">
-                    <div class="profile_txt">${sessionScope.get("id")} 님</div>
+                    <div class="profile_txt">${sessionMember.memberId} 님</div>
                 </div>
             </div>
             <div class="myInfo_bottom">
-                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyArticle'">내가 쓴 글 보기</button>
-                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/showMyComment'">내가 쓴 댓글 보기</button>
-                <button class="btn button_left" type="button" style="width: 100%" onclick="location.href='/board/writeArticle'">글 작성하기</button>
+                <button class="btn button_left" type="button" style="width: 100%"
+                        onclick="location.href='/board/showMyArticle'">내가 쓴 글 보기
+                </button>
+                <button class="btn button_left" type="button" style="width: 100%"
+                        onclick="location.href='/board/showMyComment'">내가 쓴 댓글 보기
+                </button>
+                <button class="btn button_left" type="button" style="width: 100%"
+                        onclick="location.href='/board/writeArticle'">글 작성하기
+                </button>
             </div>
         </div>
 
@@ -44,25 +51,31 @@
         <div class="article_info_region">
             <div class="article_info_header_region">
                 <div class="board_type_nav_txt"><a href="#">자유게시판 ></a></div>
-                <div class="article_title_txt">${article[0].title}</div>
+                <div class="article_title_txt">${article.title}</div>
                 <div class="article_writer_info_region">
                     <img src="/static/img/profile.PNG" class="profile_sm"/>
-                    <div class="article_writer_txt">${article[0].nickName}</div>
-                    <div class="article_reg_time_txt">${article[0].createTime}    조회수 : 1</div>
+                    <div class="article_writer_txt">${article.nickName}</div>
+                    <div class="article_reg_time_txt">${article.createTime} 조회수 : 1</div>
                     <div class="ArticleTool">
                         <ul style="list-style: none">
                             <li style="float: left; margin-right: 10px;">
-                                <button type="button" class="btn btn-primary">댓글  ${commentList.size()}개</button>
+                                <button type="button" class="btn btn-primary">댓글 ${commentList.size()}개</button>
                             </li>
                             <li style="float: left; margin-right: 10px;">
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">메뉴</button>
-                                    <ul class="dropdown-menu">
-                                        <c:if test="${article[0].memberId == sessionScope.get('id')}">
-                                            <li><a class="dropdown-item" href="/board/modifyArticle/${article[0].articleId}">수정하기</a></li>
-                                            <li><a class="dropdown-item" href="#" onclick="deleteArticle()">삭제하기</a></li>
+                                    <ul class="dropdown-menu" style="display: contents">
+                                        <c:if test="${article.memberId == sessionMember.memberId}">
+                                            <li><a class="dropdown-item"
+                                                   href="/board/articleUpdateForm/${article.articleId}">수정하기</a></li>
+                                            <li>
+                                                <form:form action="/board/article/${article.articleId}" method="post">
+                                                    <input type="hidden" name="_method" value="delete"/>
+                                                    <input type="submit" class="dropdown-item" value="삭제하기"/>
+                                                </form:form>
+                                            </li>
                                         </c:if>
-                                        <c:if test="${article[0].memberId != sessionScope.get('id')}">
+                                        <c:if test="${article.memberId != sessionMember.memberId}">
                                             <li><a class="dropdown-item" href="#">스크랩하기</a></li>
                                             <li><a class="dropdown-item" href="#">URL복사</a></li>
                                         </c:if>
@@ -74,11 +87,11 @@
                 </div>
             </div>
             <div class="article_info_content_region">
-                <div class="article_content_txt">${article[0].content}</div>
+                <div class="article_content_txt">${article.content}</div>
             </div>
             <div class="article_comment_region">
                 <div class="article_comment_header_region">
-                    <div class="article_comment_header_txt">댓글  ${commentList.size()}개</div>
+                    <div class="article_comment_header_txt">댓글 ${commentList.size()}개</div>
                 </div>
                 <div class="article_comment_list_region">
                     <c:forEach var="i" items="${commentList}">
@@ -93,15 +106,16 @@
                 </div>
                 <div class="article_comment_write_region">
                     <div class="article_writer_txt">
-                        <c:if test="${sessionScope.get('id')==null}">
+                        <c:if test="${sessionMember.memberId == null}">
                             손님
                         </c:if>
-                        <c:if test="${sessionScope.get('id')!=null}">
-                            ${sessionScope.get("id")}
+                        <c:if test="${sessionMember.memberId != null}">
+                            ${sessionMember.memberId}
                         </c:if>
                     </div>
                     <div class="article_comment_write_content">
-                        <textarea class="form-control noresize" rows="5" placeholder="댓글을 남겨보세요." id="commentContent" style="padding: 20px"></textarea>
+                        <textarea class="form-control noresize" rows="5" placeholder="댓글을 남겨보세요." id="commentContent"
+                                  style="padding: 20px"></textarea>
                     </div>
                     <div class="article_comment_menu">
                         <button type="button" class="btn button_right" id="writeCommentBtn">등록</button>
@@ -125,8 +139,8 @@
     }
 </style>
 
-<script>
-    <%--  댓글쓰기 작업 DB Insert 수행  --%>
+<%--<script>
+    &lt;%&ndash;  댓글쓰기 작업 DB Insert 수행  &ndash;%&gt;
     $("#writeCommentBtn").click(function(){
         if(!invalidate_check()) {
             return false;
@@ -203,4 +217,4 @@
             }
         });
     }
-</script>
+</script>--%>

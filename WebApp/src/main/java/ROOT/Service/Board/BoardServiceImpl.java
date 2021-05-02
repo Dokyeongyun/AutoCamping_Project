@@ -1,7 +1,7 @@
 package ROOT.Service.Board;
 
+import ROOT.Utils.APIServerInfo;
 import ROOT.VO.Article.Article;
-import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -9,7 +9,6 @@ import org.springframework.web.client.RestOperations;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -18,48 +17,51 @@ public class BoardServiceImpl implements BoardService {
     RestOperations restOperations;
 
     /**
-     * 게시판 메인화면
+     * 모든 게시글 가져오기
+     *
+     * @return 모든 게시글 리스트
      */
     @Override
-    public String main(Model model) {
-//        List<Article> list = articleDAO.get();
-//        model.addAttribute("allArticleList", list);
-        return "/board/boardMain";
+    public List<Article> getAllArticleList() {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/articles", List.class);
     }
 
     /**
      * 게시글 작성하기
+     *
+     * @param article INSERT 게시글 정보
+     * @return INSERT 결과
      */
     @Override
-    public String writeArticle() {
-        return "/board/writeArticle";
+    public Integer writeArticle(Article article) {
+        return restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/article", article, Integer.class);
     }
 
     /**
-     * 게시글 읽기 + 게시글에 포함된 댓글 리스트 가져오기
+     * 게시글 읽기
+     *
      * @param articleId 게시글 번호
-     * @return 글 읽기 화면 View name
+     * @return Article
      */
     @Override
-    public String showArticle(int articleId, Model model) {
-//        List<Article> article = articleDAO.getArticle(articleId);
-//        List<Comment> commentList = articleDAO.getComments(articleId);
-//        model.addAttribute("article", article);
-//        model.addAttribute("commentList", commentList);
-        return "/board/showArticle";
+    public Article getArticle(int articleId) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/article/" + articleId, Article.class);
     }
 
     /**
      * 게시글 수정하기
-     * @param articleId 수정할 게시글 ID
-     * @param model View로 보여줄 게시글 정보
-     * @return View Name
      */
     @Override
-    public String modifyArticle(int articleId, Model model) {
-//        List<Article> article = articleDAO.getArticle(articleId);
-//        model.addAttribute("article", article);
-        return "/board/modifyArticle";
+    public void updateArticle(Article article) {
+        restOperations.put(APIServerInfo.API_SERVER_CONTEXT + "/board/article/" + article.getArticleId(), article);
+    }
+
+    /**
+     * 게시글 삭제하기
+     */
+    @Override
+    public void deleteArticle(int articleId) {
+        restOperations.delete(APIServerInfo.API_SERVER_CONTEXT + "/board/article/" + articleId);
     }
 
     /**
@@ -77,6 +79,7 @@ public class BoardServiceImpl implements BoardService {
 
     /**
      * 내가 쓴 글 보기
+     *
      * @param model
      * @return
      */
