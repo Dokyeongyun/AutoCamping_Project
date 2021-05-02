@@ -2,44 +2,46 @@ package ROOT.Service.Article;
 
 import ROOT.VO.Article.Article;
 import ROOT.VO.Article.Comment;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/article")
+@RequestMapping("/board")
 public interface ArticleService {
-
-    /**
-     * 게시글 작성
-     */
-    @RequestMapping(value = "/writeArticle.do")
-    int writeArticle(String memberId, String title, String content, String fileName);
-
-    /**
-     * 게시글 수정
-     */
-    @RequestMapping(value = "/updateArticle.do")
-    int updateArticle(int articleId, String title, String content, String fileName);
-
-    /**
-     * 게시글 삭제
-     */
-    @RequestMapping(value = "/deleteArticle.do")
-    int deleteArticle(int articleId);
 
     /**
      * 게시글 리스트 읽어오기
      */
-    @RequestMapping(value = "/get.do")
-    List<Article> get();
+    @GetMapping("/articles")
+    List<Article> getAllArticleList();
+
+    // TODO INSERT 후 INSERT된 값 SELECT 하기, 반환값 ResponseEntity<> 이용
+
+    /**
+     * 게시글 작성
+     */
+    @PostMapping("/article")
+    int writeArticle(@RequestBody Article article);
 
     /**
      * 게시글 하나 읽기
      */
-    @RequestMapping(value = "/getArticle.do")
-    List<Article> getArticle(int articleId);
+    @GetMapping("/article/{articleId}")
+    Article getArticle(@PathVariable int articleId);
+
+    /**
+     * 게시글 수정
+     */
+    @PutMapping("/article/{articleId}")
+    int updateArticle(@PathVariable int articleId, @RequestBody Article article);
+
+    /**
+     * 게시글 삭제
+     */
+    @DeleteMapping("/article/{articleId}")
+    int deleteArticle(@PathVariable int articleId);
 
     /**
      * 댓글 리스트 읽기

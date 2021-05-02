@@ -4,7 +4,10 @@ import ROOT.DAO.ArticleDAO;
 import ROOT.VO.Article.Article;
 import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,27 +20,46 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleDAO articleDAO;
 
     /**
+     * 게시글 리스트 읽어오기
+     */
+    @Override
+    public List<Article> getAllArticleList() {
+        return articleDAO.getAllArticleList();
+    }
+
+    /**
      * 게시글 작성
      */
     @Override
-    public int writeArticle(String memberId, String title, String content, String fileName) {
+    public int writeArticle(Article article) {
+        System.out.println(article);
+
         String urlPath = "";
-        if (!fileName.equals("")) {
-            urlPath = filePath + fileName;
+        if (article.getUrlPath() != null && !article.getUrlPath().equals("")) {
+            urlPath = filePath + article.getUrlPath();
         }
-        return articleDAO.writeArticle(memberId, title, content, urlPath);
+        article.setUrlPath(urlPath);
+
+        int writeResult = articleDAO.writeArticle(article);
+
+        if (writeResult != 1) {
+            // TODO WriteFailException
+        }
+
+        return writeResult;
     }
 
     /**
      * 게시글 수정
      */
     @Override
-    public int updateArticle(int articleId, String title, String content, String fileName) {
+    public int updateArticle(int articleId, Article article) {
         String urlPath = "";
-        if (!fileName.equals("")) {
-            urlPath = filePath + fileName;
+        if (!article.getUrlPath().equals("")) {
+            urlPath = filePath + article.getUrlPath();
         }
-        return articleDAO.updateArticle(articleId, title, content, urlPath);
+        article.setUrlPath(urlPath);
+        return articleDAO.updateArticle(article);
     }
 
     /**
@@ -49,18 +71,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * 게시글 리스트 읽어오기
-     */
-    @Override
-    public List<Article> get() {
-        return articleDAO.get();
-    }
-
-    /**
      * 게시글 하나 읽기
      */
     @Override
-    public List<Article> getArticle(int articleId) {
+    public Article getArticle(int articleId) {
         return articleDAO.getArticle(articleId);
     }
 
@@ -93,7 +107,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public List<Article> getArticlesByKeyword(String key) {
-        return articleDAO.get().stream().filter(article -> {
+        return articleDAO.getAllArticleList().stream().filter(article -> {
             String text = article.getContent() + article.getTitle();
             return text.contains(key);
         }).collect(Collectors.toList());

@@ -5,6 +5,7 @@ import ROOT.RowMapper.Article.CommentRowMapper;
 import ROOT.VO.Article.Article;
 import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -12,25 +13,36 @@ import java.util.List;
 
 @Component
 public class ArticleDAO {
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public ArticleDAO(JdbcTemplate jdbcTemplate){ this.jdbcTemplate = jdbcTemplate; }
+    public ArticleDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    /**
+     * 게시글 리스트 읽어오기
+     */
+    public List<Article> getAllArticleList() {
+        String sql = "SELECT * FROM article_view ORDER BY articleId";
+        return jdbcTemplate.query(sql, new ArticleRowMapper());
+    }
 
     /**
      * 게시글 작성
      */
-    public int writeArticle(String memberId, String title, String content, String path) {
-        String sql = "insert into cb_article (memberId,title,content,imagePath) values (?,?,?,?) ";
-        return jdbcTemplate.update(sql, memberId, title, content, path);
+    public int writeArticle(Article article) {
+        String sql = "INSERT INTO cb_article (memberId,title,content,imagePath) VALUES (?,?,?,?) ";
+        return jdbcTemplate.update(sql, article.getMemberId(), article.getTitle(), article.getContent(), article.getUrlPath());
     }
 
     /**
      * 게시글 수정
      */
-    public int updateArticle(int articleId, String title, String content, String path) {
+    public int updateArticle(Article article) {
         String sql = "UPDATE cb_article SET title = ?, content = ?, imagePath = ? WHERE articleId = ?";
-        return jdbcTemplate.update(sql, title, content, path, articleId);
+        return jdbcTemplate.update(sql, article.getTitle(), article.getContent(), article.getUrlPath(), article.getArticleId());
     }
 
     /**
@@ -39,14 +51,6 @@ public class ArticleDAO {
     public int deleteArticle(int articleId) {
         String sql = "UPDATE cb_article SET isDeleted = 1 WHERE articleId = ?";
         return jdbcTemplate.update(sql, articleId);
-    }
-
-    /**
-     * 게시글 리스트 읽어오기
-     */
-    public List<Article> get() {
-        String sql = "SELECT * FROM article_view ORDER BY articleId";
-        return jdbcTemplate.query(sql, new ArticleRowMapper());
     }
 
     /**
@@ -61,9 +65,9 @@ public class ArticleDAO {
     /**
      * 게시글 하나 읽기
      */
-    public List<Article> getArticle(int articleId) {
+    public Article getArticle(int articleId) {
         String sql = "SELECT * FROM article_view WHERE articleId = ?";
-        return jdbcTemplate.query(sql, new ArticleRowMapper(), articleId);
+        return jdbcTemplate.queryForObject(sql, new ArticleRowMapper(), articleId);
     }
 
     /**

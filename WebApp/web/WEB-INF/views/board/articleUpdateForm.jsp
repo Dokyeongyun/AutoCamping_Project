@@ -18,15 +18,17 @@
             <option value="board5">게시판5</option>
         </select>
         <input type="text" class="form-control input_box" id="title" placeholder="제목을 입력해 주세요."
-            value="${article[0].title}"/>
-        <textarea id="content" class="form-control" rows="20" placeholder="내용을 입력해 주세요." style="padding: 20px; margin-bottom: 20px;">${article[0].content}</textarea>
+               value="${article.title}"/>
+        <textarea id="content" class="form-control" rows="20" placeholder="내용을 입력해 주세요."
+                  style="padding: 20px; margin-bottom: 20px;">${article.content}</textarea>
     </div>
 </div>
 
 <jsp:include page="../footer.jsp"/>
+<%--
 
 <script>
-    <%--  글쓰기 작업 DB Insert 수행  --%>
+    &lt;%&ndash;  글쓰기 작업 DB Insert 수행  &ndash;%&gt;
     $("#modifyArticleBtn").click(function(){
         if(!invalidate_check()) {
             return false;
@@ -81,3 +83,4 @@
         return true;
     }
 </script>
+--%>
