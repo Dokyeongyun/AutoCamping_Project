@@ -87,6 +87,22 @@ public class ArticleDAO {
     }
 
     /**
+     * 댓글 수정하기
+     */
+    public int updateComment(Comment comment) {
+        String sql = "UPDATE article_comment SET content = ? WHERE commentId = ?";
+        return jdbcTemplate.update(sql, comment.getContent(), comment.getCommentId());
+    }
+
+    /**
+     * 댓글 삭제하기
+     */
+    public int deleteComment(int commentId) {
+        String sql = "UPDATE article_comment SET isDeleted = 1 WHERE commentId = ?";
+        return jdbcTemplate.update(sql, commentId);
+    }
+
+    /**
      * 사용자별 작성한 게시글 읽기
      */
     public List<Article> getArticles(String memberId) {

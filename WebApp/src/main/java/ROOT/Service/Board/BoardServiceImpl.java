@@ -78,7 +78,23 @@ public class BoardServiceImpl implements BoardService {
      */
     @Override
     public List<Comment> getCommentList(int articleId) {
-        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/article/" + articleId + "/comments", List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/comments/" + articleId, List.class);
+    }
+
+    /**
+     * 댓글 수정하기
+     */
+    @Override
+    public void updateComment(Comment comment) {
+        restOperations.put(APIServerInfo.API_SERVER_CONTEXT + "/board/comment", comment);
+    }
+
+    /**
+     * 댓글 삭제하기
+     */
+    @Override
+    public void deleteComment(int commentId) {
+        restOperations.delete(APIServerInfo.API_SERVER_CONTEXT + "/board/comment/" + commentId);
     }
 
     /**

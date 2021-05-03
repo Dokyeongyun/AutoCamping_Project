@@ -49,6 +49,16 @@ public interface BoardService {
     List<Comment> getCommentList(int articleId);
 
     /**
+     * 댓글 수정하기
+     */
+    void updateComment(Comment comment);
+
+    /**
+     * 댓글 삭제하기
+     */
+    void deleteComment(int commentId);
+
+    /**
      * 게시글 검색하기 (제목+내용)
      */
     @RequestMapping("/getArticleByKeyword/{keyword}")
@@ -59,6 +69,4 @@ public interface BoardService {
      */
     @RequestMapping("/showMyArticle")
     String getArticleByKeyword(Model model, HttpSession session);
-
-    // TODO 댓글읽기
 }

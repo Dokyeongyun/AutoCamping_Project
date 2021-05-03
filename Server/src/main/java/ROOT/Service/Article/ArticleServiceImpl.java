@@ -6,7 +6,9 @@ import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -92,6 +94,22 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Comment> getCommentList(int articleId) {
         return articleDAO.getComments(articleId);
+    }
+
+    /**
+     * 댓글 수정하기
+     */
+    @Override
+    public int updateComment(Comment comment) {
+        return articleDAO.updateComment(comment);
+    }
+
+    /**
+     * 댓글 삭제하기
+     */
+    @Override
+    public int deleteComment(int commentId) {
+        return articleDAO.deleteComment(commentId);
     }
 
     /**

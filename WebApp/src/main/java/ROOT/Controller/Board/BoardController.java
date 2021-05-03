@@ -157,4 +157,36 @@ public class BoardController {
 
         return "redirect:/board/article/" + form.getArticleId();
     }
+
+    /**
+     * 댓글 수정하기
+     */
+    @PutMapping("/comment")
+    public String updateComment(@Validated CommentForm form,
+                                BindingResult result,
+                                Model model
+    ) {
+        if (result.hasErrors()) {
+            return "redirect:/board/article/" + form.getArticleId();
+        }
+
+        Comment comment = new Comment();
+        comment.setCommentId(form.getCommentId());
+        comment.setArticleId(form.getArticleId());
+        comment.setContent(form.getContent());
+
+        boardService.updateComment(comment);
+
+        return "redirect:/board/article/" + form.getArticleId();
+    }
+
+    /**
+     * 댓글 삭제하기
+     */
+    @DeleteMapping("/comment/{commentId}")
+    public String deleteComment(@PathVariable int commentId, Comment comment) {
+        boardService.deleteComment(commentId);
+
+        return "redirect:/board/article/" + comment.getArticleId();
+    }
 }

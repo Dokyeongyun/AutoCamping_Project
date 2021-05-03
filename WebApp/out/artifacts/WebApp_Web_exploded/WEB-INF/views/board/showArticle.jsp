@@ -104,17 +104,49 @@
                 <div class="article_comment_list_region">
                     <c:forEach var="i" items="${commentList}">
                         <div class="article_writer_info_region">
-                            <div>
+                            <div class="commentInfo" id="commentInfoRegion${i.commentId}">
                                 <img src="/static/img/profile.PNG" class="profile_sm"/>
                                 <div class="article_writer_txt">${i.nickName}</div>
                                 <div class="comment_content_txt">${i.content}</div>
                                 <div class="article_reg_time_txt">${i.createTime}</div>
+
+                                <div class="commentMenu" style="margin-left: 55px;">
+                                    <c:if test="${sessionMember.memberId == i.memberId}">
+                                        <button type="button" onclick="showCommentUpdateForm(${i.commentId})">수정
+                                        </button>
+                                        <form action="/board/comment/${i.commentId}" method="post" style="display: inline">
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <input type="hidden" name="commentId" value="${i.commentId}"/>
+                                            <input type="hidden" name="articleId" value="${articleId}"/>
+                                            <input type="submit" value="삭제"/>
+                                        </form>
+                                    </c:if>
+                                </div>
                             </div>
-                            <div style="margin-left: 55px;">
-                                <c:if test="${isSessionMember}">
-                                    <button type="button">수정</button>
-                                    <button type="button">삭제</button>
-                                </c:if>
+                                <%-- 댓글 수정 폼 --%>
+                            <div id="commentUpdateFormRegion${i.commentId}"
+                                 style="display: none">
+                                <form action="/board/comment" method="post">
+                                    <div class="commentInfo" id="commentInfoRegion${i.commentId}">
+                                        <img src="/static/img/profile.PNG" class="profile_sm"/>
+                                        <div class="article_writer_txt">${i.nickName}</div>
+                                        <textarea rows="2" name="content" class="form-control noresize"
+                                                  style="padding: 20px; margin-top: 40px">${i.content}</textarea>
+
+                                        <div class="commentMenu" style="margin-top: 20px;">
+                                            <c:if test="${sessionMember.memberId == i.memberId}">
+                                                <input type="hidden" name="_method" value="put"/>
+                                                <input type="hidden" name="articleId" value="${articleId}"/>
+                                                <input type="hidden" name="commentId" value="${i.commentId}"/>
+                                                <input type="hidden" name="memberId" value="${sessionMember.memberId}"/>
+                                                <input type="submit" value="등록"/>
+                                                <button type="button" id="commentUpdateCancelBtn"
+                                                        onclick="commentUpdateCancel(${i.commentId})">취소
+                                                </button>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="horizontal_gray"></div>
                         </div>
@@ -125,12 +157,8 @@
                 <div class="article_comment_write_region">
                     <form:form modelAttribute="commentForm" action="/board/comment" method="post">
                         <div class="article_writer_txt">
-                            <c:if test="${!isLoginMember}">
-                                손님
-                            </c:if>
-                            <c:if test="${isLoginMember}">
-                                ${sessionMember.memberId}
-                            </c:if>
+                            <c:if test="${!isLoginMember}">손님</c:if>
+                            <c:if test="${isLoginMember}">${sessionMember.nickName} 님</c:if>
                         </div>
                         <div class="article_comment_write_content">
                             <form:textarea path="content" cssClass="form-control noresize" rows="5"
@@ -149,3 +177,17 @@
 </div>
 
 <jsp:include page="../footer.jsp"/>
+
+<script>
+
+    function showCommentUpdateForm(commentId) {
+        $('#' + 'commentUpdateFormRegion' + commentId).show();
+        $('#' + 'commentInfoRegion' + commentId).hide();
+    }
+
+    function commentUpdateCancel(commentId) {
+        $('#' + 'commentUpdateFormRegion' + commentId).hide();
+        $('#' + 'commentInfoRegion' + commentId).show();
+    }
+
+</script>

@@ -52,8 +52,20 @@ public interface ArticleService {
     /**
      * 댓글 리스트 읽기
      */
-    @GetMapping("/article/{articleId}/comments")
+    @GetMapping("/comments/{articleId}")
     List<Comment> getCommentList(@PathVariable int articleId);
+
+    /**
+     * 댓글 수정하기
+     */
+    @PutMapping("/comment")
+    int updateComment(@RequestBody Comment comment);
+
+    /**
+     * 댓글 삭제하기
+     */
+    @DeleteMapping("/comment/{commentId}")
+    int deleteComment(@PathVariable int commentId);
 
     /**
      * 사용자별 작성한 게시글 읽기

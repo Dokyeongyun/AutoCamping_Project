@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 
 public class CommentForm {
 
+    private int commentId;
+
     @NotNull
     private int articleId;
 
@@ -14,6 +16,14 @@ public class CommentForm {
     @NotNull
     @NotBlank
     private String content;
+
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
 
     public int getArticleId() {
         return articleId;
