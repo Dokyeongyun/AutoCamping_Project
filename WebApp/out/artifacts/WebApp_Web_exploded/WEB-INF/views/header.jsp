@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/static/css/chabak.css?ver=3" type="text/css">
     <link rel="stylesheet" href="/static/css/main.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/boardmain.css?ver=1" type="text/css">
-    <link rel="stylesheet" href="/static/css/showArticle.css?ver=2" type="text/css">
+    <link rel="stylesheet" href="/static/css/showArticle.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabakmain.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/footer.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/custom_overlay.css?ver=1" type="text/css">

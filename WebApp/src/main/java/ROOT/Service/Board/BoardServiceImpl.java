@@ -2,6 +2,7 @@ package ROOT.Service.Board;
 
 import ROOT.Utils.APIServerInfo;
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -62,6 +63,22 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void deleteArticle(int articleId) {
         restOperations.delete(APIServerInfo.API_SERVER_CONTEXT + "/board/article/" + articleId);
+    }
+
+    /**
+     * 댓글 작성하기
+     */
+    @Override
+    public Integer writeComment(Comment comment) {
+        return restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/comment", comment, Integer.class);
+    }
+
+    /**
+     * 게시글별 댓글 가져오기
+     */
+    @Override
+    public List<Comment> getCommentList(int articleId) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/article/" + articleId + "/comments", List.class);
     }
 
     /**

@@ -1,7 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="for" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<c:if test="${sessionMember.memberId == article.memberId}"><c:set var="isSessionMember" value="true"/></c:if>
+<c:if test="${sessionMember.memberId != article.memberId}"><c:set var="isSessionMember" value="false"/></c:if>
+<c:if test="${sessionMember.memberId != null}"><c:set var="isLoginMember" value="true"/></c:if>
+<c:if test="${sessionMember.memberId == null}"><c:set var="isLoginMember" value="false"/></c:if>
 <jsp:include page="../header.jsp"/>
 
 <div class="full_container">
@@ -24,7 +29,7 @@
                         onclick="location.href='/board/showMyComment'">내가 쓴 댓글 보기
                 </button>
                 <button class="btn button_left" type="button" style="width: 100%"
-                        onclick="location.href='/board/writeArticle'">글 작성하기
+                        onclick="location.href='/board/articleWriteForm'">글 작성하기
                 </button>
             </div>
         </div>
@@ -65,7 +70,7 @@
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">메뉴</button>
                                     <ul class="dropdown-menu" style="display: contents">
-                                        <c:if test="${article.memberId == sessionMember.memberId}">
+                                        <c:if test="${isSessionMember}">
                                             <li><a class="dropdown-item"
                                                    href="/board/articleUpdateForm/${article.articleId}">수정하기</a></li>
                                             <li>
@@ -75,7 +80,7 @@
                                                 </form:form>
                                             </li>
                                         </c:if>
-                                        <c:if test="${article.memberId != sessionMember.memberId}">
+                                        <c:if test="${!isSessionMember}">
                                             <li><a class="dropdown-item" href="#">스크랩하기</a></li>
                                             <li><a class="dropdown-item" href="#">URL복사</a></li>
                                         </c:if>
@@ -89,132 +94,58 @@
             <div class="article_info_content_region">
                 <div class="article_content_txt">${article.content}</div>
             </div>
+
             <div class="article_comment_region">
+                <%-- 댓글 헤더 --%>
                 <div class="article_comment_header_region">
                     <div class="article_comment_header_txt">댓글 ${commentList.size()}개</div>
                 </div>
+                <%-- 댓글 리스트 --%>
                 <div class="article_comment_list_region">
                     <c:forEach var="i" items="${commentList}">
                         <div class="article_writer_info_region">
-                            <img src="/static/img/profile.PNG" class="profile_sm"/>
-                            <div class="article_writer_txt">${i.nickName}</div>
-                            <div class="comment_content_txt">${i.content}</div>
-                            <div class="article_reg_time_txt">${i.createTime}</div>
+                            <div>
+                                <img src="/static/img/profile.PNG" class="profile_sm"/>
+                                <div class="article_writer_txt">${i.nickName}</div>
+                                <div class="comment_content_txt">${i.content}</div>
+                                <div class="article_reg_time_txt">${i.createTime}</div>
+                            </div>
+                            <div style="margin-left: 55px;">
+                                <c:if test="${isSessionMember}">
+                                    <button type="button">수정</button>
+                                    <button type="button">삭제</button>
+                                </c:if>
+                            </div>
                             <div class="horizontal_gray"></div>
                         </div>
                     </c:forEach>
                 </div>
+
+                <%-- 댓글 작성 --%>
                 <div class="article_comment_write_region">
-                    <div class="article_writer_txt">
-                        <c:if test="${sessionMember.memberId == null}">
-                            손님
-                        </c:if>
-                        <c:if test="${sessionMember.memberId != null}">
-                            ${sessionMember.memberId}
-                        </c:if>
-                    </div>
-                    <div class="article_comment_write_content">
-                        <textarea class="form-control noresize" rows="5" placeholder="댓글을 남겨보세요." id="commentContent"
-                                  style="padding: 20px"></textarea>
-                    </div>
-                    <div class="article_comment_menu">
-                        <button type="button" class="btn button_right" id="writeCommentBtn">등록</button>
-                    </div>
+                    <form:form modelAttribute="commentForm" action="/board/comment" method="post">
+                        <div class="article_writer_txt">
+                            <c:if test="${!isLoginMember}">
+                                손님
+                            </c:if>
+                            <c:if test="${isLoginMember}">
+                                ${sessionMember.memberId}
+                            </c:if>
+                        </div>
+                        <div class="article_comment_write_content">
+                            <form:textarea path="content" cssClass="form-control noresize" rows="5"
+                                           cssStyle="padding: 20px;" placeholder="댓글을 남겨보세요."/>
+                        </div>
+                        <div class="article_comment_menu">
+                            <form:hidden path="articleId" value="${articleId}"/>
+                            <form:hidden path="memberId" value="${sessionMember.memberId}"/>
+                            <button type="submit" class="btn button_right">등록</button>
+                        </div>
+                    </form:form>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 <jsp:include page="../footer.jsp"/>
-
-<style>
-    .ArticleTool {
-        position: absolute;
-        right: 70px;
-        bottom: 15px;
-        font-size: 13px;
-        line-height: 18px;
-    }
-</style>
-
-<%--<script>
-    &lt;%&ndash;  댓글쓰기 작업 DB Insert 수행  &ndash;%&gt;
-    $("#writeCommentBtn").click(function(){
-        if(!invalidate_check()) {
-            return false;
-        }
-
-        if(${sessionScope.get("id") == null}){
-            alert('로그인 후 이용해주세요.');
-            location.href='/member/login';
-        }
-
-        var comment = {
-            articleId : '${article[0].articleId}',
-            memberId : '${sessionScope.get("id")}',
-            content : $("#commentContent").val()
-        };
-
-        $.ajax({
-            url : "/article/writeComment.do",
-            data : comment,
-            type : "post",
-            dataType : "json",
-            async : true,
-            success : function(resp) {
-                console.log("댓글 작성하기 결과: " + resp);
-                if(resp == "1"){
-                    alert("댓글이 성공적으로 작성되었습니다.");
-                    window.location.reload();
-                }else{
-                    alert("댓글 작성에 실패했습니다. 잠시 후 다시 시도해 주세요.");
-                }
-            },
-            error : function() {
-                alert("error")
-            }
-        });
-    });
-
-    <!-- 유효성 검사 -->
-    function invalidate_check(){
-        // 댓글 내용 공백 확인
-        if($("#commentContent").val() == ""){
-            alert("내용을 입력해주세요.");
-            $("#commentContent").focus();
-            return false;
-        }
-        return true;
-    }
-
-    function deleteArticle() {
-        if(${sessionScope.get("id") == null}){
-            alert('로그인 후 이용해주세요.');
-            location.href='/member/login';
-        }
-        var article = {
-            articleId : '${article[0].articleId}'
-        };
-        $.ajax({
-            url : "/article/deleteArticle.do",
-            data : article,
-            type : "post",
-            dataType : "json",
-            async : true,
-            success : function(resp) {
-                console.log("글 삭제하기 결과: " + resp);
-                if(resp == "1"){
-                    alert("게시글이 성공적으로 삭제되었습니다.");
-                    location.href="/board/main";
-                }else{
-                    alert("게시글 삭제에 실패했습니다. 잠시 후 다시 시도해 주세요.");
-                }
-            },
-            error : function() {
-                alert("error")
-            }
-        });
-    }
-</script>--%>

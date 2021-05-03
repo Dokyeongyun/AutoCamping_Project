@@ -1,6 +1,7 @@
 package ROOT.Service.Board;
 
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.Comment;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ public interface BoardService {
 
     /**
      * 모든 게시글 읽어오기
+     *
      * @return 모든 게시글 리스트
      */
     List<Article> getAllArticleList();
@@ -35,6 +37,16 @@ public interface BoardService {
      * 게시글 삭제하기
      */
     void deleteArticle(int articleId);
+
+    /**
+     * 댓글 작성하기
+     */
+    Integer writeComment(Comment comment);
+
+    /**
+     * 게시글별 댓글 리스트 가져오기
+     */
+    List<Comment> getCommentList(int articleId);
 
     /**
      * 게시글 검색하기 (제목+내용)

@@ -2,7 +2,9 @@ package ROOT.Controller.Board;
 
 import ROOT.Service.Board.BoardService;
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.Comment;
 import ROOT.VO.Form.ArticleForm;
+import ROOT.VO.Form.CommentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,11 @@ public class BoardController {
     @ModelAttribute
     ArticleForm setUpArticleForm() {
         return new ArticleForm();
+    }
+
+    @ModelAttribute
+    CommentForm setUpCommentForm() {
+        return new CommentForm();
     }
 
     /**
@@ -88,7 +95,9 @@ public class BoardController {
     @GetMapping("/article/{articleId}")
     public String showArticle(@PathVariable int articleId, Model model) {
         Article article = boardService.getArticle(articleId);
+        List<Comment> commentList = boardService.getCommentList(articleId);
         model.addAttribute("article", article);
+        model.addAttribute("commentList", commentList);
         return "/board/showArticle";
     }
 
@@ -121,8 +130,31 @@ public class BoardController {
      * 게시글 삭제하기
      */
     @DeleteMapping("/article/{articleId}")
-    public String deleteArticle(@PathVariable int articleId){
+    public String deleteArticle(@PathVariable int articleId) {
         boardService.deleteArticle(articleId);
         return "redirect:/board/main";
+    }
+
+    /**
+     * 댓글 작성하기
+     */
+    @PostMapping("/comment")
+    public String writeComment(@Validated CommentForm form,
+                               BindingResult result,
+                               Model model
+    ) {
+        if (result.hasErrors()) {
+            return "redirect:/board/article/" + form.getArticleId();
+        }
+
+        Comment comment = new Comment();
+        comment.setArticleId(form.getArticleId());
+        comment.setMemberId(form.getMemberId());
+        comment.setContent(form.getContent());
+
+        int writeCommentResult = boardService.writeComment(comment);
+        model.addAttribute("writeCommentResult", writeCommentResult);
+
+        return "redirect:/board/article/" + form.getArticleId();
     }
 }
