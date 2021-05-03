@@ -44,16 +44,16 @@ public interface ArticleService {
     int deleteArticle(@PathVariable int articleId);
 
     /**
-     * 댓글 리스트 읽기
-     */
-    @RequestMapping(value = "/getComments.do")
-    List<Comment> getComments(int articleId);
-
-    /**
      * 댓글 쓰기
      */
-    @RequestMapping(value = "/writeComment.do")
-    int writeComment(int articleId, String memberId, String content);
+    @PostMapping( "/comment")
+    int writeComment(@RequestBody Comment comment);
+
+    /**
+     * 댓글 리스트 읽기
+     */
+    @GetMapping("/article/{articleId}/comments")
+    List<Comment> getCommentList(@PathVariable int articleId);
 
     /**
      * 사용자별 작성한 게시글 읽기

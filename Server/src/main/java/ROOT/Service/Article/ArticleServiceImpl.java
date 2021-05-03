@@ -50,6 +50,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
+     * 게시글 하나 읽기
+     */
+    @Override
+    public Article getArticle(int articleId) {
+        return articleDAO.getArticle(articleId);
+    }
+
+    /**
      * 게시글 수정
      */
     @Override
@@ -71,27 +79,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * 게시글 하나 읽기
+     * 댓글 쓰기
      */
     @Override
-    public Article getArticle(int articleId) {
-        return articleDAO.getArticle(articleId);
+    public int writeComment(Comment comment) {
+        return articleDAO.writeComment(comment);
     }
 
     /**
      * 댓글 리스트 읽기
      */
     @Override
-    public List<Comment> getComments(int articleId) {
+    public List<Comment> getCommentList(int articleId) {
         return articleDAO.getComments(articleId);
-    }
-
-    /**
-     * 댓글 쓰기
-     */
-    @Override
-    public int writeComment(int articleId, String memberId, String content) {
-        return articleDAO.writeComment(articleId, memberId, content);
     }
 
     /**

@@ -71,19 +71,19 @@ public class ArticleDAO {
     }
 
     /**
+     * 댓글 쓰기
+     */
+    public int writeComment(Comment comment) {
+        String sql = "INSERT INTO article_comment (articleId, memberId, content) VALUES (?, ?, ?)";
+        return jdbcTemplate.update(sql, comment.getArticleId(), comment.getMemberId(), comment.getContent());
+    }
+
+    /**
      * 댓글 리스트 읽기
      */
     public List<Comment> getComments(int articleId) {
         String sql = "SELECT * FROM comment_view WHERE articleId = ?";
         return jdbcTemplate.query(sql, new CommentRowMapper(), articleId);
-    }
-
-    /**
-     * 댓글 쓰기
-     */
-    public int writeComment(int articleId, String memberId, String content) {
-        String sql = "INSERT INTO article_comment (articleId, memberId, content) VALUES (?, ?, ?)";
-        return jdbcTemplate.update(sql, articleId, memberId, content);
     }
 
     /**
