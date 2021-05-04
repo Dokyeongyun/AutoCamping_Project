@@ -1,7 +1,9 @@
 package ROOT.Controller.Board;
 
 import ROOT.Service.Board.BoardService;
+import ROOT.Service.Board.FileUploadService;
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.ArticleFile;
 import ROOT.VO.Article.Comment;
 import ROOT.VO.Form.ArticleForm;
 import ROOT.VO.Form.CommentForm;
@@ -12,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 @Controller
@@ -21,6 +25,9 @@ public class BoardController {
 
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    FileUploadService fileUploadService;
 
     @ModelAttribute
     ArticleForm setUpArticleForm() {
@@ -73,20 +80,36 @@ public class BoardController {
             return "/board/articleWriteForm";
         }
 
+        // 게시글 정보 생성
         Article article = new Article();
         article.setMemberId(form.getMemberId());
         article.setTitle(form.getTitle());
         article.setContent(form.getContent());
         article.setUrlPath(form.getPath());
 
-        Integer writeResult = boardService.writeArticle(article);
+        // 게시글 작성
+        Integer createdArticleId = boardService.writeArticle(article);
 
-        if (writeResult != 1) {
-            model.addAttribute("writeResult", "Fail");
-            return "board/articleWriteForm";
+        // Multipart 요청에서 파일 꺼내오기
+        List<MultipartFile> files = form.getFiles();
+
+        // 다중 파일 업로드
+        for (int i = 0; i < files.size(); i++) {
+            MultipartFile file = files.get(i);
+
+            // 게시글에 첨부된 파일 업로드
+            String storedFileName = fileUploadService.uploadFile(file, createdArticleId, i);
+
+            ArticleFile articleFile = new ArticleFile();
+            articleFile.setArticleId(createdArticleId);
+            articleFile.setOriginalFilename(file.getOriginalFilename());
+            articleFile.setStoredFilename(storedFileName);
+            articleFile.setFileSize(file.getSize());
+
+            boardService.insertArticleFile(articleFile);
         }
 
-        return "redirect:/board/main";
+        return "redirect:/board/article/"+createdArticleId;
     }
 
     /**

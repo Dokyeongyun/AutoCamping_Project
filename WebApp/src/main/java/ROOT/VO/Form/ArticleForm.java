@@ -1,6 +1,9 @@
 package ROOT.VO.Form;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 public class ArticleForm {
 
@@ -14,6 +17,8 @@ public class ArticleForm {
     private String content;
 
     private String path;
+
+    private List<MultipartFile> files;
 
     public String getMemberId() {
         return memberId;
@@ -45,6 +50,14 @@ public class ArticleForm {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public List<MultipartFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<MultipartFile> files) {
+        this.files = files;
     }
 
     @Override

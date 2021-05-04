@@ -2,6 +2,7 @@ package ROOT.Service.Board;
 
 import ROOT.Utils.APIServerInfo;
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.ArticleFile;
 import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,6 +96,14 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void deleteComment(int commentId) {
         restOperations.delete(APIServerInfo.API_SERVER_CONTEXT + "/board/comment/" + commentId);
+    }
+
+    /**
+     * 게시글 첨부파일 입력하기
+     */
+    @Override
+    public Integer insertArticleFile(ArticleFile file) {
+        return restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/board/articleFile", file, Integer.class);
     }
 
     /**

@@ -4,7 +4,7 @@
 <jsp:include page="../header.jsp"/>
 
 <div class="container">
-    <form:form modelAttribute="articleForm" action="/board/article" method="post">
+    <form:form modelAttribute="articleForm" action="/board/article" method="post" enctype="multipart/form-data">
         <div class="page_title_region">
             <div class="title_txt">글 작성하기</div>
             <form:hidden path="memberId" value="${sessionMember.memberId}"/>
@@ -20,8 +20,11 @@
                 <option value="board4">게시판4</option>
                 <option value="board5">게시판5</option>
             </select>
-            <form:input path="title" cssClass="form-control input_box"/>
-            <form:textarea path="content" cssClass="form-control" cssStyle="padding: 20px; margin-bottom: 20px;" rows="20"/>
+            <form:input path="title" cssClass="form-control input_box" placeholder="제목을 입력해주세요."/>
+            <form:textarea path="content" cssClass="form-control" cssStyle="padding: 20px; margin-bottom: 20px;"
+                           rows="20" placeholder="내용을 입력해주세요."/>
+            <input type="file" name="files" multiple/>
+<%--            <form:input path="files" type="file" multiple="multiple"/>--%>
         </div>
         <form:errors path="memberId"/>
         <form:errors path="title"/>

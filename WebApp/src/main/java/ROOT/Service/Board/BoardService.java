@@ -1,6 +1,7 @@
 package ROOT.Service.Board;
 
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.ArticleFile;
 import ROOT.VO.Article.Comment;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,6 +58,11 @@ public interface BoardService {
      * 댓글 삭제하기
      */
     void deleteComment(int commentId);
+
+    /**
+     * 게시글 첨부파일 입력하기
+     */
+    Integer insertArticleFile(ArticleFile file);
 
     /**
      * 게시글 검색하기 (제목+내용)
