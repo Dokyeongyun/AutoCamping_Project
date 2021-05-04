@@ -1,6 +1,7 @@
 package ROOT.Service.Article;
 
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.ArticleFile;
 import ROOT.VO.Article.Comment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +67,12 @@ public interface ArticleService {
      */
     @DeleteMapping("/comment/{commentId}")
     int deleteComment(@PathVariable int commentId);
+
+    /**
+     * 게시글 첨부파일 입력하기
+     */
+    @PostMapping("/articleFile")
+    int insertArticleFile(@RequestBody ArticleFile file);
 
     /**
      * 사용자별 작성한 게시글 읽기

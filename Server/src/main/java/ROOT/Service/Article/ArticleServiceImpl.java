@@ -2,6 +2,7 @@ package ROOT.Service.Article;
 
 import ROOT.DAO.ArticleDAO;
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.ArticleFile;
 import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +35,6 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public int writeArticle(Article article) {
-        System.out.println(article);
-
         String urlPath = "";
         if (article.getUrlPath() != null && !article.getUrlPath().equals("")) {
             urlPath = filePath + article.getUrlPath();
@@ -110,6 +109,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public int deleteComment(int commentId) {
         return articleDAO.deleteComment(commentId);
+    }
+
+    /**
+     * 게시글 첨부파일 입력하기
+     */
+    @Override
+    public int insertArticleFile(ArticleFile file) {
+        return articleDAO.insertArticleFile(file);
     }
 
     /**

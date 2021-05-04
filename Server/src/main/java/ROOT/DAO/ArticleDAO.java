@@ -3,6 +3,7 @@ package ROOT.DAO;
 import ROOT.RowMapper.Article.ArticleRowMapper;
 import ROOT.RowMapper.Article.CommentRowMapper;
 import ROOT.VO.Article.Article;
+import ROOT.VO.Article.ArticleFile;
 import ROOT.VO.Article.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +33,11 @@ public class ArticleDAO {
     /**
      * 게시글 작성
      */
-    public int writeArticle(Article article) {
+    public Integer writeArticle(Article article) {
         String sql = "INSERT INTO cb_article (memberId,title,content,imagePath) VALUES (?,?,?,?) ";
-        return jdbcTemplate.update(sql, article.getMemberId(), article.getTitle(), article.getContent(), article.getUrlPath());
+        jdbcTemplate.update(sql, article.getMemberId(), article.getTitle(), article.getContent(), article.getUrlPath());
+        String sql2 = "SELECT articleId FROM cb_article WHERE memberId = ? AND title = ? AND content = ? ORDER BY articleId DESC";
+        return jdbcTemplate.queryForObject(sql2, Integer.class, article.getMemberId(), article.getTitle(), article.getContent());
     }
 
     /**
@@ -100,6 +103,14 @@ public class ArticleDAO {
     public int deleteComment(int commentId) {
         String sql = "UPDATE article_comment SET isDeleted = 1 WHERE commentId = ?";
         return jdbcTemplate.update(sql, commentId);
+    }
+
+    /**
+     * 게시글 첨부파일 입력하기
+     */
+    public int insertArticleFile(ArticleFile file) {
+        String sql = "INSERT INTO article_file(article_id, original_filename, stored_filename, file_size) VALUES(?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, file.getArticleId(), file.getOriginalFilename(), file.getStoredFilename(), file.getFileSize());
     }
 
     /**
