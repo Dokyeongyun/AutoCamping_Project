@@ -42,19 +42,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
-     * 닉네임 중복확인
-     */
-    @Override
-    public String nickDoubleCheck(String nickName) {
-        return memberDAO.nickDoubleCheck(nickName);
-    }
-
-    /**
      * 이메일(아이디) 중복확인
      */
     @Override
-    public String idDoubleCheck(String memberId) {
-        return memberDAO.idDoubleCheck(memberId);
+    public String idCheck(String memberId) {
+        return memberDAO.idCheck(memberId);
+    }
+
+    /**
+     * 닉네임 중복확인
+     */
+    @Override
+    public String nicknameCheck(String nickname) {
+        return memberDAO.nicknameCheck(nickname);
     }
 
     /**

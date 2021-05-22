@@ -32,7 +32,7 @@ public class MemberDAO {
         try {
             String sql = "SELECT * FROM cb_member WHERE memberId = ? AND password = ? AND isDeleted = 0";
             List<Member> temp = jdbcTemplate.query(sql, new MemberRowMapper(), member.getMemberId(), member.getPassword());
-            if(temp.size() == 1){
+            if (temp.size() == 1) {
                 return temp.get(0);
             }
         } catch (Exception e) {
@@ -58,36 +58,23 @@ public class MemberDAO {
     }
 
     /**
-     * 닉네임 중복확인
-     */
-    public String nickDoubleCheck(String nickName) {
-        String sql = "SELECT nickName FROM cb_member WHERE nickName = ?";
-        List<String> result = jdbcTemplate.query(sql,
-                (resultSet, i) -> resultSet.getString("nickName"), nickName);
-
-        System.out.println(result);
-        if (result.size() > 0) {
-            return "0";
-        } else {
-            return "1";
-        }
-    }
-
-    /**
      * 이메일(아이디) 중복확인
      */
-    public String idDoubleCheck(String memberId) {
+    public String idCheck(String memberId) {
         String sql = "SELECT memberId FROM cb_member WHERE memberId = ?";
         List<String> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getString("memberId"), memberId);
+        return result.size() > 0 ? "N" : "Y";
+    }
 
-        System.out.println(memberId + " 아이디 " + result);
-
-        if (result.size() > 0) {
-            return "0";
-        } else {
-            return "1";
-        }
+    /**
+     * 닉네임 중복확인
+     */
+    public String nicknameCheck(String nickname) {
+        String sql = "SELECT nickName FROM cb_member WHERE nickName = ?";
+        List<String> result = jdbcTemplate.query(sql,
+                (resultSet, i) -> resultSet.getString("nickName"), nickname);
+        return result.size() > 0 ? "N" : "Y";
     }
 
     /**

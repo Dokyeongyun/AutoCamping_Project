@@ -15,7 +15,7 @@ public interface MemberService {
     /**
      * 로그인
      */
-    @PostMapping( "/login")
+    @PostMapping("/login")
     Member login(@RequestBody Member member);
 
     /**
@@ -31,16 +31,16 @@ public interface MemberService {
     Member join(@RequestBody Member member);
 
     /**
-     * 닉네임 중복확인
-     */
-    @RequestMapping(value = "/nickDoubleCheck.do")
-    String nickDoubleCheck(String nickName);
-
-    /**
      * 이메일(아이디) 중복확인
      */
-    @RequestMapping(value = "/idDoubleCheck.do")
-    String idDoubleCheck(String memberId);
+    @GetMapping("/idCheck")
+    String idCheck(@RequestParam String memberId);
+
+    /**
+     * 닉네임 중복확인
+     */
+    @GetMapping("/nicknameCheck")
+    String nicknameCheck(@RequestParam String nickname);
 
     /**
      * 비밀번호 변경
