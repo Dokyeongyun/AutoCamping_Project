@@ -1,13 +1,8 @@
 package ROOT.Service.Member;
 
-import ROOT.VO.Chabak.Chabak;
-import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 public interface MemberService {
 
@@ -26,18 +21,16 @@ public interface MemberService {
      */
     void logout(HttpSession session);
 
-//
-//
-//    /**
-//     * 닉네임 중복확인
-//     */
-//    String nickDoubleCheck(String nickName);
-//
-//    /**
-//     * 이메일(아이디) 중복확인
-//     */
-//    String idDoubleCheck(String memberId);
-//
+    /**
+     * 이메일(아이디) 중복확인
+     */
+    String idCheck(String memberId);
+
+    /**
+     * 닉네임 중복확인
+     */
+    String nicknameCheck(String nickname);
+
 //    /**
 //     * 비밀번호 변경
 //     */

@@ -1,11 +1,12 @@
 package ROOT.VO.Form;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class LoginForm {
 
-    @Email(message = "아이디를 다시 확인해주세요.")
+    @Pattern(regexp = "^[a-z0-9][a-z0-9_\\-]{4,19}$",
+            message = "아이디를 다시 확인해주세요.")
     private String memberId;
 
     @NotBlank(message = "비밀번호를 다시 확인해주세요.")

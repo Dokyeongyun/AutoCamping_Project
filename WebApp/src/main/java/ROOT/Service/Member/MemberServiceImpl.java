@@ -48,36 +48,32 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
-    * 로그아웃
-    */
+     * 로그아웃
+     */
     @Override
     public void logout(HttpSession session) {
         session.invalidate();
     }
 
-/**
-     * 닉네임 중복확인
-     *//*
-
-    @Override
-    public String nickDoubleCheck(String nickName) {
-        return memberDAO.nickDoubleCheck(nickName);
-    }
-
-    */
-/**
+    /**
      * 이메일(아이디) 중복확인
-     *//*
-
+     */
     @Override
-    public String idDoubleCheck(String memberId) {
-        return memberDAO.idDoubleCheck(memberId);
+    public String idCheck(String memberId) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/idCheck?memberId=" + memberId, String.class);
     }
 
-    */
+    /**
+     * 닉네임 중복확인
+     */
+    @Override
+    public String nicknameCheck(String nickname) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/nicknameCheck?nickname=" + nickname, String.class);
+    }
+
 /**
-     * 비밀번호 변경
-     *//*
+ * 비밀번호 변경
+ *//*
 
     @Override
     public int changePassword(String memberId, String password) {
@@ -86,8 +82,8 @@ public class MemberServiceImpl implements MemberService {
 
     */
 /**
-     * 닉네임 변경
-     *//*
+ * 닉네임 변경
+ *//*
 
     @Override
     public int changeNickname(String memberId, String nickName) {
@@ -96,8 +92,8 @@ public class MemberServiceImpl implements MemberService {
 
     */
 /**
-     * 회원 탈퇴
-     *//*
+ * 회원 탈퇴
+ *//*
 
     @Override
     public int withdraw(String memberId) {
@@ -106,8 +102,8 @@ public class MemberServiceImpl implements MemberService {
 
     */
 /**
-     * 사용자의 차박지 찜 리스트 가져오기
-     *//*
+ * 사용자의 차박지 찜 리스트 가져오기
+ *//*
 
     @Override
     public List<Chabak> getJJimList(String id) {
@@ -116,8 +112,8 @@ public class MemberServiceImpl implements MemberService {
 
     */
 /**
-     * 차박지 찜
-     *//*
+ * 차박지 찜
+ *//*
 
     @Override
     public String jjimDo(String id, String placeName, int placeId) {
@@ -126,8 +122,8 @@ public class MemberServiceImpl implements MemberService {
 
     */
 /**
-     * 차박지 찜 취소
-     *//*
+ * 차박지 찜 취소
+ *//*
 
     @Override
     public String jjimUndo(String id, String placeName, int placeId) {
@@ -136,8 +132,8 @@ public class MemberServiceImpl implements MemberService {
 
     */
 /**
-     * 사용자가 특정 차박지 평가 여부 확인
-     *//*
+ * 사용자가 특정 차박지 평가 여부 확인
+ *//*
 
     @Override
     public String getJJimAndEvaluated(String memberId, String placeId) {
@@ -149,8 +145,8 @@ public class MemberServiceImpl implements MemberService {
 
     */
 /**
-     * 사용자가 작성한 리뷰 가져오기
-     *//*
+ * 사용자가 작성한 리뷰 가져오기
+ *//*
 
     @Override
     public List<Review> getUsersReview(String memberId) {
