@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/HeaderCSS.css?ver=1" type="text/css">
+    <link rel="stylesheet" href="/static/css/MainCSS.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabak.css?ver=3" type="text/css">
-    <link rel="stylesheet" href="/static/css/main.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/boardmain.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/showArticle.css?ver=1" type="text/css">
-    <link rel="stylesheet" href="/static/css/chabakmain.css?ver=2" type="text/css">
+    <link rel="stylesheet" href="/static/css/chabakmain.css?ver=3" type="text/css">
     <link rel="stylesheet" href="/static/css/footer.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/custom_overlay.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabakMap.css?ver=1" type="text/css">
@@ -23,10 +23,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <%--image slide library - slick --%>
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick.css?ver=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick-theme.css?ver=1"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <%--image slide library - slick --%>
+    <script type="text/javascript" src="/static/slick/slick.min.js"></script>
 </head>
 <body>
 
-<nav style="background: white; margin-bottom: 22px;">
+<nav style="background: white;">
     <div class="headerWrap">
         <div class="topHeader">
             <div class="navbar-header">

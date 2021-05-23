@@ -1,0 +1,39 @@
+/* 메인화면 이미지 슬라이드 */
+.slideImgArea{height: 400px;padding: 0 100px;background-color: #ebebeb;border-radius: 10px;margin-bottom: 40px;}
+.slideImgDiv {height: 100%;width: 100%;}
+.slideImgDiv img {height: 100%;width: 100%;}
+
+/* 메인화면 검색창 */
+.searchArea {padding: 20px 0;}
+.searchForm {margin: 0 auto;width: fit-content;}
+.searchFormDiv{height: 60px; border: 2px solid #2F5597; width: fit-content}
+.searchInputBox {width: 600px;height: 100%;padding: 0 22px 0 12px;font-size: 13px;color: #62696c;line-height: 2.7em;float: left;}
+
+/* 메인화면 컨텐츠 영역 */
+.contentArea {width: 100%;height: fit-content;overflow: hidden;margin: 30px auto 0 auto;position: relative;font-family: "Nanum Gothic", sans-serif;}
+.content1 {display: inline-block;width: 100%;height: 100%;padding: 10px; float: left}
+.contentTop {height: fit-content;font-size: 24px; border-bottom: 3px solid #086492; overflow: hidden}
+.contentTop h2 {color: #1a1a1a;font-weight: 520;font-size: 20px; display: inline-block; padding: 10px; margin-top: 0}
+.contentTop img{width: 40px; float:left; margin: 0 10px; display: inline-block}
+.contentBottom {height: fit-content;}
+
+/* 공지사항 영역 */
+.noticeList {padding: 10px;  border: 1px solid #ddd;}
+.noticeList ul {margin: 0;padding: 0;}
+.noticeList li {list-style: none;margin: 0;color: #000;line-height: 1.6;padding-top: 7px;padding-bottom: 7px;border-bottom: 1px solid #bfbfbf;}
+.noticeList li a {font-size: 12px;display: block;color: inherit;}
+.noticeList li span {font-size: 11px;float: none !important;display: block;color: #bfbfbf;}
+
+.full_container {width: 100%;min-height: 100%;padding: 0 30px;overflow: hidden;}
+.left_container {width: 20%;min-height: 100%;float: left;border-right: 1px solid #ddd;padding: 0 10px;}
+.right_container {width: 80%;min-height: 100%;float: right;padding: 0 10px;}
+.myInfo_container {width: 100%;height: fit-content;min-height: 200px;padding: 20px;margin-bottom: 30px;background-color: #ecf8f6;}
+.board_container {width: 100%;height: 500px;padding: 20px;margin-bottom: 30px;background-color: #ecf8f6;}
+.myInfo_top {width: 100%;height: max-content;overflow: hidden;padding-bottom: 10px;border-bottom: 1px solid #ddd;}
+.myInfo_img {float: left;width: 30%;}
+.profile_txt {font-size: 14px;float: right;vertical-align: center;}
+.myInfo_txt {float: right;height: 100%;padding: 20px 0;}
+.myInfo_bottom {padding: 20px 0;width: 100%;overflow: hidden;}
+.button_right {float: right;width: 100px;background-color: #77b7b4;color: white;font-weight: bolder;margin-bottom: 10px;}
+.button_left {float: left;width: 100px;background-color: #77b7b4;color: white;font-weight: bolder;margin-bottom: 10px;}
+

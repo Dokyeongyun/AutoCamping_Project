@@ -4,7 +4,7 @@
 <%--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12a5252e62de7f45904fd0889eea405d"></script>--%>
 
 <nav class="navbar">
-    <div style="border-top: 1px solid black; border-bottom: 1px solid black; margin-top: -22px;">
+    <div style="border-top: 1px solid black; border-bottom: 1px solid black;">
         <ul class="ul_center">
             <li class="li_center"><a href="/chabak/main">차박지검색</a></li>
             <li class="li_center"><a href="/chabak/map?province=all">차박지지도</a></li>

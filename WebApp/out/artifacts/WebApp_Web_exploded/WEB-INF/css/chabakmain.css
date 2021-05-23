@@ -6,7 +6,7 @@
 .sub_bg_w {position: absolute;top: 0;left: 0;width: 100%;z-index: -1;}
 .sub_bg_w .search_bg_01 {min-height: 1000px;background: #000 url(/static/img/camping1.PNG) no-repeat center top;padding-bottom: 50px;opacity: 90%; margin-top: 95px}
 .skip {overflow: hidden;position: absolute;top: -10000px;left: -10000px;width: auto;height: 1px;text-indent: -999px;z-index: -999;}
-.chabakMain_Container {padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: white;margin-bottom: 30px;}
+.chabakMain_Container {padding: 20px;border: 1px solid #ddd;background-color: white;margin-bottom: 30px;}
 .chabakjiList_row {margin-top: 10px;border: 1px solid #ddd;border-radius: 10px;overflow: hidden;text-align: center;}
 .chabakjiInfo {display: inline-block;width: 30%;border: 1px solid #ddd;border-radius: 10px;margin: 10px;cursor: pointer;}
 .chabakji_img {width: 100%;height: 200px;max-height: 200px;border: 1px solid #ddd;border-radius: 10px;}
