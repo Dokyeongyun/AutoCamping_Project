@@ -1,6 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 
 <c:if test="${loginResult != null && loginResult != ''}">
     <script>
@@ -10,28 +10,25 @@
 
 <jsp:include page="../header.jsp"/>
 <div class="container">
-    <h3>로그인</h3>
-    <div class="card" style="margin: 30px 0">
-        <div class="card-header">로그인</div>
-        <div class="card-body">
+    <div style="margin: 0 auto; width: 70%">
+        <h3 class="pageTitle">로그인</h3>
+        <div class="joinContent">
             <form:form modelAttribute="loginForm" action="/member/login" method="post">
-                <%-- 아이디 --%>
-                <div class="form-group row">
-                    <label for="memberId" class="col-md-4 col-form-label text-md-right">ID</label>
-                    <div class="col-md-6">
-                        <form:input path="memberId" cssClass="form-control"/>
+                <div class="rowGroup">
+                        <%-- 아이디 --%>
+                    <div class="joinRow">
+                        <h3 class="joinTitle"><label for="memberId">아이디</label></h3>
+                        <div><form:input path="memberId" cssClass="joinFormInputBox"/></div>
+                        <span class="joinErrorText" id="memberIdMsg" style="display:none" aria-live="assertive"></span>
                     </div>
-                </div>
-                <%-- 비밀번호 --%>
-                <div class="form-group row">
-                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                    <div class="col-md-6">
-                        <form:password path="password" cssClass="form-control"/>
+                        <%-- 비밀번호 --%>
+                    <div class="joinRow">
+                        <h3 class="joinTitle"><label for="password">비밀번호</label></h3>
+                        <div><form:password path="password" cssClass="joinFormInputBox"/></div>
+                        <span class="joinErrorText" id="passwordMsg" style="display:none" aria-live="assertive"></span>
                     </div>
-                </div>
-                <%-- 아이디 기억하기 --%>
-                <div class="form-group row">
-                    <div class="col-md-6 offset-md-4">
+                        <%-- 아이디 기억하기 --%>
+                    <div class="joinRow">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="remember">아이디 기억하기
@@ -39,10 +36,14 @@
                         </div>
                     </div>
                 </div>
-                <%-- 제출하기, 비밀번호 찾기 버튼 --%>
-                <div class="col-md-6 offset-md-4">
-                    <button type="submit" id="submitBtn" class="btn btn-primary">로그인</button>
-                    <a href="#" class="btn btn-link">비밀번호를 잊으셨나요?</a>
+                <%-- 로그인 버튼 및 비밀번호 찾기 --%>
+                <div class="btnArea">
+                    <button type="submit" id="submitBtn" class="btnType btnPrimary">로그인</button>
+                </div>
+                <div class="joinRow" style="text-align: right">
+                    <a href="/member/loginForm" style="font-weight: bold;">
+                        비밀번호를 잊으셨나요?
+                    </a>
                 </div>
             </form:form>
         </div>

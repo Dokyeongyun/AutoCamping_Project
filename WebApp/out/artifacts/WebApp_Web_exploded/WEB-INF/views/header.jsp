@@ -8,11 +8,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/HeaderCSS.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabak.css?ver=3" type="text/css">
     <link rel="stylesheet" href="/static/css/main.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/boardmain.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/showArticle.css?ver=1" type="text/css">
-    <link rel="stylesheet" href="/static/css/chabakmain.css?ver=1" type="text/css">
+    <link rel="stylesheet" href="/static/css/chabakmain.css?ver=2" type="text/css">
     <link rel="stylesheet" href="/static/css/footer.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/custom_overlay.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabakMap.css?ver=1" type="text/css">
@@ -25,29 +26,36 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">차박러 모여라</a>
+<nav style="background: white; margin-bottom: 22px;">
+    <div class="headerWrap">
+        <div class="topHeader">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/" style="font-family: 'BM_Jua'; color: black;">차박, 여기서</a>
+            </div>
+            <div style="overflow: hidden">
+                <ul class="topHeaderMenu">
+                    <c:if test="${sessionMember.memberId != null}">
+                        <li><div class="greeting">${sessionMember.memberId} 님, 환영합니다.</div></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/member/modifyInfo">회원정보</a></li>
+                        <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
+                    </c:if>
+                    <c:if test="${sessionMember.memberId == null}">
+                        <li><a href="${pageContext.request.contextPath}/member/loginForm">로그인</a></li>
+                        <li><a href="${pageContext.request.contextPath}/member/joinForm">회원가입</a></li>
+                    </c:if>
+                    <li><a href="${pageContext.request.contextPath}#">사이트맵</a></li>
+                </ul>
+            </div>
         </div>
-        <div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/board/main">게시판</a></li>
-                <li><a href="/chabak/main">차박지</a></li>
-                <c:if test="${sessionMember.memberId != null}">
-                    <li>
-                        <div class="greeting">${sessionMember.memberId} 님, 환영합니다.</div>
-                    </li>
-                    <li class="active"><a href="/member/modifyInfo">회원정보</a></li>
-                    <li><a href="/member/logout">로그아웃</a></li>
-                </c:if>
-                <c:if test="${sessionMember.memberId == null}">
-                    <li class="active"><a href="/member/loginForm">로그인</a></li>
-                    <li><a href="/member/joinForm">회원가입</a></li>
-                </c:if>
+    </div>
+    <div class="headerWrap">
+        <div class="bottomHeader">
+            <ul class="bottomHeaderMenu">
+                <li><a href="${pageContext.request.contextPath}/board/main">커뮤니티</a></li>
+                <li><a href="${pageContext.request.contextPath}/chabak/main">차박지</a></li>
+                <li><a href="/">고객센터</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <body>
-
