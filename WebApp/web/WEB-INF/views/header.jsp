@@ -7,8 +7,10 @@
     <title>HOME</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%-- CSS --%>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/HeaderCSS.css?ver=1" type="text/css">
+    <link rel="stylesheet" href="/static/css/HeaderCSS.css?ver=2" type="text/css">
     <link rel="stylesheet" href="/static/css/MainCSS.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabak.css?ver=3" type="text/css">
     <link rel="stylesheet" href="/static/css/boardmain.css?ver=1" type="text/css">
@@ -20,6 +22,8 @@
     <link rel="stylesheet" href="/static/css/chabakDetail.css?ver=2" type="text/css">
     <link rel="stylesheet" href="/static/css/kakaoMap.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/JoinCSS.css?ver=2" type="text/css">
+
+    <%-- JS --%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -36,7 +40,6 @@
     <script type="text/javascript" src="/static/slick/slick.min.js"></script>
 </head>
 <body>
-
 <nav style="background: white;">
     <div class="headerWrap">
         <div class="topHeader">
@@ -60,13 +63,47 @@
         </div>
     </div>
     <div class="headerWrap">
-        <div class="bottomHeader">
+        <div class="bottomHeader" id="bottomHeader">
             <ul class="bottomHeaderMenu">
-                <li><a href="${pageContext.request.contextPath}/board/main">커뮤니티</a></li>
-                <li><a href="${pageContext.request.contextPath}/chabak/main">차박지</a></li>
-                <li><a href="/">고객센터</a></li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/board/main">커뮤니티</a>
+                    <ul class="herderSubMenu">
+                        <li><a class="headerSubMenuItem" href="${pageContext.request.contextPath}/board/main">공지사항</a></li>
+                        <li><a class="headerSubMenuItem" href="#">게시판1</a></li>
+                        <li><a class="headerSubMenuItem" href="#">게시판2</a></li>
+                        <li><a class="headerSubMenuItem" href="#">게시판3</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/chabak/main">차박지둘러보기</a>
+                    <ul class="herderSubMenu">
+                        <li><a class="headerSubMenuItem" href="${pageContext.request.contextPath}/chabak/main">차박지검색</a></li>
+                        <li><a class="headerSubMenuItem" href="${pageContext.request.contextPath}/chabak/map?province=all">차박지지도</a></li>
+                        <li><a class="headerSubMenuItem" href="${pageContext.request.contextPath}/chabak/ranking/avg_point">차박지순위</a></li>
+                        <li><a class="headerSubMenuItem" href="#">차박후기</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/">고객센터</a>
+                    <ul class="herderSubMenu">
+                        <li><a class="headerSubMenuItem" href="#">Q&A</a></li>
+                        <li><a class="headerSubMenuItem" href="#">#</a></li>
+                        <li><a class="headerSubMenuItem" href="#">#</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    // navbar mouseover event
+    $("#bottomHeader").hover(function() {
+        $(".herderSubMenu").addClass('active');
+        $("#bottomHeader").css("background","#f6f6f6");
+    }, function(){
+        $(".herderSubMenu").removeClass('active');
+        $("#bottomHeader").css("background", "white");
+    });
+</script>
 <body>
