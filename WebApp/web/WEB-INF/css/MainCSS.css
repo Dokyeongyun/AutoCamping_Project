@@ -24,10 +24,32 @@
 .noticeList li a {font-size: 12px;display: block;color: inherit;}
 .noticeList li span {font-size: 11px;float: none !important;display: block;color: #bfbfbf;}
 
-.full_container {width: 100%;min-height: 100%;padding: 0 30px;overflow: hidden;}
-.left_container {width: 20%;min-height: 100%;float: left;border-right: 1px solid #ddd;padding: 0 10px;}
-.right_container {width: 80%;min-height: 100%;float: right;padding: 0 10px;}
-.myInfo_container {width: 100%;height: fit-content;min-height: 200px;padding: 20px;margin-bottom: 30px;background-color: #ecf8f6;}
+/* 커뮤니티 - 화면 구역 구분 */
+.fullContainer {position: relative; display: flex; width: 1280px; min-width: 1280px; padding: 0 15px; margin: 15px auto 0; }
+.leftContainer {position: relative; width: 145px; min-width: 145px; margin: 0 15px 0 0;}
+.mainContainer {position: relative; width: 895px; min-width: 895px;}
+.rightContainer {width: 180px; margin: 0 0 0 15px;}
+
+/* 왼쪽 내비게이션 */
+.leftNav {width: 100%;border-radius: 2px;overflow: hidden;}
+.leftNavMenu {padding-bottom: 5px;margin-bottom: 10px;border-radius: 2px;overflow: hidden;background-color: #fff;}
+.leftNavMenu a {display: flex;align-items: center;width: 100%;padding: 7px 10px;font-size: 12px;text-decoration: none;}
+.leftNavMenu a.menuGroup.all {color: #fff;padding: 9px 10px;margin: 0;background-color: #003565;border: 0;}
+.leftNavMenu a.menuGroup {font-weight: bold;color: #111;margin: 5px 0;border-top: 1px solid #F1F1F1;background-color: #FAFAFA;}
+.leftNavMenu a.menuGroup.menuGroup:first-child + a, .leftNavMenu .menuGroup:first-child + a, .leftNavMenu .menuGroup:first-child + a {margin: 0 0 5px;border-top: 0;}
+.leftNavMenu a.menuGroup:focus, .leftNavMenu a.menuGroup:hover {background-color: #F1F1F1;}
+.leftNavMenu a.menuList {color: #222;padding: 10px 10px;}
+.leftNavMenu a.menuList:hover {background-color: #F1F1F1}
+.leftNavMenu a .menuOver {width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+/* 오른쪽 내비게이션 */
+.rightContainer .loginBoxSubmitRegion .checkIDRemember {color: #666;letter-spacing: -0.8px;font-size: 12px;}
+.rightContainer .loginBoxSubmitRegion .buttonSubmit {width: 60px;height: 25px;color: #fff;font-weight: 500;margin: 2px 0;border-radius: 2px;background-color: #003565;font-size: 12px;}
+.loginBox {width: 180px;padding: 10px;margin: 0 0 1px 0;border-radius: 2px 2px 0 0;background-color: #fff;}
+.loginBox .loginBoxSubmitRegion {display: flex;align-items: center;justify-content: space-between;margin: 4px 0;}
+.loginBox .loginBoxMenu {display: flex;justify-content: space-between;letter-spacing: -0.8px;width: 100%;padding: 10px 0 0;border-top: 1px dashed #E2E2E2;}
+.loginBox .loginBoxMenu a {color: #666;font-size: 12px;}
+
 .board_container {width: 100%;height: 500px;padding: 20px;margin-bottom: 30px;background-color: #ecf8f6;}
 .myInfo_top {width: 100%;height: max-content;overflow: hidden;padding-bottom: 10px;border-bottom: 1px solid #ddd;}
 .myInfo_img {float: left;width: 30%;}

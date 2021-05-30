@@ -7,6 +7,7 @@ import ROOT.VO.Article.ArticleFile;
 import ROOT.VO.Article.Comment;
 import ROOT.VO.Form.ArticleForm;
 import ROOT.VO.Form.CommentForm;
+import ROOT.VO.Form.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class BoardController {
 
     @Autowired
     FileUploadService fileUploadService;
+
+    @ModelAttribute
+    LoginForm setUpLoginForm() { return new LoginForm(); }
 
     @ModelAttribute
     ArticleForm setUpArticleForm() {
