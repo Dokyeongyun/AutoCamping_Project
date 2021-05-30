@@ -50,6 +50,28 @@
 .loginBox .loginBoxMenu {display: flex;justify-content: space-between;letter-spacing: -0.8px;width: 100%;padding: 10px 0 0;border-top: 1px dashed #E2E2E2;}
 .loginBox .loginBoxMenu a {color: #666;font-size: 12px;}
 
+/* 메인 구역 - 섹션 구역 구분 */
+.sectionContentWrap {display: flex;flex-wrap: wrap;justify-content: space-between;}
+.sectionContent {display: flex;width: 100%;}
+.sectionList {position: relative;width: 100%;min-width: 443px;padding: 15px 23px 13px;margin: 0 0 9px 0;border-radius: 2px;background-color: #fff;box-shadow: 0 0 1px 0 rgb(0 0 0 / 10%);}
+.sectionList .sectionTitle {display: block;font-size: 18px;letter-spacing: -0.5px;margin: 0 0 5px 0;border-bottom: 1px solid rgba(0,0,0,0.15);}
+.sectionList .sectionTitle a {display: flex;align-items: center;justify-content: space-between;color: #333;padding: 5px 0;margin: 0 0 10px;opacity: .9;text-decoration: none;}
+.sectionContent .sectionList:first-child {margin: 0 0 9px 0;}
+.sectionContent .sectionList:last-child {margin: 0 0 9px 9px;}
+
+/* 메인 구역 - 섹션 게시글 리스트 */
+.sectionList .listItem {display: block;height: auto;border: 0;}
+.sectionList .listItem .listTitle {padding: 4px 0;}
+.sectionList .listItem .listTitle .listSubject .shortname {display: inline-block;color: #fff;min-width: 40px;width: auto;font-size: 12px;text-align: center;padding: 0 3px;border: 0;border-radius: 2px;background-color: #999;}
+.sectionList .listItem .listTitle .listSubject .subject {position: relative;top: 0;color: black}
+.sectionList .listItem .listTitle .listReply {top: 0;}
+.listItem {position: relative;display: table;width: 100%;height: 37px;border-bottom: 1px solid #E2E2E2;border-right: 1px solid #E2E2E2;background-color: #fff;}
+.listItem .listTitle {display: flex;align-items: center;flex-wrap: wrap;padding: 9px 0;font-size: 14px;}
+.listItem .listTitle .listSubject {display: inline-block;align-items: center;position: relative;float: left;max-width: 460px;line-height: 18px;word-break: break-all;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;margin: 0 5px 0 0; text-decoration: none}
+.subject:hover {color: #2F5597}
+.listItem .listTitle .listReply {position: relative;top: 0;font-size: 11px;color: #F7683A;padding: 0;}
+
+
 .board_container {width: 100%;height: 500px;padding: 20px;margin-bottom: 30px;background-color: #ecf8f6;}
 .myInfo_top {width: 100%;height: max-content;overflow: hidden;padding-bottom: 10px;border-bottom: 1px solid #ddd;}
 .myInfo_img {float: left;width: 30%;}

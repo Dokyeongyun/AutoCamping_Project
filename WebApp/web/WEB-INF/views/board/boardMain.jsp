@@ -5,8 +5,9 @@
 <jsp:include page="../header.jsp"/>
 
 <style>
-
+body{background-color: #eee;}
 </style>
+
 <div class="fullContainer">
     <div class="leftContainer">
         <div class="leftNav">
@@ -107,65 +108,49 @@
             </div>--%>
     </div>
     <div class="mainContainer">
-        <div class="page_title_region">
-            <div class="title_txt">전체글보기</div>
-            <div class="small_txt">${allArticleList.size()}개의 글</div>
-        </div>
-        <div class="article_list_region">
-            <table class="article_list_table">
-                <thead>
-                <tr>
-                    <th width="10%">게시판이름</th>
-                    <th width="50%">제목</th>
-                    <th width="20%">작성자</th>
-                    <th width="10%">작성일</th>
-                    <th width="10%">조회수</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="i" items="${allArticleList}">
-                    <tr>
-                        <td>게시판이름</td>
-                        <td><a href="/board/article/${i.articleId}">${i.title}</a></td>
-                        <td>${i.nickName}</td>
-                        <td>${i.createTime}</td>
-                        <td>1</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-        <div class="pagination_region">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </div>
-        <div class="article_search_region">
-            <select id="searchDate" class="form-control" style="width: 150px; display: inline-block">
-                <option value="all">전체기간</option>
-                <option value="1d">1일</option>
-                <option value="1w">1주</option>
-                <option value="1m">1개월</option>
-                <option value="6m">6개월</option>
-                <option value="1y">1년</option>
-            </select>
-            <select id="searchBy" class="form-control" style="width: 150px; display: inline-block">
-                <option value="titleAndContent">제목+내용</option>
-                <option value="title">제목만</option>
-                <option value="writer">글작성자</option>
-                <option value="comment">댓글내용</option>
-                <option value="comment_writer">댓글작성자</option>
-            </select>
-            <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요"
-                   style="width: 200px; display: inline-block"/>
-            <button class="btn" type="button" id="searchArticleBtn" style="background-color: #77b7b4; color: white">검색
-            </button>
+        <div class="sectionContentWrap">
+            <div class="sectionContent">
+                <div class="sectionList notice">
+                    <h2 class="sectionTitle">
+                        <a class="news_title" href="#" title="공지사항 바로가기">공지사항 ></a>
+                    </h2>
+                    <div class="sectionBody">
+                        <c:forEach begin="1" end="7" var="i">
+                            <div class="listItem">
+                                <div class="listTitle">
+                                    <a class="listSubject" href="#">
+                                        <span class="shortname">공지사항</span>
+                                        <span class="subject" title="공지사항${i}">공지사항${i}</span>
+                                    </a>
+                                    <a class="listReply" href="#">
+                                        <span>${i*10}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+                <div class="sectionList hot">
+                    <h2 class="sectionTitle">
+                        <a class="news_title" href="#" title="HOT 게시글 바로가기">HOT 게시글 ></a>
+                    </h2>
+                    <div class="sectionBody">
+                        <c:forEach begin="1" end="7" var="i">
+                            <div class="listItem">
+                                <div class="listTitle">
+                                    <a class="listSubject" href="#">
+                                        <span class="shortname">게시판${i}</span>
+                                        <span class="subject" title="HOT${i}">HOT${i}</span>
+                                    </a>
+                                    <a class="listReply" href="#">
+                                        <span>${i*10}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="rightContainer">
