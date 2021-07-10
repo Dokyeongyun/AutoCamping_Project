@@ -1,11 +1,11 @@
 package ROOT.VO.Member;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Member {
     private String memberId;
 
     private String nickName;
+
+    private String email;
 
     private String password;
 
@@ -25,6 +25,14 @@ public class Member {
         this.nickName = nickName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -38,6 +46,7 @@ public class Member {
         return "Member{" +
                 "memberId='" + memberId + '\'' +
                 ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

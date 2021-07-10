@@ -43,6 +43,12 @@ public interface MemberService {
     String nicknameCheck(@RequestParam String nickname);
 
     /**
+     * 닉네임 중복확인
+     */
+    @GetMapping("/emailCheck")
+    String emailCheck(@RequestParam String email);
+
+    /**
      * 비밀번호 변경
      */
     @RequestMapping(value = "/changePassword.do")

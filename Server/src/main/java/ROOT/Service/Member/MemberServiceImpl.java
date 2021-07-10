@@ -58,6 +58,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
+     * 이메일 중복확인
+     */
+    @Override
+    public String emailCheck(String email) {
+        return memberDAO.emailCheck(email);
+    }
+
+    /**
      * 비밀번호 변경
      */
     @Override

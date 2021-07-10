@@ -46,8 +46,8 @@ public class MemberDAO {
      */
     public Member join(Member member) {
         try {
-            String sql = "INSERT INTO cb_member(memberId,nickName,password) VALUES (?,?,?)";
-            int result = jdbcTemplate.update(sql, member.getMemberId(), member.getNickName(), member.getPassword());
+            String sql = "INSERT INTO cb_member(memberId, nickName, password, MEM_EMAIL) VALUES (?, ?, ?, ?)";
+            int result = jdbcTemplate.update(sql, member.getMemberId(), member.getNickName(), member.getPassword(), member.getEmail());
             if (result == 1) {
                 return member;
             }
@@ -74,6 +74,16 @@ public class MemberDAO {
         String sql = "SELECT nickName FROM cb_member WHERE nickName = ?";
         List<String> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getString("nickName"), nickname);
+        return result.size() > 0 ? "N" : "Y";
+    }
+
+    /**
+     * 이메일 중복확인
+     */
+    public String emailCheck(String email) {
+        String sql = "SELECT MEM_EMAIL FROM cb_member WHERE MEM_EMAIL = ?";
+        List<String> result = jdbcTemplate.query(sql,
+                (resultSet, i) -> resultSet.getString("MEM_EMAIL"), email);
         return result.size() > 0 ? "N" : "Y";
     }
 
