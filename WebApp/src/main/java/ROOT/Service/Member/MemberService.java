@@ -31,6 +31,11 @@ public interface MemberService {
      */
     String nicknameCheck(String nickname);
 
+    /**
+     * 이메일 중복확인
+     */
+    String emailCheck(String email);
+
 //    /**
 //     * 비밀번호 변경
 //     */

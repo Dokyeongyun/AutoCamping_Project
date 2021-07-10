@@ -27,4 +27,11 @@ public class JoinAjaxController {
         // 중복된다면 "N", 아니라면 "Y" 리턴
         return memberService.nicknameCheck(nickname);
     }
+
+    @GetMapping("/checkEmail")
+    public String checkEmail(@RequestParam String email){
+        // 요청 파라미터로 email 받은 후, 중복검사
+        // 중복된다면 "N", 아니라면 "Y" 리턴
+        return memberService.emailCheck(email);
+    }
 }

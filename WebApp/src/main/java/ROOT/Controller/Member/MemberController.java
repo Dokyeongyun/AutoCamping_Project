@@ -89,6 +89,7 @@ public class MemberController {
         Member member = new Member();
         member.setMemberId(form.getMemberId());
         member.setNickName(form.getNickName());
+        member.setEmail(form.getEmail());
         member.setPassword(form.getPassword());
 
         // 회원가입

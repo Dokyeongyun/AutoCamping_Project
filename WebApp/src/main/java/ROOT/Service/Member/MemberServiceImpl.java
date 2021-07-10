@@ -71,6 +71,14 @@ public class MemberServiceImpl implements MemberService {
         return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/nicknameCheck?nickname=" + nickname, String.class);
     }
 
+    /**
+     * 이메일 중복확인
+     */
+    @Override
+    public String emailCheck(String email) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/emailCheck?email=" + email, String.class);
+    }
+
 /**
  * 비밀번호 변경
  *//*

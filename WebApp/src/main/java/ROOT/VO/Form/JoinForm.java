@@ -15,6 +15,11 @@ public class JoinForm {
             message = "닉네임은 2~10자의 한글, 영문, 숫자만 사용 가능합니다.")
     private String nickName;
 
+    @NotBlank(message = "이메일은 필수 입력 값입니다.")
+    @Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$",
+            message = "이메일 형식을 확인해주세요.")
+    private String email;
+
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     @Pattern(regexp = "^[A-Za-z0-9`\\-=\\\\\\[\\];',\\./~!@#\\$%\\^&\\*\\(\\)_\\+|\\{\\}:\"<>\\?]{8,16}$",
             message = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
@@ -39,6 +44,10 @@ public class JoinForm {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+
+    public void setEmail(String email) { this.email = email; }
+
+    public String getEmail() { return email; }
 
     public String getPassword() {
         return password;
@@ -69,8 +78,10 @@ public class JoinForm {
         return "JoinForm{" +
                 "memberId='" + memberId + '\'' +
                 ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", passwordCheck='" + passwordCheck + '\'' +
+                ", check=" + check +
                 '}';
     }
 }

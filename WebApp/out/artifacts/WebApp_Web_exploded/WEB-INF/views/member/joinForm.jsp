@@ -28,6 +28,12 @@
                         <div><form:input path="nickName" cssClass="joinFormInputBox"/></div>
                         <span class="joinErrorText" id="nickNameMsg" style="display:none" aria-live="assertive"></span>
                     </div>
+                        <%-- 이메일 --%>
+                    <div class="joinRow">
+                        <h3 class="joinTitle"><label for="email">이메일</label></h3>
+                        <div><form:input path="email" cssClass="joinFormInputBox"/></div>
+                        <span class="joinErrorText" id="emailMsg" style="display:none" aria-live="assertive"></span>
+                    </div
                         <%-- 비밀번호 --%>
                     <div class="joinRow">
                         <h3 class="joinTitle"><label for="password">비밀번호</label></h3>
@@ -68,6 +74,7 @@
     //region define, setter
     var idFlag = false;
     var nicknameFlag = false;
+    var emailFlag = false;
     var pwFlag = false;
     var submitFlag = false;
 
@@ -82,6 +89,11 @@
         $("#nickName").blur(function () {
             nicknameFlag = false;
             checkNickname("first");
+        });
+
+        $("#email").blur(function () {
+            emailFlag = false;
+            checkEmail("first");
         });
 
         $("#password").blur(function () {
@@ -145,6 +157,7 @@
             return false;
         }
     }
+
     //endregion
 
     //region unreal 가입
@@ -229,6 +242,48 @@
         return true;
     }
 
+    function checkEmail(event) {
+        if (emailFlag) return true;
+
+        var $email = $("#email");
+
+        var oMsg = $("#emailMsg");
+        var email = $email.val();
+        var oInput = $email;
+        if (email === "") {
+            showErrorMsg(oMsg, "필수 정보입니다.");
+            setFocusToInputObject(oInput);
+            return false;
+        }
+
+        var isEmailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+        if (!isEmailRule.test(email)) {
+            showErrorMsg(oMsg, "이메일 형식을 확인해주세요.");
+            setFocusToInputObject(oInput);
+            return false;
+        }
+
+        emailFlag = false;
+        $.ajax({
+            type: "GET",
+            url: "/joinAjax/checkEmail?email=" + email,
+            success: function (data) {
+                if (data === "Y") {
+                    if (event === "first") {
+                        showSuccessMsg(oMsg, "사용가능한 이메일입니다.");
+                    } else {
+                        hideMsg(oMsg);
+                    }
+                    emailFlag = true;
+                } else {
+                    showErrorMsg(oMsg, "해당 이메일로 가입된 정보가 이미 존재합니다.");
+                    setFocusToInputObject(oInput);
+                }
+            }
+        });
+        return true;
+    }
+
     function checkPassword() {
         if (pwFlag) return true;
 
@@ -273,6 +328,7 @@
 
         return true;
     }
+
     //endregion
 
     //region 공통 함수
@@ -406,5 +462,6 @@
     function hideMsg(obj) {
         obj.hide();
     }
+
     //endregion
 </script>
