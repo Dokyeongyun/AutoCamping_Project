@@ -120,7 +120,7 @@
 
         $("#btnJoin").click(function () {
             submitClose();
-            if (idFlag && nicknameFlag && pwFlag) {
+            if (idFlag && nicknameFlag && emailFlag && pwFlag) {
                 mainSubmit();
             } else {
                 setTimeout(function () {
@@ -138,7 +138,7 @@
             submitOpen();
             return false;
         }
-        if (idFlag && nicknameFlag && pwFlag) {
+        if (idFlag && nicknameFlag && emailFlag && pwFlag) {
             $("#joinForm").submit();
         } else {
             submitOpen();
