@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df0498b349cbd74c43b9ccfb23dba540"></script>
+
     <%-- CSS --%>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/HeaderCSS.css?ver=2" type="text/css">
