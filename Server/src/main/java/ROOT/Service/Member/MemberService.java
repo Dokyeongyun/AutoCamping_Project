@@ -31,7 +31,7 @@ public interface MemberService {
     Member join(@RequestBody Member member);
 
     /**
-     * 이메일(아이디) 중복확인
+     * 아이디 중복확인
      */
     @GetMapping("/idCheck")
     String idCheck(@RequestParam String memberId);
@@ -43,10 +43,16 @@ public interface MemberService {
     String nicknameCheck(@RequestParam String nickname);
 
     /**
-     * 닉네임 중복확인
+     * 이메일 중복확인
      */
     @GetMapping("/emailCheck")
     String emailCheck(@RequestParam String email);
+
+    /**
+     * 이메일을 이용해 회원 아이디 가져오기
+     */
+    @GetMapping("/memberId")
+    String getUserIDUsingEmail(String email);
 
     /**
      * 비밀번호 변경

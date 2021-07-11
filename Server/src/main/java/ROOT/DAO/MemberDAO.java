@@ -58,7 +58,7 @@ public class MemberDAO {
     }
 
     /**
-     * 이메일(아이디) 중복확인
+     * 아이디 중복확인
      */
     public String idCheck(String memberId) {
         String sql = "SELECT memberId FROM cb_member WHERE memberId = ?";
@@ -85,6 +85,14 @@ public class MemberDAO {
         List<String> result = jdbcTemplate.query(sql,
                 (resultSet, i) -> resultSet.getString("MEM_EMAIL"), email);
         return result.size() > 0 ? "N" : "Y";
+    }
+
+    /**
+     * 이메일을 이용해 회원 아이디 가져오기
+     */
+    public String getUserIDUsingEmail(String email) {
+        String sql = "SELECT memberId FROM CB_MEMBER WHERE MEM_EMAIL = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, email);
     }
 
     /**

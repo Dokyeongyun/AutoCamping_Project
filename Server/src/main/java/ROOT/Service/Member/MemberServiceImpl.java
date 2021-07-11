@@ -66,6 +66,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
+     * 이메일을 이용해 회원 아이디 가져오기
+     */
+    @Override
+    public String getUserIDUsingEmail(String email) {
+        return memberDAO.getUserIDUsingEmail(email);
+    }
+
+    /**
      * 비밀번호 변경
      */
     @Override
