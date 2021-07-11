@@ -10,3 +10,4 @@
 .btnType {width: 100%;padding: 15px 0;font-size: 18px;font-weight: bold;}
 .joinErrorText {display: block;margin: 9px 2px 2px;font-size: 12px;color: red;}
 .green {color: green}
+.disabled {background-color: #ddd}

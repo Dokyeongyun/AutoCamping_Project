@@ -79,6 +79,14 @@ public class MemberServiceImpl implements MemberService {
         return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/emailCheck?email=" + email, String.class);
     }
 
+    /**
+     * 이메일을 이용해 회원 아이디 가져오기
+     */
+    @Override
+    public String getUserIDUsingEmail(String email) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/memberId?email=" + email, String.class);
+    }
+
 /**
  * 비밀번호 변경
  *//*

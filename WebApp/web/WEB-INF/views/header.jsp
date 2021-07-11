@@ -23,9 +23,10 @@
     <link rel="stylesheet" href="/static/css/chabakMap.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabakDetail.css?ver=2" type="text/css">
     <link rel="stylesheet" href="/static/css/kakaoMap.css?ver=1" type="text/css">
-    <link rel="stylesheet" href="/static/css/JoinCSS.css?ver=2" type="text/css">
+    <link rel="stylesheet" href="/static/css/JoinCSS.css?ver=3" type="text/css">
 
     <%-- JS --%>
+    <script src="${pageContext.request.contextPath}/static/js/validate.js" type="text/javascript" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>

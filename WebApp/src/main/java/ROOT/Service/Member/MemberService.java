@@ -36,6 +36,11 @@ public interface MemberService {
      */
     String emailCheck(String email);
 
+    /**
+     * 이메일을 이용해 회원 아이디 가져오기
+     */
+    String getUserIDUsingEmail(String email);
+
 //    /**
 //     * 비밀번호 변경
 //     */

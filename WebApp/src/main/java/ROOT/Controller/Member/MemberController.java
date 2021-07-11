@@ -66,6 +66,20 @@ public class MemberController {
     }
 
     /**
+     * 아이디찾기 화면
+     */
+    @GetMapping("/findIDForm")
+    public void findIDForm() {
+    }
+
+    /**
+     * 비밀번호찾기 화면
+     */
+    @GetMapping("/findPasswordForm")
+    public void findPasswordForm() {
+    }
+
+    /**
      * 회원가입 폼으로부터 받은 입력값 검사 및 로직 실행
      * 입력값 검사 통과 시 - 회원가입 Logic 실행
      * 입력값 검사 실패 시 - 다시 회원가입 폼 화면으로 이동 (입력값 검사 결과와 함께)

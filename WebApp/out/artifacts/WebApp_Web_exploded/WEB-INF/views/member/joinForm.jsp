@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <%-- 제출하기, 비밀번호 찾기 버튼 --%>
+                <%-- 제출하기, 아이디/비밀번호 찾기 버튼 --%>
                 <div class="btnArea">
                     <button type="button" id="btnJoin" class="btnType btnPrimary">회원가입</button>
                 </div>
@@ -446,22 +446,5 @@
             obj.focus();
         }
     }
-
-    function showErrorMsg(obj, msg) {
-        obj.attr("class", "joinErrorText");
-        obj.html(msg);
-        obj.show();
-    }
-
-    function showSuccessMsg(obj, msg) {
-        obj.attr("class", "joinErrorText green");
-        obj.html(msg);
-        obj.show();
-    }
-
-    function hideMsg(obj) {
-        obj.hide();
-    }
-
     //endregion
 </script>

@@ -41,7 +41,10 @@
                     <button type="submit" id="submitBtn" class="btnType btnPrimary">로그인</button>
                 </div>
                 <div class="joinRow" style="text-align: right">
-                    <a href="/member/loginForm" style="font-weight: bold;">
+                    <a href="${pageContext.request.contextPath}/member/findIDForm" style="font-weight: bold;">
+                        아이디
+                    </a> /
+                    <a href="${pageContext.request.contextPath}/member/findPasswordForm" style="font-weight: bold;">
                         비밀번호를 잊으셨나요?
                     </a>
                 </div>
