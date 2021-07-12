@@ -1,9 +1,11 @@
 package ROOT.Controller.Member;
 
 import ROOT.Service.Member.MemberService;
+import ROOT.Service.Utils.MailService;
 import ROOT.VO.Form.JoinForm;
 import ROOT.VO.Form.LoginForm;
 import ROOT.VO.Member.Member;
+import ROOT.VO.Utils.MailAuth;
 import ROOT.Validator.JoinValidator;
 import ROOT.Validator.LoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @SessionAttributes("sessionMember")
@@ -28,6 +31,9 @@ public class MemberController {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    MailService mailService;
 
     @InitBinder("joinForm")
     public void joinInitBinder(WebDataBinder binder) {
@@ -77,6 +83,28 @@ public class MemberController {
      */
     @GetMapping("/findPasswordForm")
     public void findPasswordForm() {
+    }
+
+    /**
+     * 비밀번호변경 화면
+     */
+    @GetMapping("/changePasswordForm")
+    public ModelAndView changePasswordForm(@RequestParam String email, @RequestParam String authNum) {
+        MailAuth mailAuth = new MailAuth();
+        mailAuth.setMailAuthEmail(email);
+        mailAuth.setMailAuthNum(authNum);
+        String latestAuthNum = mailService.getLatestAuthNum(mailAuth);
+
+        ModelAndView mav = new ModelAndView();
+        if(!latestAuthNum.equals(authNum)){
+            // TODO 비정상적 접근 에러 메시지 함께 전송해야 함
+            mav.setViewName("redirect:/");
+        }else{
+            mav.setViewName("/member/changePasswordForm");
+            mav.addObject("email", email);
+        }
+
+        return mav;
     }
 
     /**

@@ -2,6 +2,7 @@ package ROOT.Controller.AjaxController;
 
 import ROOT.Service.Member.MemberService;
 import ROOT.Service.Utils.MailService;
+import ROOT.VO.Member.Member;
 import ROOT.VO.Utils.Mail;
 import ROOT.VO.Utils.MailAuth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,44 @@ public class JoinAjaxController {
         return authNum;
     }
 
+    @GetMapping("/sendAuthNumForFindPw")
+    public String sendAuthNum(@RequestParam String email, @RequestParam String memberId){
+        // TODO Manage String Resource
+
+        // 해당 이메일로 가입된 사용자가 있는지 확인
+        String selectedMemberId = memberService.getUserIDUsingEmail(email);
+
+        // 없으면 NOT_USER 반환
+        if(selectedMemberId == null || "".equals(selectedMemberId)){
+            return "NOT_USER";
+        }
+
+        // 입력된 아이디와 반환된 아이디가 같은지 확인
+        if(!memberId.equals(selectedMemberId)){
+            return "NOT_USER";
+        }
+
+        // 입력된 정보로 가입된 회원이 있으면 인증번호 생성하여 인증번호 전송, 그 후 인증번호 반환
+        String authNum = mailService.createAuthNum();
+        String sender = "aservmz@gmail.com";
+        String title = "[차박, 여기서] 요청하신 인증번호를 알려드립니다.";
+
+        Mail mail = new Mail();
+        mail.setMailSender(sender);
+        mail.setMailRecipient(email);
+        mail.setMailTitle(title);
+        mail.setMailContent(authNum);
+
+        mailService.sendEmail(mail);
+
+        MailAuth mailAuth = new MailAuth();
+        mailAuth.setMailAuthNum(authNum);
+        mailAuth.setMailAuthEmail(email);
+        mailService.insertMailAuthLog(mailAuth);
+
+        return authNum;
+    }
+
     @PostMapping("/getAuthUserID")
     public String getAuthUserID(@RequestBody MailAuth mailAuth) {
         String latestAuthNum = mailService.getLatestAuthNum(mailAuth);
@@ -79,5 +118,10 @@ public class JoinAjaxController {
             authUserID = memberService.getUserIDUsingEmail(mailAuth.getMailAuthEmail());
         }
         return authUserID;
+    }
+
+    @PostMapping("/changePassword")
+    public void changePassword(@RequestBody Member member) {
+        memberService.changePassword(member);
     }
 }

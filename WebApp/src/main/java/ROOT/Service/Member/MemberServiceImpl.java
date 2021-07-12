@@ -87,16 +87,14 @@ public class MemberServiceImpl implements MemberService {
         return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/memberId?email=" + email, String.class);
     }
 
-/**
- * 비밀번호 변경
- *//*
-
+    /**
+     * 비밀번호 변경
+     */
     @Override
-    public int changePassword(String memberId, String password) {
-        return memberDAO.changePassword(memberId, password);
+    public void changePassword(Member member){
+        restOperations.put(APIServerInfo.API_SERVER_CONTEXT + "/member/password", member, Member.class);
     }
 
-    */
 /**
  * 닉네임 변경
  *//*

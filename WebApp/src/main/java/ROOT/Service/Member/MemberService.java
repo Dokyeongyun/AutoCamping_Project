@@ -41,6 +41,11 @@ public interface MemberService {
      */
     String getUserIDUsingEmail(String email);
 
+    /**
+     * 비밀번호 변경
+     */
+    void changePassword(Member member);
+
 //    /**
 //     * 비밀번호 변경
 //     */
