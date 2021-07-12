@@ -98,11 +98,11 @@ public class MemberDAO {
     /**
      * 비밀번호 변경
      */
-    public int changePassword(String memberId, String password) {
+    public int changePassword(Member member) {
         try {
-            String encrypted = CryptoUtil.encryptAES256(password, password.hashCode() + "");
-            String sql = "UPDATE cb_member SET password = ? WHERE memberId = ?";
-            return jdbcTemplate.update(sql, encrypted, memberId);
+            String encrypted = CryptoUtil.encryptAES256(member.getPassword(), member.getPassword().hashCode() + "");
+            String sql = "UPDATE cb_member SET password = ? WHERE MEM_EMAIL = ?";
+            return jdbcTemplate.update(sql, encrypted, member.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
         }

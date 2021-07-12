@@ -57,8 +57,8 @@ public interface MemberService {
     /**
      * 비밀번호 변경
      */
-    @RequestMapping(value = "/changePassword.do")
-    int changePassword(String memberId, String password);
+    @PutMapping( "/password")
+    int changePassword(@RequestBody Member member);
 
     /**
      * 닉네임 변경

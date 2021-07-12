@@ -6,6 +6,8 @@ import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -77,8 +79,8 @@ public class MemberServiceImpl implements MemberService {
      * 비밀번호 변경
      */
     @Override
-    public int changePassword(String memberId, String password) {
-        return memberDAO.changePassword(memberId, password);
+    public int changePassword(Member member){
+        return memberDAO.changePassword(member);
     }
 
     /**
