@@ -155,18 +155,29 @@ body{background-color: #eee;}
     </div>
     <div class="rightContainer">
         <div class="loginBox">
-            <form:form modelAttribute="loginForm" action="/member/login" method="post">
-                <form:input path="memberId" placeholder="아이디" cssClass="joinFormInputBox" cssStyle="height: 30px"/>
-                <form:password path="password" placeholder="비밀번호" cssClass="joinFormInputBox" cssStyle="height: 30px"/>
-                <div class="loginBoxSubmitRegion">
-                    <label class="checkIDRemember"><input type="checkbox" name="remember">아이디기억</label>
-                    <button type="submit" class="buttonSubmit">로그인</button>
+            <c:if test="${sessionMember.memberId == null}">
+                <form:form modelAttribute="loginForm" action="/member/login" method="post">
+                    <form:input path="memberId" placeholder="아이디" cssClass="joinFormInputBox" cssStyle="height: 30px"/>
+                    <form:password path="password" placeholder="비밀번호" cssClass="joinFormInputBox" cssStyle="height: 30px"/>
+                    <div class="loginBoxSubmitRegion">
+                        <label class="checkIDRemember"><input type="checkbox" name="remember">아이디기억</label>
+                        <button type="submit" class="buttonSubmit">로그인</button>
+                    </div>
+                    <div class="loginBoxMenu">
+                        <a href="${pageContext.request.contextPath}/member/findIDForm" >아이디·</a><a href="${pageContext.request.contextPath}/member/findPasswordForm" >비밀번호 찾기</a>
+                        <a href="${pageContext.request.contextPath}/member/joinForm" class="button_signup">회원가입</a>
+                    </div>
+                </form:form>
+            </c:if>
+            <c:if test="${sessionMember.memberId != null}">
+                <div style="text-align: center; font-weight: bold; padding: 10px;">
+                    <c:out value="${sessionMember.memberId}"/>님
                 </div>
                 <div class="loginBoxMenu">
-                    <a href="#" class="button_find">아이디·비밀번호 찾기</a>
-                    <a href="${pageContext.request.contextPath}/member/joinForm" class="button_signup">회원가입</a>
+                    <a href="${pageContext.request.contextPath}/member/myArticles" >내 게시글</a>
+                    <a href="${pageContext.request.contextPath}/member/logout" class="button_signup">로그아웃</a>
                 </div>
-            </form:form>
+            </c:if>
         </div>
     </div>
 </div>
