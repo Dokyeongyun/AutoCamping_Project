@@ -19,14 +19,14 @@
                     <div class="joinRow">
                         <h3 class="joinTitle"><label for="memberId">아이디</label></h3>
                         <div><form:input path="memberId" cssClass="joinFormInputBox"/></div>
-                        <span class="joinErrorText" id="memberIdMsg" style="display:none" aria-live="assertive"></span>
+                        <span><form:errors cssClass="joinErrorText" id="memberIdMsg" path="memberId"/></span>
                     </div>
                         <%-- 비밀번호 --%>
                     <div class="joinRow">
                         <h3 class="joinTitle"><label for="password">비밀번호</label></h3>
                         <div><form:password path="password" cssClass="joinFormInputBox"/></div>
-                        <span class="joinErrorText" id="passwordMsg" style="display:none" aria-live="assertive"></span>
-                    </div>
+                        <span><form:errors cssClass="joinErrorText" id="passwordMsg" path="password"/></span>
+                   </div>
                         <%-- 아이디 기억하기 --%>
                     <div class="joinRow">
                         <div class="checkbox">
@@ -41,10 +41,10 @@
                     <button type="submit" id="submitBtn" class="btnType btnPrimary">로그인</button>
                 </div>
                 <div class="joinRow" style="text-align: right">
-                    <a href="${pageContext.request.contextPath}/member/findIDForm" style="font-weight: bold;">
+                    <a href="${pageContext.request.contextPath}/member/findIDForm" class="bold">
                         아이디
                     </a> /
-                    <a href="${pageContext.request.contextPath}/member/findPasswordForm" style="font-weight: bold;">
+                    <a href="${pageContext.request.contextPath}/member/findPasswordForm" class="bold">
                         비밀번호를 잊으셨나요?
                     </a>
                 </div>

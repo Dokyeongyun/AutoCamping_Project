@@ -1,10 +1,13 @@
 package ROOT.VO.Member;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Member {
     private String memberId;
 
     private String nickName;
 
+    @JsonProperty("MEM_EMAIL")
     private String email;
 
     private String password;

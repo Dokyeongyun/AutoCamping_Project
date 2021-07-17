@@ -12,6 +12,7 @@
 
     <%-- CSS --%>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/common.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/HeaderCSS.css?ver=2" type="text/css">
     <link rel="stylesheet" href="/static/css/MainCSS.css?ver=3" type="text/css">
     <link rel="stylesheet" href="/static/css/chabak.css?ver=3" type="text/css">

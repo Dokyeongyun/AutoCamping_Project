@@ -175,15 +175,16 @@ public class MemberController {
         // 로그인
         Member loginMember = memberService.login(member);
 
-        // 결과확인, 실패 시 다시 로그인 폼으로
+        // 결과확인, 실패 시 다시 로그인 폼으로 리디렉트
         if (loginMember.getMemberId() == null || !loginMember.getMemberId().equals(member.getMemberId())) {
-            model.addAttribute("loginResult", "로그인에 실패했습니다. 입력값을 확인 후 다시 시도해주세요.");
+            model.addAttribute("loginResult", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
             return "/member/loginForm";
         }
 
         sessionMember.setMemberId(loginMember.getMemberId());
         sessionMember.setNickName(loginMember.getNickName());
         sessionMember.setPassword(loginMember.getPassword());
+        sessionMember.setEmail(loginMember.getEmail());
 
         return "redirect:/";
     }
