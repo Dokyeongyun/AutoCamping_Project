@@ -4,10 +4,14 @@ import ROOT.DAO.MemberDAO;
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
+import ROOT.VO.Member.MemberLoginHistory;
+import ROOT.VO.Member.MemberLoginLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -79,8 +83,24 @@ public class MemberServiceImpl implements MemberService {
      * 비밀번호 변경
      */
     @Override
-    public int changePassword(Member member){
+    public int changePassword(Member member) {
         return memberDAO.changePassword(member);
+    }
+
+    /**
+     * 회원 계정 로그인 잠금시간 확인
+     */
+    @Override
+    public MemberLoginLock checkLoginLockTime(String memberId) {
+        return memberDAO.checkLoginLockTime(memberId);
+    }
+
+    /**
+     * 로그인 이력 기록
+     */
+    @Override
+    public void insertLoginHistory(@RequestBody MemberLoginHistory loginHistory) {
+        memberDAO.insertLoginHistory(loginHistory);
     }
 
     /**

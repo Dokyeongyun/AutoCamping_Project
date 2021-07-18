@@ -3,6 +3,8 @@ package ROOT.Service.Member;
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
+import ROOT.VO.Member.MemberLoginHistory;
+import ROOT.VO.Member.MemberLoginLock;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -59,6 +61,18 @@ public interface MemberService {
      */
     @PutMapping( "/password")
     int changePassword(@RequestBody Member member);
+
+    /**
+     * 회원 계정 로그인 잠금시간 확인
+     */
+    @RequestMapping("/login/lockTime/{memberId}")
+    MemberLoginLock checkLoginLockTime(@PathVariable String memberId);
+
+    /**
+     * 로그인 이력 기록
+     */
+    @RequestMapping("/login/history")
+    void insertLoginHistory(@RequestBody MemberLoginHistory loginHistory);
 
     /**
      * 닉네임 변경

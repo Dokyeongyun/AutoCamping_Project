@@ -7,12 +7,13 @@ import ROOT.Util.crypto.CryptoUtil;
 import ROOT.VO.Chabak.Chabak;
 import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
+import ROOT.VO.Member.MemberLoginHistory;
+import ROOT.VO.Member.MemberLoginLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class MemberDAO {
@@ -30,9 +31,10 @@ public class MemberDAO {
     public Member login(Member member) {
         Member result = new Member();
         try {
-            String sql = "SELECT * FROM cb_member WHERE memberId = ? AND password = ? AND isDeleted = 0";
-            List<Member> temp = jdbcTemplate.query(sql, new MemberRowMapper(), member.getMemberId(), member.getPassword());
+            String sql = "SELECT * FROM cb_member WHERE memberId = ? AND isDeleted = 0";
+            List<Member> temp = jdbcTemplate.query(sql, new MemberRowMapper(), member.getMemberId());
             if (temp.size() == 1) {
+                System.out.println(temp.get(0));
                 return temp.get(0);
             }
         } catch (Exception e) {
@@ -107,6 +109,23 @@ public class MemberDAO {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    /**
+     * 회원 계정 로그인 잠금시간 확인
+     */
+    public MemberLoginLock checkLoginLockTime(String memberId) {
+        String sql = "SELECT * FROM MEM_LOGIN_LOCK WHERE MEM_LOGIN_LOCK_MEM_ID = ?";
+        List<MemberLoginLock> list = jdbcTemplate.queryForList(sql, MemberLoginLock.class, memberId);
+        return list.size() == 0 ? null : list.get(0);
+    }
+
+    /**
+     * 로그인 이력 기록
+     */
+    public void insertLoginHistory(MemberLoginHistory loginHistory) {
+        String sql = "INSERT INTO MEM_LOGIN_HISTORY(MEM_LOGIN_MEM_ID, MEM_LOGIN_IP, MEM_LOGIN_YN) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, loginHistory.getLoginMemberId(), loginHistory.getLoginIP(), loginHistory.getLoginYN());
     }
 
     /**
