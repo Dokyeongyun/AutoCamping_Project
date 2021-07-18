@@ -5,13 +5,14 @@ import org.springframework.security.crypto.codec.Hex;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
-public class CryptoUtil {
+public class CryptoUtils {
     public static String encryptAES256(String msg, String key) throws Exception {
         final Cipher encryptCipher = Cipher.getInstance("AES");
         encryptCipher.init(Cipher.ENCRYPT_MODE, generateMySQLAESKey(key, "UTF-8"));
 
-        return new String(Hex.encode(encryptCipher.doFinal(msg.getBytes("UTF-8")))).toUpperCase();
+        return new String(Hex.encode(encryptCipher.doFinal(msg.getBytes(StandardCharsets.UTF_8)))).toUpperCase();
     }
 
     public static String decryptAES256(String msg, String key) throws Exception {

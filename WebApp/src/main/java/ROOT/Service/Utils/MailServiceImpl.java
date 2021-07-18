@@ -1,8 +1,6 @@
 package ROOT.Service.Utils;
 
 import ROOT.Utils.APIServerInfo;
-import ROOT.Utils.CryptoUtil;
-import ROOT.VO.Member.Member;
 import ROOT.VO.Utils.Mail;
 import ROOT.VO.Utils.MailAuth;
 import org.springframework.beans.factory.annotation.Autowired;

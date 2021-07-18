@@ -1,8 +1,10 @@
 package ROOT.Service.Member;
 
 import ROOT.Utils.APIServerInfo;
-import ROOT.Utils.CryptoUtil;
+import ROOT.Utils.CryptoUtils;
 import ROOT.VO.Member.Member;
+import ROOT.VO.Member.MemberLoginHistory;
+import ROOT.VO.Member.MemberLoginLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
@@ -22,8 +24,6 @@ public class MemberServiceImpl implements MemberService {
     public Member login(Member member) {
         Member loginMember = new Member();
         try {
-            String encrypted = CryptoUtil.encryptAES256(member.getPassword(), member.getPassword().hashCode() + "");
-            member.setPassword(encrypted);
             loginMember = restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/login", member, Member.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
     public Member join(Member member) {
         Member joinMember = new Member();
         try {
-            String encrypted = CryptoUtil.encryptAES256(member.getPassword(), member.getPassword().hashCode() + "");
+            String encrypted = CryptoUtils.encryptAES256(member.getPassword(), member.getPassword().hashCode() + "");
             member.setPassword(encrypted);
             joinMember = restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/join", member, Member.class);
         } catch (Exception e) {
@@ -91,9 +91,26 @@ public class MemberServiceImpl implements MemberService {
      * 비밀번호 변경
      */
     @Override
-    public void changePassword(Member member){
+    public void changePassword(Member member) {
         restOperations.put(APIServerInfo.API_SERVER_CONTEXT + "/member/password", member, Member.class);
     }
+
+    /**
+     * 회원 계정 로그인 잠금시간 확인
+     */
+    @Override
+    public MemberLoginLock checkLoginLockTime(String memberId) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/login/lockTime/" + memberId, MemberLoginLock.class);
+    }
+
+    /**
+     * 로그인 이력 기록
+     */
+    @Override
+    public void insertLoginHistory(MemberLoginHistory loginHistory) {
+        restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/login/history", loginHistory, Void.class);
+    }
+
 
 /**
  * 닉네임 변경

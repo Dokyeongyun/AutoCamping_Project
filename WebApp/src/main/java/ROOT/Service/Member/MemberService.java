@@ -1,6 +1,8 @@
 package ROOT.Service.Member;
 
 import ROOT.VO.Member.Member;
+import ROOT.VO.Member.MemberLoginHistory;
+import ROOT.VO.Member.MemberLoginLock;
 
 import javax.servlet.http.HttpSession;
 
@@ -45,6 +47,17 @@ public interface MemberService {
      * 비밀번호 변경
      */
     void changePassword(Member member);
+
+    /**
+     * 회원 계정 로그인 잠금시간 확인
+     */
+    MemberLoginLock checkLoginLockTime(String memberId);
+
+    /**
+     * 로그인 이력 기록
+     */
+    void insertLoginHistory(MemberLoginHistory loginHistory);
+
 
 //    /**
 //     * 비밀번호 변경

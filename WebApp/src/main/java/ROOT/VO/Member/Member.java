@@ -34,9 +34,20 @@ public class Member {
         this.password = password;
     }
 
-    public String getEmail() { return email;}
+    public String getEmail() {
+        return email;
+    }
 
-    public void setEmail(String email) { this.email = email;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setMember(Member member) {
+        this.memberId = member.getMemberId();
+        this.nickName = member.getNickName();
+        this.password = null;
+        this.email = member.getEmail();
+    }
 
     @Override
     public String toString() {
