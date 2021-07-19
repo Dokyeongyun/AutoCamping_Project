@@ -6,10 +6,15 @@ import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
 import ROOT.VO.Member.MemberLoginLock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 @Service("MemberService")
 public class MemberServiceImpl implements MemberService {
@@ -96,11 +101,27 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
+     * 회원가입 시, 로그인 잠금시간 추가 및 초기화
+     */
+    @Override
+    public void insertLoginLockTime(MemberLoginLock loginLock) {
+        restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/login/lockTime", loginLock, Void.class);
+    }
+
+    /**
      * 회원 계정 로그인 잠금시간 확인
      */
     @Override
     public MemberLoginLock checkLoginLockTime(String memberId) {
         return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/login/lockTime/" + memberId, MemberLoginLock.class);
+    }
+
+    /**
+     * 로그인 잠금시간 업데이트
+     */
+    @Override
+    public void updateLoginLockTime(MemberLoginLock loginLock) {
+        restOperations.put(APIServerInfo.API_SERVER_CONTEXT + "/member/login/lockTime", loginLock, Void.class);
     }
 
     /**
@@ -111,6 +132,14 @@ public class MemberServiceImpl implements MemberService {
         restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/login/history", loginHistory, Void.class);
     }
 
+    /**
+     * 최근 5회 로그인 이력 가져오기
+     */
+    @Override
+    public List<MemberLoginHistory> getRecentLoginHistoryList(String memberId) {
+        MemberLoginHistory[] arr = restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/login/history/" + memberId, MemberLoginHistory[].class);
+        return Arrays.asList(Objects.requireNonNull(arr));
+    }
 
 /**
  * 닉네임 변경

@@ -26,6 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @Controller
 @SessionAttributes("sessionMember")
@@ -135,6 +138,8 @@ public class MemberController {
             return "/member/joinForm";
         }
 
+        boolean isSuccess = false;
+
         // 입력값 검사 성공 시
         Member member = new Member();
         member.setMemberId(form.getMemberId());
@@ -145,13 +150,20 @@ public class MemberController {
         // 회원가입
         Member joinMember = memberService.join(member);
 
-        // 결과확인, 실패 시 다시 회원가입 폼으로
+        // 결과확인, 실패 시 다시 회원가입 폼으로 이동.
         if (joinMember == null || !joinMember.getMemberId().equals(member.getMemberId())) {
             model.addAttribute("joinResult", "회원가입에 실패했습니다. 잠시 후 다시 시도해주세요.");
-            return "/member/joinForm";
+        } else {
+            isSuccess = true;
+
+            // 회원가입 성공 시, 로그인 잠금시간 행 추가 및 초기화
+            MemberLoginLock loginLock = new MemberLoginLock();
+            loginLock.setLoginLockMemberId(joinMember.getMemberId());
+            loginLock.setLoginLockTime("20000101010101");
+            memberService.insertLoginLockTime(loginLock);
         }
 
-        return "redirect:/member/loginForm";
+        return isSuccess ? "redirect:/member/loginForm" : "/member/joinForm";
     }
 
     /**
@@ -204,48 +216,96 @@ public class MemberController {
          */
 
         boolean isSuccess = false; // 로그인 성공여부, 성공하면 이전페이지 리디렉션, 실패하면 로그인폼 재이동
+        String loginStatusCode;
 
-        // 입력값 검사 성공 시
+        // ================================================
+        // 입력값 및 회원 계정 상태에 따른 loginStatusCode 설정
+        // ================================================
+
         Member member = new Member();
         member.setMemberId(form.getMemberId());
         Member loginMember = memberService.login(member);
 
         if (loginMember.getMemberId() == null) { // ID 없음
-            model.addAttribute("loginResult", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+            loginStatusCode = "ID_INVALID";
         } else {
             MemberLoginLock memberLoginLock = memberService.checkLoginLockTime(loginMember.getMemberId()); // 잠금상태인지 확인
 
-            if (memberLoginLock != null) { // 로그인 잠금기록 있음
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-                String lockTimeString = memberLoginLock.getLoginLockTime();
-                long lockTime = sdf.parse(lockTimeString).getTime();
-                long curTime = System.currentTimeMillis();
-                long diffTime = (curTime - lockTime) / 1000;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String lockTimeString = memberLoginLock.getLoginLockTime();
+            long lockTime = sdf.parse(lockTimeString).getTime();
+            long curTime = System.currentTimeMillis();
+            long diffTime = (curTime - lockTime) / 1000;
 
-                if (diffTime <= 300) { // 로그인 잠금상태
-                    model.addAttribute("loginResult", "현재 비밀번호 5회 연속 오류로 인해 회원님의 계정이 잠금상태입니다.\n5분 후에 다시 시도해주세요.");
+            if (diffTime <= 300) {      // 로그인 잠금상태
+                loginStatusCode = "ACCOUNT_LOGIN_LOCKED";
+            } else {                    // 로그인 잠금상태 X
+                String inputPassword = form.getPassword();
+                String encryptedPassword = CryptoUtils.encryptAES256(inputPassword, inputPassword.hashCode() + "");
+
+                if (encryptedPassword.equals(loginMember.getPassword())) { // 로그인 성공
+                    loginStatusCode = "LOGIN_SUCCESS";
+                } else {
+                    loginStatusCode = "PASSWORD_INVALID";
                 }
-            }
-
-            String inputPassword = form.getPassword();
-            String encryptedPassword = CryptoUtils.encryptAES256(inputPassword, inputPassword.hashCode() + "");
-
-            if (encryptedPassword.equals(loginMember.getPassword())) { // 로그인 성공
-                isSuccess = true;
-            } else {
-                model.addAttribute("loginResult", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
             }
         }
 
-        // 로그인 이력 기록
-        MemberLoginHistory loginHistory = new MemberLoginHistory();
-        loginHistory.setLoginMemberId(loginMember.getMemberId());
-        loginHistory.setLoginIP(ClientUtils.getRemoteIP(request));
-        loginHistory.setLoginYN(isSuccess ? "Y" : "N");
-        memberService.insertLoginHistory(loginHistory);
+        // ================================================
+        // loginStatusCode에 따른 분기처리
+        // ================================================
 
-        if (isSuccess) { // 로그인 성공
-            sessionMember.setMember(loginMember);
+        boolean isIDInvalid = false;
+        boolean isLoginLocked = false;
+        switch (loginStatusCode) {
+            case "ID_INVALID":
+                isIDInvalid = true;
+                model.addAttribute("loginResult", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+                break;
+            case "ACCOUNT_LOGIN_LOCKED":
+                isLoginLocked = true;
+                model.addAttribute("loginResult", "현재 비밀번호 5회 연속 오류로 인해 회원님의 계정이 잠금상태입니다. 5분 후에 다시 시도해주세요.");
+                break;
+            case "PASSWORD_INVALID":
+                model.addAttribute("loginResult", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+                break;
+            case "LOGIN_SUCCESS":
+                isSuccess = true;
+                sessionMember.setMember(loginMember);   // 세션 값 설정
+
+                MemberLoginLock loginLock = new MemberLoginLock();
+                loginLock.setLoginLockMemberId(loginMember.getMemberId());
+                loginLock.setLoginLockTime("20000101010101");
+                memberService.updateLoginLockTime(loginLock);   // 락 해제
+                break;
+        }
+
+        // 로그인 이력 기록
+        if (!isIDInvalid) {
+            MemberLoginHistory loginHistory = new MemberLoginHistory();
+            loginHistory.setLoginMemberId(loginMember.getMemberId());
+            loginHistory.setLoginIP(ClientUtils.getRemoteIP(request));
+            loginHistory.setLoginYN(isSuccess ? "Y" : "N");
+            memberService.insertLoginHistory(loginHistory);
+        }
+
+        // 잠금상태가 아니면, 로그인 연속 실패횟수 체크
+        if (!isLoginLocked) {
+            List<MemberLoginHistory> loginHistories = memberService.getRecentLoginHistoryList(loginMember.getMemberId());
+
+            int failCount = 0;
+            for (MemberLoginHistory history : loginHistories) {
+                String loginYN = history.getLoginYN();
+                if ("N".equals(loginYN)) failCount++;
+            }
+
+            if (failCount == 5) { // 5회 연속 실패했으면, 계정 잠금
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                MemberLoginLock loginLock = new MemberLoginLock();
+                loginLock.setLoginLockMemberId(loginMember.getMemberId());
+                loginLock.setLoginLockTime(sdf.format(new Date()));
+                memberService.updateLoginLockTime(loginLock);
+            }
         }
 
         return isSuccess ? "redirect:/" : "/member/loginForm";

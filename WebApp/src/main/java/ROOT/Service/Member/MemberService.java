@@ -5,6 +5,7 @@ import ROOT.VO.Member.MemberLoginHistory;
 import ROOT.VO.Member.MemberLoginLock;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface MemberService {
 
@@ -49,15 +50,29 @@ public interface MemberService {
     void changePassword(Member member);
 
     /**
+     * 회원가입 시, 로그인 잠금시간 추가 및 초기화
+     */
+    void insertLoginLockTime(MemberLoginLock loginLock);
+
+    /**
      * 회원 계정 로그인 잠금시간 확인
      */
     MemberLoginLock checkLoginLockTime(String memberId);
+
+    /**
+     * 로그인 잠금시간 업데이트
+     */
+    void updateLoginLockTime(MemberLoginLock loginLock);
 
     /**
      * 로그인 이력 기록
      */
     void insertLoginHistory(MemberLoginHistory loginHistory);
 
+    /**
+     * 최근 5회 로그인 이력 가져오기
+     */
+    List<MemberLoginHistory> getRecentLoginHistoryList(String memberId);
 
 //    /**
 //     * 비밀번호 변경
