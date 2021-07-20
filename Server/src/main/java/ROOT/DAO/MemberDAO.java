@@ -2,6 +2,8 @@ package ROOT.DAO;
 
 import ROOT.RowMapper.Chabak.ChabakRowMapper;
 import ROOT.RowMapper.Chabak.ReviewRowMapper;
+import ROOT.RowMapper.Member.MemberLoginHistoryRowMapper;
+import ROOT.RowMapper.Member.MemberLoginLockRowMapper;
 import ROOT.RowMapper.Member.MemberRowMapper;
 import ROOT.Util.crypto.CryptoUtil;
 import ROOT.VO.Chabak.Chabak;
@@ -112,12 +114,28 @@ public class MemberDAO {
     }
 
     /**
+     * 회원가입 시, 로그인 잠금시간 추가 및 초기화
+     */
+    public void insertLoginLockTime(MemberLoginLock loginLock) {
+        String sql = "INSERT INTO MEM_LOGIN_LOCK(MEM_LOGIN_LOCK_MEM_ID, MEM_LOGIN_LOCK_TIME) VALUES (?, ?)";
+        jdbcTemplate.update(sql, loginLock.getLoginLockMemberId(), loginLock.getLoginLockTime());
+    }
+
+    /**
      * 회원 계정 로그인 잠금시간 확인
      */
     public MemberLoginLock checkLoginLockTime(String memberId) {
         String sql = "SELECT * FROM MEM_LOGIN_LOCK WHERE MEM_LOGIN_LOCK_MEM_ID = ?";
-        List<MemberLoginLock> list = jdbcTemplate.queryForList(sql, MemberLoginLock.class, memberId);
+        List<MemberLoginLock> list = jdbcTemplate.query(sql, new MemberLoginLockRowMapper(), memberId);
         return list.size() == 0 ? null : list.get(0);
+    }
+
+    /**
+     * 로그인 잠금시간 업데이트
+     */
+    public void updateLoginLockTime(MemberLoginLock loginLock) {
+        String sql = "UPDATE MEM_LOGIN_LOCK SET MEM_LOGIN_LOCK_TIME = ? WHERE MEM_LOGIN_LOCK_MEM_ID = ?";
+        jdbcTemplate.update(sql, loginLock.getLoginLockTime(), loginLock.getLoginLockMemberId());
     }
 
     /**
@@ -126,6 +144,14 @@ public class MemberDAO {
     public void insertLoginHistory(MemberLoginHistory loginHistory) {
         String sql = "INSERT INTO MEM_LOGIN_HISTORY(MEM_LOGIN_MEM_ID, MEM_LOGIN_IP, MEM_LOGIN_YN) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, loginHistory.getLoginMemberId(), loginHistory.getLoginIP(), loginHistory.getLoginYN());
+    }
+
+    /**
+     * 최근 5회 로그인 이력 가져오기
+     */
+    public List<MemberLoginHistory> getRecentLoginHistoryList(String memberId) {
+        String sql = "SELECT * FROM MEM_LOGIN_HISTORY WHERE MEM_LOGIN_MEM_ID = ? ORDER BY MEM_LOGIN_DT DESC LIMIT 5";
+        return jdbcTemplate.query(sql, new MemberLoginHistoryRowMapper(), memberId);
     }
 
     /**

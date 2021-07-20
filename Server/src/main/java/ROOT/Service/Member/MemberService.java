@@ -59,20 +59,38 @@ public interface MemberService {
     /**
      * 비밀번호 변경
      */
-    @PutMapping( "/password")
+    @PutMapping("/password")
     int changePassword(@RequestBody Member member);
+
+    /**
+     * 회원가입 시, 로그인 잠금시간 추가 및 초기화
+     */
+    @PostMapping("/login/lockTime")
+    void insertLoginLockTime(@RequestBody MemberLoginLock loginLock);
 
     /**
      * 회원 계정 로그인 잠금시간 확인
      */
-    @RequestMapping("/login/lockTime/{memberId}")
+    @GetMapping("/login/lockTime/{memberId}")
     MemberLoginLock checkLoginLockTime(@PathVariable String memberId);
+
+    /**
+     * 로그인 잠금시간 업데이트
+     */
+    @PutMapping("/login/lockTime")
+    void updateLoginLockTime(@RequestBody MemberLoginLock loginLock);
 
     /**
      * 로그인 이력 기록
      */
-    @RequestMapping("/login/history")
+    @PostMapping("/login/history")
     void insertLoginHistory(@RequestBody MemberLoginHistory loginHistory);
+
+    /**
+     * 최근 5회 로그인 이력 가져오기
+     */
+    @GetMapping("/login/history/{memberId}")
+    List<MemberLoginHistory> getRecentLoginHistoryList(@PathVariable String memberId);
 
     /**
      * 닉네임 변경

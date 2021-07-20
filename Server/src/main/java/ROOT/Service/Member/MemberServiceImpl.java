@@ -8,10 +8,7 @@ import ROOT.VO.Member.MemberLoginHistory;
 import ROOT.VO.Member.MemberLoginLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -88,6 +85,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
+     * 회원가입 시, 로그인 잠금시간 추가 및 초기화
+     */
+    @Override
+    public void insertLoginLockTime(MemberLoginLock loginLock) {
+        memberDAO.insertLoginLockTime(loginLock);
+    }
+
+    /**
      * 회원 계정 로그인 잠금시간 확인
      */
     @Override
@@ -96,11 +101,27 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
+     * 로그인 잠금시간 업데이트
+     */
+    @Override
+    public void updateLoginLockTime(MemberLoginLock loginLock) {
+        memberDAO.updateLoginLockTime(loginLock);
+    }
+
+    /**
      * 로그인 이력 기록
      */
     @Override
-    public void insertLoginHistory(@RequestBody MemberLoginHistory loginHistory) {
+    public void insertLoginHistory(MemberLoginHistory loginHistory) {
         memberDAO.insertLoginHistory(loginHistory);
+    }
+
+    /**
+     * 최근 5회 로그인 이력 가져오기
+     */
+    @Override
+    public List<MemberLoginHistory> getRecentLoginHistoryList(String memberId) {
+        return memberDAO.getRecentLoginHistoryList(memberId);
     }
 
     /**
