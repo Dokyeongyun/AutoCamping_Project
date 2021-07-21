@@ -16,9 +16,9 @@
         </div>
         <div class="cbj_detail_top_lower">
             <div class="cbj_detail_menu_img_region" style="float: right">
-                <img src="/static/img/star_icon.PNG" class="circle_img star_icon_region" id="star_icon" onclick="changeStarIcon();">
-                <img src="/static/img/share_icon.PNG" class="circle_img">
-                <img src="/static/img/link_icon.PNG" class="circle_img">
+                <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="circle_img star_icon_region" id="star_icon" onclick="changeStarIcon();">
+                <img src="${pageContext.request.contextPath}/static/img/share_icon.PNG" class="circle_img">
+                <img src="${pageContext.request.contextPath}/static/img/link_icon.PNG" class="circle_img">
             </div>
         </div>
     </div>
@@ -201,49 +201,54 @@
 </body>
 <jsp:include page="../footer.jsp"/>
 <script>
-    var starImgSrc = '/static/img/star_icon.PNG';
-    var starFillImgSrc = '/static/img/star_fill_icon.PNG';
+    const starImgSrc = '/static/img/star_icon.PNG';
+    const starFillImgSrc = '/static/img/star_fill_icon.PNG';
+    let dibsStatus = ${isJjimPlace};
 
-    if(${isJjimPlace != "0"}){
+    if(dibsStatus){
         $("#star_icon").attr("src", starFillImgSrc);
         $(".star_icon_region").css("backgroundColor", '#e6e8a9');
     }
 
     function changeStarIcon() {
-        var src = jQuery('#star_icon').attr("src");
+        let src = jQuery('#star_icon').attr("src");
         if(src === starImgSrc){
-            if(jjim() === "success"){
+            if(dibs()){
                 $("#star_icon").attr("src", starFillImgSrc);
                 $(".star_icon_region").css("backgroundColor", '#e6e8a9');
             }
         }else{
-            if(unjjim() === "success"){
+            if(!unDibs()){
                 $("#star_icon").attr("src", starImgSrc);
                 $(".star_icon_region").css("backgroundColor", '#fff');
             }
         }
     }
+
     function isLoginMember(){
-        if(${sessionScope.get("id") == null}){
+        let memberId = '${sessionMember.memberId}';
+        if(memberId === ''){
             alert('로그인 후 이용해주세요.');
-            location.href='/member/login';
+            location.href='/member/loginForm';
             return false;
         }
         return true;
     }
-    function jjim() {
-        var result = '';
+
+    function dibs() {
         if(!isLoginMember()) {return false;}
-        var jjim = {
-            id : '${sessionScope.get("id")}',
-            placeName : '${chabakDetail.placeName}',
-            placeId : '${chabakDetail.placeId}'
+
+        let result = '';
+        let dibs = {
+            memberId : '${sessionMember.memberId}',
+            placeId : ${chabakDetail.placeId}
         };
 
         $.ajax({
-            url : "/member/jjim.do",
-            data : jjim,
+            url : "/member/chabak/dibs",
+            data : JSON.stringify(dibs),
             type : "post",
+            contentType : "application/json; charset=UTF-8",
             dataType : "json",
             async : false,
             success : function(resp) {result = resp;},
@@ -251,18 +256,20 @@
         });
         return result;
     }
-    function unjjim() {
-        var result = '';
+
+    function unDibs() {
+        let result = '';
         if(!isLoginMember()) {return false;}
-        var jjim = {
-            id : '${sessionScope.get("id")}',
-            placeName : '${chabakDetail.placeName}',
-            placeId : '${chabakDetail.placeId}'
+        let dibs = {
+            memberId : '${sessionMember.memberId}',
+            placeId : ${chabakDetail.placeId}
         };
+
         $.ajax({
-            url : "/member/jjim.undo",
-            data : jjim,
+            url : "/member/chabak/unDibs",
+            data : JSON.stringify(dibs),
             type : "post",
+            contentType : "application/json; charset=UTF-8",
             dataType : "json",
             async : false,
             success : function(resp) {result = resp;},

@@ -1,18 +1,18 @@
 package ROOT.Controller.Chabak;
 
 import ROOT.Service.Chabak.ChabakService;
+import ROOT.Service.Member.MemberService;
 import ROOT.VO.Chabak.BestAndCount;
 import ROOT.VO.Chabak.Chabak;
+import ROOT.VO.Chabak.ChabakDibs;
 import ROOT.VO.Chabak.Review;
 import ROOT.VO.Facility.Fishing;
 import ROOT.VO.Facility.Toilet;
+import ROOT.VO.Member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -23,6 +23,9 @@ public class ChabakController {
 
     @Autowired
     ChabakService chabakService;
+
+    @Autowired
+    MemberService memberService;
 
     /**
      * 차박지 탭 메인화면
@@ -58,9 +61,14 @@ public class ChabakController {
         List<Fishing> fishingList = chabakService.getFishings(placeId);
         List<Review> reviewList = chabakService.getReviews(placeId);
 
-        String isJjimPlace = "0";
-        if (session.getAttribute("id") != null) {
-//            isJjimPlace = memberDAO.isJJim((String) session.getAttribute("id"), String.valueOf(placeId));
+        Boolean isJjimPlace = false;
+        Member sessionMember = (Member) session.getAttribute("sessionMember");
+
+        if (sessionMember != null) {
+            ChabakDibs chabakDibs = new ChabakDibs();
+            chabakDibs.setMemberId(sessionMember.getMemberId());
+            chabakDibs.setPlaceId(placeId);
+            isJjimPlace = memberService.getChabakDibsStatus(chabakDibs);
         }
         model.addAttribute("chabakDetail", chabakDetail);
         model.addAttribute("toiletList", toiletList);

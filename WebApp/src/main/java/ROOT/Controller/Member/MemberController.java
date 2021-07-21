@@ -3,6 +3,7 @@ package ROOT.Controller.Member;
 import ROOT.Service.Member.MemberService;
 import ROOT.Service.Utils.MailService;
 import ROOT.Utils.CryptoUtils;
+import ROOT.VO.Chabak.ChabakDibs;
 import ROOT.VO.Form.JoinForm;
 import ROOT.VO.Form.LoginForm;
 import ROOT.VO.Member.Member;
@@ -315,5 +316,30 @@ public class MemberController {
     public String logout(SessionStatus status) {
         status.setComplete();
         return "redirect:/";
+    }
+
+
+    //=================================================================//
+    //                           차박지 관련                             //
+    //=================================================================//
+
+    /**
+     * 차박지 찜 AJAX
+     */
+    @ResponseBody
+    @PostMapping("/chabak/dibs")
+    public boolean chabakDibsAjax(@RequestBody ChabakDibs dibs){
+        memberService.dibsChabak(dibs);
+        return memberService.getChabakDibsStatus(dibs);
+    }
+
+    /**
+     * 차박지 찜 취소 AJAX
+     */
+    @ResponseBody
+    @PostMapping("/chabak/unDibs")
+    public boolean chabakUnDibsAjax(@RequestBody ChabakDibs dibs){
+        memberService.unDibsChabak(dibs);
+        return memberService.getChabakDibsStatus(dibs);
     }
 }

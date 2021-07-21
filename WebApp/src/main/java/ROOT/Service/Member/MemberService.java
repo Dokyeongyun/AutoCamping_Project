@@ -1,5 +1,6 @@
 package ROOT.Service.Member;
 
+import ROOT.VO.Chabak.ChabakDibs;
 import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
 import ROOT.VO.Member.MemberLoginLock;
@@ -74,10 +75,21 @@ public interface MemberService {
      */
     List<MemberLoginHistory> getRecentLoginHistoryList(String memberId);
 
-//    /**
-//     * 비밀번호 변경
-//     */
-//    int changePassword(String memberId, String password);
+    /**
+     * 차박지 찜 상태 가져오기
+     */
+    Boolean getChabakDibsStatus(ChabakDibs dibs);
+
+    /**
+     * 차박지 찜
+     */
+    void dibsChabak(ChabakDibs dibs);
+
+    /**
+     * 차박지 찜 취소
+     */
+    void unDibsChabak(ChabakDibs dibs);
+
 //
 //    /**
 //     * 닉네임 변경
@@ -93,16 +105,6 @@ public interface MemberService {
 //     * 사용자의 차박지 찜 리스트 가져오기
 //     */
 //    List<Chabak> getJJimList(String id);
-//
-//    /**
-//     * 차박지 찜
-//     */
-//    String jjimDo(String id, String placeName, int placeId);
-//
-//    /**
-//     * 차박지 찜 취소
-//     */
-//    String jjimUndo(String id, String placeName, int placeId);
 //
 //    /**
 //     * 사용자의 특정 차박지 찜, 평가 여부 가져오기
