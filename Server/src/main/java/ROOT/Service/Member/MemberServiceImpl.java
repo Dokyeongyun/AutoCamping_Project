@@ -2,6 +2,7 @@ package ROOT.Service.Member;
 
 import ROOT.DAO.MemberDAO;
 import ROOT.VO.Chabak.Chabak;
+import ROOT.VO.Chabak.ChabakDibs;
 import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
@@ -122,6 +123,30 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<MemberLoginHistory> getRecentLoginHistoryList(String memberId) {
         return memberDAO.getRecentLoginHistoryList(memberId);
+    }
+
+    /**
+     * 차박지 찜 상태 가져오기
+     */
+    @Override
+    public Boolean getChabakDibsStatus(String memberId, int placeId){
+        return memberDAO.getChabakDibsStatus(memberId, placeId);
+    }
+
+    /**
+     * 차박지 찜
+     */
+    @Override
+    public void dibsChabak(ChabakDibs dibs){
+        memberDAO.dibsChabak(dibs);
+    }
+
+    /**
+     * 차박지 찜 취소
+     */
+    @Override
+    public void unDibsChabak(ChabakDibs dibs){
+        memberDAO.unDibsChabak(dibs);
     }
 
     /**

@@ -7,6 +7,7 @@ import ROOT.RowMapper.Member.MemberLoginLockRowMapper;
 import ROOT.RowMapper.Member.MemberRowMapper;
 import ROOT.Util.crypto.CryptoUtil;
 import ROOT.VO.Chabak.Chabak;
+import ROOT.VO.Chabak.ChabakDibs;
 import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
@@ -152,6 +153,31 @@ public class MemberDAO {
     public List<MemberLoginHistory> getRecentLoginHistoryList(String memberId) {
         String sql = "SELECT * FROM MEM_LOGIN_HISTORY WHERE MEM_LOGIN_MEM_ID = ? ORDER BY MEM_LOGIN_DT DESC LIMIT 5";
         return jdbcTemplate.query(sql, new MemberLoginHistoryRowMapper(), memberId);
+    }
+
+    /**
+     * 차박지 찜 상태 가져오기
+     */
+    public Boolean getChabakDibsStatus(String memberId, int placeId) {
+        String sql = "SELECT COUNT(*) FROM CB_JJIM_LIST WHERE memberId = ? AND placeId = ?";
+        Integer size = jdbcTemplate.queryForObject(sql, Integer.class, memberId, placeId);
+        return size != null && size != 0;
+    }
+
+    /**
+     * 차박지 찜
+     */
+    public void dibsChabak(ChabakDibs dibs){
+        String sql = "INSERT INTO CB_JJIM_LIST(memberId, placeId) VALUES(?, ?)";
+        jdbcTemplate.update(sql, dibs.getMemberId(), dibs.getPlaceId());
+    }
+
+    /**
+     * 차박지 찜 취소
+     */
+    public void unDibsChabak(ChabakDibs dibs){
+        String sql = "DELETE FROM CB_JJIM_LIST WHERE memberId = ? AND placeId = ?";
+        jdbcTemplate.update(sql, dibs.getMemberId(), dibs.getPlaceId());
     }
 
     /**

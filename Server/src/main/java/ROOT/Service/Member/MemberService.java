@@ -1,6 +1,7 @@
 package ROOT.Service.Member;
 
 import ROOT.VO.Chabak.Chabak;
+import ROOT.VO.Chabak.ChabakDibs;
 import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
@@ -91,6 +92,24 @@ public interface MemberService {
      */
     @GetMapping("/login/history/{memberId}")
     List<MemberLoginHistory> getRecentLoginHistoryList(@PathVariable String memberId);
+
+    /**
+     * 차박지 찜 상태 가져오기
+     */
+    @GetMapping("/chabak/dibs/{memberId}/{placeId}")
+    Boolean getChabakDibsStatus(@PathVariable String memberId, @PathVariable int placeId);
+
+    /**
+     * 차박지 찜
+     */
+    @PostMapping("/chabak/dibs")
+    void dibsChabak(@RequestBody ChabakDibs dibs);
+
+    /**
+     * 차박지 찜
+     */
+    @PostMapping("/chabak/unDibs")
+    void unDibsChabak(@RequestBody ChabakDibs dibs);
 
     /**
      * 닉네임 변경

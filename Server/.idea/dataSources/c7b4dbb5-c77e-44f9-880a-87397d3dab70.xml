@@ -1286,7 +1286,6 @@ articleId</ColNames>
     <column id="378" parent="307" name="placeName">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <index id="379" parent="307" name="cb_jjim_list_ibfk_3_idx">
       <ColNames>memberId</ColNames>
