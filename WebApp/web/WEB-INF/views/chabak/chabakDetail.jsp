@@ -472,27 +472,33 @@
             return false;
         }
 
-        if(${sessionScope.get("id") == null}){
+        let memberId = '${sessionMember.memberId}';
+        let nickName = '${sessionMember.nickName}';
+
+        if(memberId === ''){
             alert('로그인 후 이용해주세요.');
-            location.href='/member/login';
+            location.href='/member/loginForm';
         }
 
-        var review = {
-            memberId : '${sessionScope.get("id")}',
+        let review = {
+            memberId : memberId,
+            nickName : nickName,
             placeId : ${chabakDetail.placeId},
             placeName : '${chabakDetail.placeName}',
-            eval : $("#evalPoint").val(),
-            review : $("#reviewContent").val()
+            evaluation_point : $("#evalPoint").val(),
+            review_content : $("#reviewContent").val()
         };
 
         $.ajax({
-            url : "/chabak/eval.do",
-            data : review,
+            url : "/member/chabak/review",
+            data : JSON.stringify(review),
             type : "post",
+            contentType : "application/json; charset=UTF-8",
             dataType : "json",
             async : true,
             success : function(resp) {
-                if(resp != "1"){
+                console.log(resp);
+                if(resp > 0){
                     alert("리뷰가 성공적으로 작성되었습니다.");
                     window.location.reload();
                 }else{

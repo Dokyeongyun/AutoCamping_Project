@@ -4,6 +4,7 @@ import ROOT.Service.Member.MemberService;
 import ROOT.Service.Utils.MailService;
 import ROOT.Utils.CryptoUtils;
 import ROOT.VO.Chabak.ChabakDibs;
+import ROOT.VO.Chabak.Review;
 import ROOT.VO.Form.JoinForm;
 import ROOT.VO.Form.LoginForm;
 import ROOT.VO.Member.Member;
@@ -341,5 +342,14 @@ public class MemberController {
     public boolean chabakUnDibsAjax(@RequestBody ChabakDibs dibs){
         memberService.unDibsChabak(dibs);
         return memberService.getChabakDibsStatus(dibs);
+    }
+
+    /**
+     * 차박지 리뷰
+     */
+    @ResponseBody
+    @PostMapping("/chabak/review")
+    public int writeChabakReview(@RequestBody Review review){
+        return memberService.writeChabakReview(review);
     }
 }

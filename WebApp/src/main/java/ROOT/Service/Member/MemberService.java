@@ -1,6 +1,7 @@
 package ROOT.Service.Member;
 
 import ROOT.VO.Chabak.ChabakDibs;
+import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
 import ROOT.VO.Member.MemberLoginLock;
@@ -89,6 +90,11 @@ public interface MemberService {
      * 차박지 찜 취소
      */
     void unDibsChabak(ChabakDibs dibs);
+
+    /**
+     * 차박지 리뷰 작성
+     */
+    Integer writeChabakReview(Review review);
 
 //
 //    /**

@@ -3,6 +3,7 @@ package ROOT.Service.Member;
 import ROOT.Utils.APIServerInfo;
 import ROOT.Utils.CryptoUtils;
 import ROOT.VO.Chabak.ChabakDibs;
+import ROOT.VO.Chabak.Review;
 import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
 import ROOT.VO.Member.MemberLoginLock;
@@ -154,7 +155,7 @@ public class MemberServiceImpl implements MemberService {
      * 차박지 찜
      */
     @Override
-    public void dibsChabak(ChabakDibs dibs){
+    public void dibsChabak(ChabakDibs dibs) {
         restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/chabak/dibs", dibs, Void.class);
     }
 
@@ -162,8 +163,16 @@ public class MemberServiceImpl implements MemberService {
      * 차박지 찜 취소
      */
     @Override
-    public void unDibsChabak(ChabakDibs dibs){
+    public void unDibsChabak(ChabakDibs dibs) {
         restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/chabak/unDibs", dibs, Void.class);
+    }
+
+    /**
+     * 차박지 리뷰 작성
+     */
+    @Override
+    public Integer writeChabakReview(Review review) {
+        return restOperations.postForObject(APIServerInfo.API_SERVER_CONTEXT + "/member/chabak/review", review, Integer.class);
     }
 
 /**
