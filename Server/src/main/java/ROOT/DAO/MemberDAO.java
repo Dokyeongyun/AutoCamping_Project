@@ -167,7 +167,7 @@ public class MemberDAO {
     /**
      * 차박지 찜
      */
-    public void dibsChabak(ChabakDibs dibs){
+    public void dibsChabak(ChabakDibs dibs) {
         String sql = "INSERT INTO CB_JJIM_LIST(memberId, placeId) VALUES(?, ?)";
         jdbcTemplate.update(sql, dibs.getMemberId(), dibs.getPlaceId());
     }
@@ -175,9 +175,31 @@ public class MemberDAO {
     /**
      * 차박지 찜 취소
      */
-    public void unDibsChabak(ChabakDibs dibs){
+    public void unDibsChabak(ChabakDibs dibs) {
         String sql = "DELETE FROM CB_JJIM_LIST WHERE memberId = ? AND placeId = ?";
         jdbcTemplate.update(sql, dibs.getMemberId(), dibs.getPlaceId());
+    }
+
+    /**
+     * 차박지 리뷰 작성
+     */
+    public int writeChabakReview(Review review) {
+        System.out.println(review);
+        String sql =
+                "INSERT INTO user_evaluation " +
+                "   SET memberId = ? " +
+                "     , placeId = ? " +
+                "     , placeName = ? " +
+                "     , evaluation_point = ? " +
+                "     , review_content = ? " +
+                "   ON DUPLICATE KEY UPDATE " +
+                "       memberId = ? " +
+                "     , placeId = ? " +
+                "     , placeName = ? " +
+                "     , evaluation_point = ? " +
+                "     , review_content = ? ";
+        return jdbcTemplate.update(sql, review.getMemberId(), review.getPlaceId(), review.getPlaceName(), review.getEvaluation_point(), review.getReview_content(),
+                review.getMemberId(), review.getPlaceId(), review.getPlaceName(), review.getEvaluation_point(), review.getReview_content());
     }
 
     /**

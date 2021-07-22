@@ -112,6 +112,12 @@ public interface MemberService {
     void unDibsChabak(@RequestBody ChabakDibs dibs);
 
     /**
+     * 차박지 리뷰 작성
+     */
+    @PostMapping("/chabak/review")
+    int writeChabakReview(@RequestBody Review review);
+
+    /**
      * 닉네임 변경
      */
     @RequestMapping(value = "/changeNickname.do")

@@ -129,7 +129,7 @@ public class MemberServiceImpl implements MemberService {
      * 차박지 찜 상태 가져오기
      */
     @Override
-    public Boolean getChabakDibsStatus(String memberId, int placeId){
+    public Boolean getChabakDibsStatus(String memberId, int placeId) {
         return memberDAO.getChabakDibsStatus(memberId, placeId);
     }
 
@@ -137,7 +137,7 @@ public class MemberServiceImpl implements MemberService {
      * 차박지 찜
      */
     @Override
-    public void dibsChabak(ChabakDibs dibs){
+    public void dibsChabak(ChabakDibs dibs) {
         memberDAO.dibsChabak(dibs);
     }
 
@@ -145,8 +145,16 @@ public class MemberServiceImpl implements MemberService {
      * 차박지 찜 취소
      */
     @Override
-    public void unDibsChabak(ChabakDibs dibs){
+    public void unDibsChabak(ChabakDibs dibs) {
         memberDAO.unDibsChabak(dibs);
+    }
+
+    /**
+     * 차박지 리뷰 작성
+     */
+    @Override
+    public int writeChabakReview(Review review) {
+        return memberDAO.writeChabakReview(review);
     }
 
     /**
