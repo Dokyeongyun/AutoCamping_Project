@@ -10,12 +10,13 @@ public class ReviewRowMapper implements RowMapper<Review> {
     @Override
     public Review mapRow(ResultSet rs, int i) throws SQLException {
         Review review = new Review();
-        review.setPlaceId(rs.getInt("placeId"));
-        review.setMemberId(rs.getString("memberId"));
-        review.setNickName(rs.getString("nickName"));
-        review.setReview_content(rs.getString("review_content"));
-        review.setEvaluation_point(rs.getDouble("evaluation_point"));
-        review.setEval_time(rs.getString("eval_time"));
+        review.setPlaceId(rs.getInt("CB_REVIEW_PLC_ID"));
+        review.setPlaceName(rs.getString("CB_REVIEW_PLC_NM"));
+        review.setMemberId(rs.getString("CB_REVIEW_MEM_ID"));
+        review.setMemberNickname(rs.getString("CB_REVIEW_MEM_NICK"));
+        review.setReviewContent(rs.getString("CB_REVIEW_CONTENT"));
+        review.setEvalPoint(rs.getDouble("CB_REVIEW_EVAL_PNT"));
+        review.setEvalDate(rs.getString("CB_REVIEW_EVAL_DT"));
         return review;
     }
 }

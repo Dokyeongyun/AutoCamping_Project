@@ -50,14 +50,6 @@ public class ChabakServiceImpl implements ChabakService {
     public List<Fishing> getFishings(int placeId) { return chabakDAO.getFishings(placeId); }
 
     /**
-     * 차박지 평가 및 리뷰 작성
-     */
-    @Override
-    public int userEval(String memberId, int placeId, String placeName, double eval, String review) {
-        return chabakDAO.userEval(memberId, placeId, placeName, eval, review);
-    }
-
-    /**
      * 사용자가 설정한 조건에 따른 차박지 필터링
      */
     @Override

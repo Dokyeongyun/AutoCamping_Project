@@ -976,30 +976,30 @@ SELECT|sys.sys_config
     <table id="306" parent="3" name="cb_fishing"/>
     <table id="307" parent="3" name="cb_jjim_list"/>
     <table id="308" parent="3" name="cb_member"/>
-    <table id="309" parent="3" name="cb_toilet"/>
-    <table id="310" parent="3" name="mail_auth"/>
-    <table id="311" parent="3" name="mem_login_history"/>
-    <table id="312" parent="3" name="mem_login_lock"/>
-    <table id="313" parent="3" name="province"/>
-    <table id="314" parent="3" name="relation_chabak_and_toilet"/>
-    <table id="315" parent="3" name="user"/>
-    <table id="316" parent="3" name="user_evaluation"/>
+    <table id="309" parent="3" name="cb_review"/>
+    <table id="310" parent="3" name="cb_toilet"/>
+    <table id="311" parent="3" name="mail_auth"/>
+    <table id="312" parent="3" name="mem_login_history"/>
+    <table id="313" parent="3" name="mem_login_lock"/>
+    <table id="314" parent="3" name="province"/>
+    <table id="315" parent="3" name="relation_chabak_and_toilet"/>
+    <table id="316" parent="3" name="user"/>
     <view id="317" parent="3" name="article_view">
       <Definer>dky@%</Definer>
     </view>
-    <view id="318" parent="3" name="chabak_info_view">
+    <view id="318" parent="3" name="cb_review_view">
       <Definer>dky@%</Definer>
     </view>
-    <view id="319" parent="3" name="chabak_utility_count">
+    <view id="319" parent="3" name="chabak_info_view">
       <Definer>dky@%</Definer>
     </view>
-    <view id="320" parent="3" name="cityprovince_bestandcount">
+    <view id="320" parent="3" name="chabak_utility_count">
       <Definer>dky@%</Definer>
     </view>
-    <view id="321" parent="3" name="comment_view">
+    <view id="321" parent="3" name="cityprovince_bestandcount">
       <Definer>dky@%</Definer>
     </view>
-    <view id="322" parent="3" name="review_view">
+    <view id="322" parent="3" name="comment_view">
       <Definer>dky@%</Definer>
     </view>
     <column id="323" parent="302" name="commentId">
@@ -1357,294 +1357,294 @@ articleId</ColNames>
 nickName</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="392" parent="309" name="toiletId">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="393" parent="309" name="address">
-      <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <column id="394" parent="309" name="open_time">
-      <Position>3</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <column id="395" parent="309" name="latitude">
-      <Position>4</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="396" parent="309" name="longitude">
-      <Position>5</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="397" parent="309" name="geom">
-      <Position>6</Position>
-      <DataType>geometry|0s</DataType>
-    </column>
-    <key id="398" parent="309" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>toiletId</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="399" parent="310" name="MAIL_AUTH_ID">
+    <column id="392" parent="309" name="CB_REVIEW_ID">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="400" parent="310" name="MAIL_AUTH_NUM">
-      <Position>2</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="401" parent="310" name="MAIL_AUTH_EMAIL">
-      <Position>3</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="402" parent="310" name="MAIL_AUTH_DATE">
-      <Position>4</Position>
-      <DataType>timestamp|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-    </column>
-    <key id="403" parent="310" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>MAIL_AUTH_ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="404" parent="311" name="MEM_LOGIN_HISTORY_IDX">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="405" parent="311" name="MEM_LOGIN_MEM_ID">
-      <Position>2</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="406" parent="311" name="MEM_LOGIN_DT">
-      <Position>3</Position>
-      <DataType>datetime|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-    </column>
-    <column id="407" parent="311" name="MEM_LOGIN_IP">
-      <Position>4</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="408" parent="311" name="MEM_LOGIN_YN">
-      <Position>5</Position>
-      <DataType>varchar(2)|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>&apos;N&apos;</DefaultExpression>
-    </column>
-    <index id="409" parent="311" name="MEM_LOGIN_MEM_ID_idx">
-      <ColNames>MEM_LOGIN_MEM_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="410" parent="311" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>MEM_LOGIN_HISTORY_IDX</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="411" parent="311" name="MEM_LOGIN_MEM_ID">
-      <ColNames>MEM_LOGIN_MEM_ID</ColNames>
-      <RefTableName>cb_member</RefTableName>
-      <RefColNames>memberId</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <column id="412" parent="312" name="MEM_LOGIN_LOCK_IDX">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="413" parent="312" name="MEM_LOGIN_LOCK_MEM_ID">
-      <Position>2</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="414" parent="312" name="MEM_LOGIN_LOCK_TIME">
-      <Position>3</Position>
-      <DataType>datetime|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-    </column>
-    <index id="415" parent="312" name="MEM_LOGIN_LOCK_MEM_ID_idx">
-      <ColNames>MEM_LOGIN_LOCK_MEM_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="416" parent="312" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>MEM_LOGIN_LOCK_IDX</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="417" parent="312" name="MEM_LOGIN_LOCK_MEM_ID">
-      <ColNames>MEM_LOGIN_LOCK_MEM_ID</ColNames>
-      <RefTableName>cb_member</RefTableName>
-      <RefColNames>memberId</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <column id="418" parent="313" name="regionName">
-      <Position>1</Position>
-      <DataType>varchar(45)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="419" parent="313" name="geom">
-      <Position>2</Position>
-      <DataType>geometry|0s</DataType>
-    </column>
-    <key id="420" parent="313" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>regionName</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="421" parent="314" name="placeId">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="422" parent="314" name="toiletId">
-      <Position>2</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <column id="423" parent="314" name="fishingspotId">
-      <Position>3</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <index id="424" parent="314" name="placeId">
-      <ColNames>placeId</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="425" parent="314" name="toiletId_idx">
-      <ColNames>toiletId</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="426" parent="314" name="fishingspot_id_idx">
-      <ColNames>fishingspotId</ColNames>
-      <Type>btree</Type>
-    </index>
-    <foreign-key id="427" parent="314" name="placeId">
-      <ColNames>placeId</ColNames>
-      <RefTableName>cb_chabak_location</RefTableName>
-      <RefColNames>placeId</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <foreign-key id="428" parent="314" name="toiletId">
-      <ColNames>toiletId</ColNames>
-      <RefTableName>cb_toilet</RefTableName>
-      <RefColNames>toiletId</RefColNames>
-    </foreign-key>
-    <foreign-key id="429" parent="314" name="fishingspotId">
-      <ColNames>fishingspotId</ColNames>
-      <RefTableName>cb_fishing</RefTableName>
-      <RefColNames>fishingspotId</RefColNames>
-    </foreign-key>
-    <column id="430" parent="315" name="userID">
-      <Position>1</Position>
-      <DataType>varchar(32)|0s</DataType>
-    </column>
-    <column id="431" parent="315" name="userPassword">
-      <Position>2</Position>
-      <DataType>varchar(32)|0s</DataType>
-    </column>
-    <column id="432" parent="316" name="eval_id">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="433" parent="316" name="memberId">
+    <column id="393" parent="309" name="CB_REVIEW_MEM_ID">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="434" parent="316" name="placeId">
+    <column id="394" parent="309" name="CB_REVIEW_PLC_ID">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="435" parent="316" name="placeName">
+    <column id="395" parent="309" name="CB_REVIEW_PLC_NM">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="436" parent="316" name="evaluation_point">
+    <column id="396" parent="309" name="CB_REVIEW_EVAL_PNT">
       <Position>5</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="437" parent="316" name="eval_time">
+    <column id="397" parent="309" name="CB_REVIEW_EVAL_DT">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <column id="438" parent="316" name="review_content">
+    <column id="398" parent="309" name="CB_REVIEW_CONTENT">
       <Position>7</Position>
-      <DataType>varchar(100)|0s</DataType>
+      <DataType>varchar(300)|0s</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <index id="439" parent="316" name="unique_ix_point">
-      <ColNames>memberId
-placeId</ColNames>
+    <index id="399" parent="309" name="unique_ix_point">
+      <ColNames>CB_REVIEW_MEM_ID
+CB_REVIEW_PLC_ID</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="440" parent="316" name="memberId_idx">
-      <ColNames>memberId</ColNames>
+    <index id="400" parent="309" name="memberId_idx">
+      <ColNames>CB_REVIEW_MEM_ID</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="441" parent="316" name="placeId">
-      <ColNames>placeId</ColNames>
+    <index id="401" parent="309" name="placeId">
+      <ColNames>CB_REVIEW_PLC_ID</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="442" parent="316" name="PRIMARY">
+    <key id="402" parent="309" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>eval_id
-memberId
-placeId</ColNames>
+      <ColNames>CB_REVIEW_ID
+CB_REVIEW_MEM_ID
+CB_REVIEW_PLC_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="443" parent="316" name="unique_ix_point">
-      <ColNames>memberId
-placeId</ColNames>
+    <key id="403" parent="309" name="unique_ix_point">
+      <ColNames>CB_REVIEW_MEM_ID
+CB_REVIEW_PLC_ID</ColNames>
       <UnderlyingIndexName>unique_ix_point</UnderlyingIndexName>
     </key>
-    <foreign-key id="444" parent="316" name="user_evaluation_ibfk_2">
-      <ColNames>memberId</ColNames>
+    <foreign-key id="404" parent="309" name="cb_review_ibfk_2">
+      <ColNames>CB_REVIEW_MEM_ID</ColNames>
       <RefTableName>cb_member</RefTableName>
       <RefColNames>memberId</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="445" parent="316" name="user_evaluation_ibfk_1">
-      <ColNames>placeId</ColNames>
+    <foreign-key id="405" parent="309" name="cb_review_ibfk_1">
+      <ColNames>CB_REVIEW_PLC_ID</ColNames>
       <RefTableName>cb_chabak_location</RefTableName>
       <RefColNames>placeId</RefColNames>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <trigger id="446" parent="316" name="user_evaluation_trigger_insert">
+    <trigger id="406" parent="309" name="user_evaluation_trigger_insert">
       <SourceTextLength>213</SourceTextLength>
       <Definer>chabak@localhost</Definer>
       <Turn>after-row</Turn>
       <Events>I</Events>
     </trigger>
-    <trigger id="447" parent="316" name="user_evaluation_trigger_update">
+    <trigger id="407" parent="309" name="user_evaluation_trigger_update">
       <SourceTextLength>213</SourceTextLength>
       <Definer>chabak@localhost</Definer>
       <Turn>after-row</Turn>
       <Events>U</Events>
     </trigger>
+    <column id="408" parent="310" name="toiletId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="409" parent="310" name="address">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="410" parent="310" name="open_time">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="411" parent="310" name="latitude">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="412" parent="310" name="longitude">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="413" parent="310" name="geom">
+      <Position>6</Position>
+      <DataType>geometry|0s</DataType>
+    </column>
+    <key id="414" parent="310" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>toiletId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="415" parent="311" name="MAIL_AUTH_ID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="416" parent="311" name="MAIL_AUTH_NUM">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="417" parent="311" name="MAIL_AUTH_EMAIL">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="418" parent="311" name="MAIL_AUTH_DATE">
+      <Position>4</Position>
+      <DataType>timestamp|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <key id="419" parent="311" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>MAIL_AUTH_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="420" parent="312" name="MEM_LOGIN_HISTORY_IDX">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="421" parent="312" name="MEM_LOGIN_MEM_ID">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="422" parent="312" name="MEM_LOGIN_DT">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="423" parent="312" name="MEM_LOGIN_IP">
+      <Position>4</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="424" parent="312" name="MEM_LOGIN_YN">
+      <Position>5</Position>
+      <DataType>varchar(2)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;N&apos;</DefaultExpression>
+    </column>
+    <index id="425" parent="312" name="MEM_LOGIN_MEM_ID_idx">
+      <ColNames>MEM_LOGIN_MEM_ID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="426" parent="312" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>MEM_LOGIN_HISTORY_IDX</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="427" parent="312" name="MEM_LOGIN_MEM_ID">
+      <ColNames>MEM_LOGIN_MEM_ID</ColNames>
+      <RefTableName>cb_member</RefTableName>
+      <RefColNames>memberId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="428" parent="313" name="MEM_LOGIN_LOCK_IDX">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="429" parent="313" name="MEM_LOGIN_LOCK_MEM_ID">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="430" parent="313" name="MEM_LOGIN_LOCK_TIME">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="431" parent="313" name="MEM_LOGIN_LOCK_MEM_ID_idx">
+      <ColNames>MEM_LOGIN_LOCK_MEM_ID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="432" parent="313" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>MEM_LOGIN_LOCK_IDX</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="433" parent="313" name="MEM_LOGIN_LOCK_MEM_ID">
+      <ColNames>MEM_LOGIN_LOCK_MEM_ID</ColNames>
+      <RefTableName>cb_member</RefTableName>
+      <RefColNames>memberId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="434" parent="314" name="regionName">
+      <Position>1</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="435" parent="314" name="geom">
+      <Position>2</Position>
+      <DataType>geometry|0s</DataType>
+    </column>
+    <key id="436" parent="314" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>regionName</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="437" parent="315" name="placeId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="438" parent="315" name="toiletId">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="439" parent="315" name="fishingspotId">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="440" parent="315" name="placeId">
+      <ColNames>placeId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="441" parent="315" name="toiletId_idx">
+      <ColNames>toiletId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="442" parent="315" name="fishingspot_id_idx">
+      <ColNames>fishingspotId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="443" parent="315" name="placeId">
+      <ColNames>placeId</ColNames>
+      <RefTableName>cb_chabak_location</RefTableName>
+      <RefColNames>placeId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="444" parent="315" name="toiletId">
+      <ColNames>toiletId</ColNames>
+      <RefTableName>cb_toilet</RefTableName>
+      <RefColNames>toiletId</RefColNames>
+    </foreign-key>
+    <foreign-key id="445" parent="315" name="fishingspotId">
+      <ColNames>fishingspotId</ColNames>
+      <RefTableName>cb_fishing</RefTableName>
+      <RefColNames>fishingspotId</RefColNames>
+    </foreign-key>
+    <column id="446" parent="316" name="userID">
+      <Position>1</Position>
+      <DataType>varchar(32)|0s</DataType>
+    </column>
+    <column id="447" parent="316" name="userPassword">
+      <Position>2</Position>
+      <DataType>varchar(32)|0s</DataType>
+    </column>
     <column id="448" parent="317" name="articleId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
@@ -1679,101 +1679,106 @@ placeId</ColNames>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="455" parent="319" name="placeId">
+    <column id="455" parent="318" name="CB_REVIEW_PLC_ID">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="456" parent="319" name="toiletCount">
+    <column id="456" parent="318" name="CB_REVIEW_PLC_NM">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="457" parent="318" name="CB_REVIEW_MEM_ID">
+      <Position>3</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="458" parent="318" name="CB_REVIEW_MEM_NICK">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="459" parent="318" name="CB_REVIEW_CONTENT">
+      <Position>5</Position>
+      <DataType>varchar(300)|0s</DataType>
+    </column>
+    <column id="460" parent="318" name="CB_REVIEW_EVAL_PNT">
+      <Position>6</Position>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="461" parent="318" name="CB_REVIEW_EVAL_DT">
+      <Position>7</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="462" parent="320" name="placeId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="463" parent="320" name="toiletCount">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="457" parent="319" name="fishingCount">
+    <column id="464" parent="320" name="fishingCount">
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="458" parent="320" name="city_province">
+    <column id="465" parent="321" name="city_province">
       <Position>1</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="459" parent="320" name="placeName">
+    <column id="466" parent="321" name="placeName">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="460" parent="320" name="filepath">
+    <column id="467" parent="321" name="filepath">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="461" parent="320" name="count(*)">
+    <column id="468" parent="321" name="count(*)">
       <Position>4</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="462" parent="320" name="avg_point">
+    <column id="469" parent="321" name="avg_point">
       <Position>5</Position>
       <DataType>double(3,1 digit)|0s</DataType>
     </column>
-    <column id="463" parent="321" name="commentId">
+    <column id="470" parent="322" name="commentId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="464" parent="321" name="articleId">
+    <column id="471" parent="322" name="articleId">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="465" parent="321" name="memberId">
+    <column id="472" parent="322" name="memberId">
       <Position>3</Position>
       <DataType>varchar(35)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="466" parent="321" name="nickName">
+    <column id="473" parent="322" name="nickName">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="467" parent="321" name="content">
+    <column id="474" parent="322" name="content">
       <Position>5</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="468" parent="321" name="createTime">
+    <column id="475" parent="322" name="createTime">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
-    </column>
-    <column id="469" parent="322" name="placeId">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="470" parent="322" name="memberId">
-      <Position>2</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="471" parent="322" name="nickName">
-      <Position>3</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="472" parent="322" name="review_content">
-      <Position>4</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <column id="473" parent="322" name="evaluation_point">
-      <Position>5</Position>
-      <DataType>double|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="474" parent="322" name="eval_time">
-      <Position>6</Position>
-      <DataType>datetime|0s</DataType>
     </column>
   </database-model>
 </dataSource>

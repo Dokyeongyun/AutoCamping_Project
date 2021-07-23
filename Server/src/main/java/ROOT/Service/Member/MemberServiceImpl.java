@@ -197,16 +197,16 @@ public class MemberServiceImpl implements MemberService {
         return memberDAO.jjimUndo(id, placeId);
     }
 
-    /**
+/*    *//**
      * 사용자가 특정 차박지 평가 여부 확인
-     */
+     *//*
     @Override
     public String getJJimAndEvaluated(String memberId, String placeId) {
         String isJJim = memberDAO.isJJim(memberId, placeId);
         String isEvaluated = memberDAO.isEvaluated(memberId, placeId);
 
         return isJJim + " " + isEvaluated;
-    }
+    }*/
 
     /**
      * 사용자가 작성한 리뷰 가져오기

@@ -186,20 +186,20 @@ public class MemberDAO {
     public int writeChabakReview(Review review) {
         System.out.println(review);
         String sql =
-                "INSERT INTO user_evaluation " +
-                "   SET memberId = ? " +
-                "     , placeId = ? " +
-                "     , placeName = ? " +
-                "     , evaluation_point = ? " +
-                "     , review_content = ? " +
+                "INSERT INTO CB_REVIEW " +
+                "   SET CB_REVIEW_MEM_ID = ? " +
+                "     , CB_REVIEW_PLC_ID = ? " +
+                "     , CB_REVIEW_PLC_NM = ? " +
+                "     , CB_REVIEW_EVAL_PNT = ? " +
+                "     , CB_REVIEW_CONTENT = ? " +
                 "   ON DUPLICATE KEY UPDATE " +
-                "       memberId = ? " +
-                "     , placeId = ? " +
-                "     , placeName = ? " +
-                "     , evaluation_point = ? " +
-                "     , review_content = ? ";
-        return jdbcTemplate.update(sql, review.getMemberId(), review.getPlaceId(), review.getPlaceName(), review.getEvaluation_point(), review.getReview_content(),
-                review.getMemberId(), review.getPlaceId(), review.getPlaceName(), review.getEvaluation_point(), review.getReview_content());
+                "       CB_REVIEW_MEM_ID = ? " +
+                "     , CB_REVIEW_PLC_ID = ? " +
+                "     , CB_REVIEW_PLC_NM = ? " +
+                "     , CB_REVIEW_EVAL_PNT = ? " +
+                "     , CB_REVIEW_CONTENT = ? ";
+        return jdbcTemplate.update(sql, review.getMemberId(), review.getPlaceId(), review.getPlaceName(), review.getEvalPoint(), review.getReviewContent(),
+                review.getMemberId(), review.getPlaceId(), review.getPlaceName(), review.getEvalPoint(), review.getReviewContent());
     }
 
     /**
@@ -269,9 +269,9 @@ public class MemberDAO {
         }
     }
 
-    /**
+/*    *//**
      * 사용자가 특정 차박지 평가 여부 확인
-     */
+     *//*
     public String isEvaluated(String memberId, String placeId) {
         String sql = "SELECT evaluation_point FROM user_evaluation WHERE memberId = ? AND placeId = ?";
         List<String> result = jdbcTemplate.query(sql,
@@ -282,13 +282,13 @@ public class MemberDAO {
         } else {
             return "0";
         }
-    }
+    }*/
 
     /**
      * 사용자가 작성한 리뷰 가져오기
      */
     public List<Review> getUsersReview(String memberId) {
-        String sql = "SELECT * FROM review_view WHERE memberId = ?";
+        String sql = "SELECT * FROM CB_REVIEW_VIEW WHERE CB_REVIEW_MEM_ID = ?";
         return jdbcTemplate.query(sql, new ReviewRowMapper(), memberId);
     }
 }

@@ -67,15 +67,6 @@ public class ChabakDAO {
     }
 
     /**
-     * 차박지 평가 및 리뷰 작성
-     */
-    public int userEval(String memberId, int placeId, String placeName, double eval, String review) {
-        String sql = "INSERT INTO user_evaluation (memberId,placeId,placeName,evaluation_point,review_content)" +
-                " VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE evaluation_point = ?, review_content = ?";
-        return jdbcTemplate.update(sql, memberId, placeId, placeName, eval, review, eval, review);
-    }
-
-    /**
      * 사용자가 설정한 조건에 따른 차박지 필터링
      */
     public List<Chabak> getFilteredList(String[] regions, String[] facilities) {
@@ -141,7 +132,7 @@ public class ChabakDAO {
      * 차박지별 등록된 리뷰 읽기
      */
     public List<Review> getReviews(int placeId){
-        String sql = "SELECT * FROM review_view WHERE placeId = ?";
+        String sql = "SELECT * FROM CB_REVIEW_VIEW WHERE CB_REVIEW_PLC_ID = ?";
         return jdbcTemplate.query(sql, new ReviewRowMapper(), placeId);
     }
 

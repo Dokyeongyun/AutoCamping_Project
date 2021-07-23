@@ -150,8 +150,8 @@ public interface MemberService {
     /**
      * 사용자의 특정 차박지 찜, 평가 여부 가져오기
      */
-    @RequestMapping(value = "/getJJimAndEvaluated.do")
-    String getJJimAndEvaluated(String memberId, String placeId);
+/*    @RequestMapping(value = "/getJJimAndEvaluated.do")
+    String getJJimAndEvaluated(String memberId, String placeId);*/
 
     /**
      * 사용자가 작성한 리뷰 가져오기
