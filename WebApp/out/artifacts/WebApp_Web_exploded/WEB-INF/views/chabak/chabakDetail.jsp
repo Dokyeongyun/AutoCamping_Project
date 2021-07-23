@@ -153,15 +153,15 @@
                     <div class="article_comment_list_region">
                         <c:forEach var="i" items="${reviewList}">
                             <div class="article_writer_info_region">
-                                <img src="/static/img/profile.PNG" class="profile_sm"/>
+                                <img src="${pageContext.request.contextPath}/static/img/profile.PNG" class="profile_sm"/>
                                 <div style="overflow: hidden">
-                                    <div style="float: left; margin-right: 10px;" class="article_writer_txt">${i.nickName}</div>
-                                    <c:forEach begin="1" end="${i.evaluation_point}">
-                                        <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
+                                    <div style="float: left; margin-right: 10px;" class="article_writer_txt">${i.memberNickname}</div>
+                                    <c:forEach begin="1" end="${i.evalPoint}">
+                                        <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
                                     </c:forEach>
                                 </div>
-                                <div class="comment_content_txt">${i.review_content}</div>
-                                <div class="article_reg_time_txt">${i.eval_time}</div>
+                                <div class="comment_content_txt">${i.reviewContent}</div>
+                                <div class="article_reg_time_txt">${i.evalDate}</div>
                                 <div class="horizontal_gray"></div>
                             </div>
                         </c:forEach>
@@ -482,11 +482,11 @@
 
         let review = {
             memberId : memberId,
-            nickName : nickName,
+            memberNickname : nickName,
             placeId : ${chabakDetail.placeId},
             placeName : '${chabakDetail.placeName}',
-            evaluation_point : $("#evalPoint").val(),
-            review_content : $("#reviewContent").val()
+            evalPoint : $("#evalPoint").val(),
+            reviewContent : $("#reviewContent").val()
         };
 
         $.ajax({
