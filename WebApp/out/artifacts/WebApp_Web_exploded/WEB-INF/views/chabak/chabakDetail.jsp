@@ -169,11 +169,11 @@
                     <div class="article_comment_write_region">
                         <div style="overflow: hidden">
                             <div class="article_writer_txt" style="float: left; margin-right: 10px;">
-                                <c:if test="${sessionScope.get('id')==null}">
+                                <c:if test="${sessionMember.memberId == null}">
                                     손님
                                 </c:if>
-                                <c:if test="${sessionScope.get('id')!=null}">
-                                    ${sessionScope.get("id")}
+                                <c:if test="${sessionMember.memberId != null}">
+                                    ${sessionMember.nickName} 님
                                 </c:if>
                             </div>
                             <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
