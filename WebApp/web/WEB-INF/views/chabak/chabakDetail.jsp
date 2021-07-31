@@ -16,7 +16,8 @@
         </div>
         <div class="cbj_detail_top_lower">
             <div class="cbj_detail_menu_img_region" style="float: right">
-                <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="circle_img star_icon_region" id="star_icon" onclick="changeStarIcon();">
+                <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG"
+                     class="circle_img star_icon_region" id="star_icon" onclick="changeStarIcon();">
                 <img src="${pageContext.request.contextPath}/static/img/share_icon.PNG" class="circle_img">
                 <img src="${pageContext.request.contextPath}/static/img/link_icon.PNG" class="circle_img">
             </div>
@@ -104,13 +105,26 @@
                 </c:if>
                 <c:if test="${toiletList.size()!=0}">
                     <table class="cbj_detail_info_table">
-                        <tr><th>번호</th><td id="toilet_num">1</td></tr>
-                        <tr><th>주소</th><td id="toilet_address">${toiletList[0].address}</td></tr>
-                        <tr><th>개방시간</th><td id="toilet_openTime">${toiletList[0].open_time}</td></tr>
+                        <tr>
+                            <th>번호</th>
+                            <td id="toilet_num">1</td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td id="toilet_address">${toiletList[0].address}</td>
+                        </tr>
+                        <tr>
+                            <th>개방시간</th>
+                            <td id="toilet_openTime">${toiletList[0].open_time}</td>
+                        </tr>
                         <tr>
                             <td colspan="2" style="text-align: center">
-                                <button id="toilet_previous" onclick="toiletPrevious()" type="button" class="btn btn-default" style="width: 100px;">이전</button>
-                                <button id="toilet_next" onclick="toiletNext()" type="button" class="btn btn-default" style="width: 100px;">이후</button>
+                                <button id="toilet_previous" onclick="toiletPrevious()" type="button"
+                                        class="btn btn-default" style="width: 100px;">이전
+                                </button>
+                                <button id="toilet_next" onclick="toiletNext()" type="button" class="btn btn-default"
+                                        style="width: 100px;">이후
+                                </button>
                             </td>
                         </tr>
                     </table>
@@ -124,15 +138,34 @@
                 </c:if>
                 <c:if test="${fishingList.size()!=0}">
                     <table class="cbj_detail_info_table">
-                        <tr><th>번호</th><td id="fishing_num">1</td></tr>
-                        <tr><th>낚시터명</th><td id="fishing_name">${fishingList[0].name}</td></tr>
-                        <tr><th>주소</th><td id="fishing_address">${fishingList[0].address}</td></tr>
-                        <tr><th>유형</th><td id="fishing_type">${fishingList[0].type}</td></tr>
-                        <tr><th>전화번호</th><td id="fishing_phone">${fishingList[0].phone}</td></tr>
+                        <tr>
+                            <th>번호</th>
+                            <td id="fishing_num">1</td>
+                        </tr>
+                        <tr>
+                            <th>낚시터명</th>
+                            <td id="fishing_name">${fishingList[0].name}</td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td id="fishing_address">${fishingList[0].address}</td>
+                        </tr>
+                        <tr>
+                            <th>유형</th>
+                            <td id="fishing_type">${fishingList[0].type}</td>
+                        </tr>
+                        <tr>
+                            <th>전화번호</th>
+                            <td id="fishing_phone">${fishingList[0].phone}</td>
+                        </tr>
                         <tr>
                             <td colspan="2" style="text-align: center">
-                                <button id="fishing_previous" onclick="fishingPrevious()" type="button" class="btn btn-default" style="width: 100px;">이전</button>
-                                <button id="fishing_next" onclick="fishingNext()" type="button" class="btn btn-default" style="width: 100px;">이후</button>
+                                <button id="fishing_previous" onclick="fishingPrevious()" type="button"
+                                        class="btn btn-default" style="width: 100px;">이전
+                                </button>
+                                <button id="fishing_next" onclick="fishingNext()" type="button" class="btn btn-default"
+                                        style="width: 100px;">이후
+                                </button>
                             </td>
                         </tr>
                     </table>
@@ -143,60 +176,64 @@
     <hr style="border-top: 2px solid black">
     <%-- 차박지 리뷰 --%>
     <div class="cbj_detail_review_region">
-            <div class="iconAndText_Region">
-                <img class="icon" src="/static/img/review_icon.PNG">
-                <div class="icon_text sub_title_txt">차박지 리뷰</div>
-                <div class="article_comment_region">
-                    <div class="article_comment_header_region">
-                        <div class="article_comment_header_txt">리뷰  ${reviewList.size()}개</div>
-                    </div>
-                    <div class="article_comment_list_region">
-                        <c:forEach var="i" items="${reviewList}">
-                            <div class="article_writer_info_region">
-                                <img src="${pageContext.request.contextPath}/static/img/profile.PNG" class="profile_sm"/>
-                                <div style="overflow: hidden">
-                                    <div style="float: left; margin-right: 10px;" class="article_writer_txt">${i.memberNickname}</div>
-                                    <c:forEach begin="1" end="${i.evalPoint}">
-                                        <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
-                                    </c:forEach>
-                                </div>
-                                <div class="comment_content_txt">${i.reviewContent}</div>
-                                <div class="article_reg_time_txt">${i.evalDate}</div>
-                                <div class="horizontal_gray"></div>
+        <div class="iconAndText_Region">
+            <img class="icon" src="/static/img/review_icon.PNG">
+            <div class="icon_text sub_title_txt">차박지 리뷰</div>
+            <div class="article_comment_region">
+                <div class="article_comment_header_region">
+                    <div class="article_comment_header_txt">리뷰 ${reviewList.size()}개</div>
+                </div>
+                <div class="article_comment_list_region">
+                    <c:forEach var="i" items="${reviewList}">
+                        <div class="article_writer_info_region">
+                            <img src="${pageContext.request.contextPath}/static/img/profile.PNG" class="profile_sm"/>
+                            <div style="overflow: hidden">
+                                <div style="float: left; margin-right: 10px;"
+                                     class="article_writer_txt">${i.memberNickname}</div>
+                                <c:forEach begin="1" end="${i.evalPoint}">
+                                    <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG"
+                                         class="cbj_detail_review_star"/>
+                                </c:forEach>
                             </div>
-                        </c:forEach>
-                    </div>
-                    <div class="article_comment_write_region">
-                        <div style="overflow: hidden">
-                            <div class="article_writer_txt" style="float: left; margin-right: 10px;">
-                                <c:if test="${sessionMember.memberId == null}">
-                                    손님
-                                </c:if>
-                                <c:if test="${sessionMember.memberId != null}">
-                                    ${sessionMember.nickName} 님
-                                </c:if>
-                            </div>
-                            <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
-                            <select id="evalPoint" class="form-control" style="float: left; width: 100px;margin-left: 10px;height: 30px;">
-                                <option value="0">점수</option>
-                                <option value="1">1점</option>
-                                <option value="2">2점</option>
-                                <option value="3">3점</option>
-                                <option value="4">4점</option>
-                                <option value="5">5점</option>
-                            </select>
+                            <div class="comment_content_txt">${i.reviewContent}</div>
+                            <div class="article_reg_time_txt">${i.evalDate}</div>
+                            <div class="horizontal_gray"></div>
                         </div>
+                    </c:forEach>
+                </div>
+                <div class="article_comment_write_region">
+                    <div style="overflow: hidden">
+                        <div class="article_writer_txt" style="float: left; margin-right: 10px;">
+                            <c:if test="${sessionMember.memberId == null}">
+                                손님
+                            </c:if>
+                            <c:if test="${sessionMember.memberId != null}">
+                                ${sessionMember.nickName} 님
+                            </c:if>
+                        </div>
+                        <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
+                        <select id="evalPoint" class="form-control"
+                                style="float: left; width: 100px;margin-left: 10px;height: 30px;">
+                            <option value="0">점수</option>
+                            <option value="1">1점</option>
+                            <option value="2">2점</option>
+                            <option value="3">3점</option>
+                            <option value="4">4점</option>
+                            <option value="5">5점</option>
+                        </select>
+                    </div>
 
-                        <div class="article_comment_write_content">
-                            <textarea class="form-control noresize" rows="5" placeholder="차박지에 대한 느낀점을 남겨보세요." id="reviewContent" style="padding: 20px"></textarea>
-                        </div>
-                        <div class="article_comment_menu">
-                            <button type="button" class="btn button_right" id="writeReviewBtn">등록</button>
-                        </div>
+                    <div class="article_comment_write_content">
+                        <textarea class="form-control noresize" rows="5" placeholder="차박지에 대한 느낀점을 남겨보세요."
+                                  id="reviewContent" style="padding: 20px"></textarea>
+                    </div>
+                    <div class="article_comment_menu">
+                        <button type="button" class="btn button_right" id="writeReviewBtn">등록</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 </body>
 <jsp:include page="../footer.jsp"/>
@@ -205,75 +242,87 @@
     const starFillImgSrc = '/static/img/star_fill_icon.PNG';
     let dibsStatus = ${isJjimPlace};
 
-    if(dibsStatus){
+    if (dibsStatus) {
         $("#star_icon").attr("src", starFillImgSrc);
         $(".star_icon_region").css("backgroundColor", '#e6e8a9');
     }
 
     function changeStarIcon() {
         let src = jQuery('#star_icon').attr("src");
-        if(src === starImgSrc){
-            if(dibs()){
+        if (src === starImgSrc) {
+            if (dibs()) {
                 $("#star_icon").attr("src", starFillImgSrc);
                 $(".star_icon_region").css("backgroundColor", '#e6e8a9');
             }
-        }else{
-            if(!unDibs()){
+        } else {
+            if (!unDibs()) {
                 $("#star_icon").attr("src", starImgSrc);
                 $(".star_icon_region").css("backgroundColor", '#fff');
             }
         }
     }
 
-    function isLoginMember(){
+    function isLoginMember() {
         let memberId = '${sessionMember.memberId}';
-        if(memberId === ''){
+        if (memberId === '') {
             alert('로그인 후 이용해주세요.');
-            location.href='/member/loginForm';
+            location.href = '/member/loginForm';
             return false;
         }
         return true;
     }
 
     function dibs() {
-        if(!isLoginMember()) {return false;}
+        if (!isLoginMember()) {
+            return false;
+        }
 
         let result = '';
         let dibs = {
-            memberId : '${sessionMember.memberId}',
-            placeId : ${chabakDetail.placeId}
+            memberId: '${sessionMember.memberId}',
+            placeId: ${chabakDetail.placeId}
         };
 
         $.ajax({
-            url : "/member/chabak/dibs",
-            data : JSON.stringify(dibs),
-            type : "post",
-            contentType : "application/json; charset=UTF-8",
-            dataType : "json",
-            async : false,
-            success : function(resp) {result = resp;},
-            error : function() {alert("error")}
+            url: "/member/chabak/dibs",
+            data: JSON.stringify(dibs),
+            type: "post",
+            contentType: "application/json; charset=UTF-8",
+            dataType: "json",
+            async: false,
+            success: function (resp) {
+                result = resp;
+            },
+            error: function () {
+                alert("error")
+            }
         });
         return result;
     }
 
     function unDibs() {
         let result = '';
-        if(!isLoginMember()) {return false;}
+        if (!isLoginMember()) {
+            return false;
+        }
         let dibs = {
-            memberId : '${sessionMember.memberId}',
-            placeId : ${chabakDetail.placeId}
+            memberId: '${sessionMember.memberId}',
+            placeId: ${chabakDetail.placeId}
         };
 
         $.ajax({
-            url : "/member/chabak/unDibs",
-            data : JSON.stringify(dibs),
-            type : "post",
-            contentType : "application/json; charset=UTF-8",
-            dataType : "json",
-            async : false,
-            success : function(resp) {result = resp;},
-            error : function() {alert("error")}
+            url: "/member/chabak/unDibs",
+            data: JSON.stringify(dibs),
+            type: "post",
+            contentType: "application/json; charset=UTF-8",
+            dataType: "json",
+            async: false,
+            success: function (resp) {
+                result = resp;
+            },
+            error: function () {
+                alert("error")
+            }
         });
         return result;
     }
@@ -334,9 +383,25 @@
 
     <c:forEach var="i" items="${toiletList}">
     toiletPositions.push({
-        content: '<div style="padding:5px; background-color: white; border: 1px solid black">'+
-            '<div>주소: ${i.address}</div>' +
-            '<div>개방시간: ${i.open_time}</div></div>',
+        content:
+            '<div style="padding: 5px; border-radius: 5px; border: 1px solid black; background: white">' +
+            '<table style="font-size: 12px; width:250px">' +
+            '<colgroup>' +
+            '<col style="width: 25%">' +
+            '<col style="width: auto">' +
+            '</colgroup>' +
+            '<tbody>' +
+            '<tr> ' +
+            '<th style="text-align: right; padding-right: 5px;">주소</td>' +
+            '<td> ${i.address}</td>' +
+            '</tr>' +
+            '<tr> ' +
+            '<th style="text-align: right; padding-right: 5px;">개방시간</td>' +
+            '<td> ${i.open_time}</td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>' +
+            '</div>',
         title: '${i.address}',
         latlng: new kakao.maps.LatLng(${i.latitude}, ${i.longitude})
     });
@@ -344,27 +409,29 @@
 
     var toiletImageSrc = '/static/img/toilet_marker_icon.PNG';
 
-    for (var i = 0; i < toiletPositions.length; i ++) {
+    for (var i = 0; i < toiletPositions.length; i++) {
         var toiletImageSize = new kakao.maps.Size(36, 42);
         var toiletImage = new kakao.maps.MarkerImage(toiletImageSrc, toiletImageSize);
         var toiletMarker = new kakao.maps.Marker({
             map: map,
             position: toiletPositions[i].latlng,
-            image : toiletImage
+            image: toiletImage
         });
 
         toiletMarkers.push(toiletMarker);
 
-        var toiletInfowindow = new kakao.maps.InfoWindow({
-            content: toiletPositions[i].content
+        var toiletInfowindow = new kakao.maps.CustomOverlay({
+            position: toiletPositions[i].latlng,
+            content: toiletPositions[i].content,
+            yAnchor: 1.8
         });
 
-        (function(toiletMarker, toiletInfowindow) {
-            kakao.maps.event.addListener(toiletMarker, 'mouseover', function() {
-                toiletInfowindow.open(map, toiletMarker);
+        (function (toiletMarker, toiletInfowindow) {
+            kakao.maps.event.addListener(toiletMarker, 'mouseover', function () {
+                toiletInfowindow.setMap(map);
             });
-            kakao.maps.event.addListener(toiletMarker, 'mouseout', function() {
-                toiletInfowindow.close();
+            kakao.maps.event.addListener(toiletMarker, 'mouseout', function () {
+                toiletInfowindow.setMap(null);
             });
         })(toiletMarker, toiletInfowindow);
     }
@@ -374,10 +441,33 @@
 
     <c:forEach var="i" items="${fishingList}">
     fishingPositions.push({
-        content: '<div style="padding:5px; background-color: white; border: 1px solid black">'+
-            '<div>낚시터명: ${i.name}</div>' +
-            '<div>낚시터유형: ${i.type}</div>' +
-            '<div>전화번호: ${i.phone}</div></div>',
+        content:
+            '<div style="padding: 5px; border-radius: 5px; border: 1px solid black; background: white">' +
+            '<table style="font-size: 12px; width:250px">' +
+            '<colgroup>' +
+            '<col style="width: 25%">' +
+            '<col style="width: auto">' +
+            '</colgroup>' +
+            '<tbody>' +
+            '<tr> ' +
+            '<th style="text-align: right; padding-right: 5px;">낚시터명</td>' +
+            '<td> ${i.name}</td>' +
+            '</tr>' +
+            '<tr> ' +
+            '<th style="text-align: right; padding-right: 5px;">낚시터유형</td>' +
+            '<td> ${i.type}</td>' +
+            '</tr>' +
+            '<tr> ' +
+            '<th style="text-align: right; padding-right: 5px;">주소</td>' +
+            '<td> ${i.address}</td>' +
+            '</tr>' +
+            '<tr> ' +
+            '<th style="text-align: right; padding-right: 5px;">전화번호</td>' +
+            '<td> ${i.phone}</td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>' +
+            '</div>',
         title: '${i.address}',
         latlng: new kakao.maps.LatLng(${i.latitude}, ${i.longitude})
     });
@@ -396,16 +486,18 @@
 
         fishingMarkers.push(fishingMarker);
 
-        var fishingInfowindow = new kakao.maps.InfoWindow({
-            content: fishingPositions[j].content
+        var fishingInfowindow = new kakao.maps.CustomOverlay({
+            position: fishingPositions[j].latlng,
+            content: fishingPositions[j].content,
+            yAnchor: 1.8
         });
 
-        (function(fishingMarker, fishingInfowindow) {
-            kakao.maps.event.addListener(fishingMarker, 'mouseover', function() {
-                fishingInfowindow.open(map, fishingMarker);
+        (function (fishingMarker, fishingInfowindow) {
+            kakao.maps.event.addListener(fishingMarker, 'mouseover', function () {
+                fishingInfowindow.setMap(map);
             });
-            kakao.maps.event.addListener(fishingMarker, 'mouseout', function() {
-                fishingInfowindow.close();
+            kakao.maps.event.addListener(fishingMarker, 'mouseout', function () {
+                fishingInfowindow.setMap(null);
             });
         })(fishingMarker, fishingInfowindow);
     }
@@ -415,18 +507,18 @@
     changeMarker('all');
 
     // 카테고리를 클릭했을 때 type에 따라 카테고리의 스타일과 지도에 표시되는 마커를 변경
-    function changeMarker(type){
+    function changeMarker(type) {
         var toiletMenu = document.getElementById('toiletMenu');
         var fishingMenu = document.getElementById('fishingMenu');
         var allMenu = document.getElementById('allMenu');
 
-        if(type === 'all') {
+        if (type === 'all') {
             allMenu.className = 'menu_selected';
             toiletMenu.className = '';
             fishingMenu.className = '';
 
             showAllMarkers();
-        }else if (type === 'toilet') {
+        } else if (type === 'toilet') {
             allMenu.className = '';
             toiletMenu.className = 'menu_selected';
             fishingMenu.className = '';
@@ -442,23 +534,27 @@
             setFishingMarkers(map);
         }
     }
+
     // 모든 마커 보여주기
-    function showAllMarkers(){
+    function showAllMarkers() {
         setToiletMarkers(map);
         setFishingMarkers(map);
     }
+
     // 화장실 마커들의 지도 표시 여부를 설정하는 함수
     function setToiletMarkers(map) {
         for (var i = 0; i < toiletMarkers.length; i++) {
             toiletMarkers[i].setMap(map);
         }
     }
+
     // 낚시터 마커들의 지도 표시 여부를 설정하는 함수
     function setFishingMarkers(map) {
         for (var i = 0; i < fishingMarkers.length; i++) {
             fishingMarkers[i].setMap(map);
         }
     }
+
     // 차박지 위치로 지도 이동하기
     function panTo() {
         map.setLevel(5);
@@ -467,59 +563,59 @@
 </script>
 <script>
     <%--  리뷰작성 작업 DB Insert 수행  --%>
-    $("#writeReviewBtn").click(function(){
-        if(!invalidate_check()) {
+    $("#writeReviewBtn").click(function () {
+        if (!invalidate_check()) {
             return false;
         }
 
         let memberId = '${sessionMember.memberId}';
         let nickName = '${sessionMember.nickName}';
 
-        if(memberId === ''){
+        if (memberId === '') {
             alert('로그인 후 이용해주세요.');
-            location.href='/member/loginForm';
+            location.href = '/member/loginForm';
         }
 
         let review = {
-            memberId : memberId,
-            memberNickname : nickName,
-            placeId : ${chabakDetail.placeId},
-            placeName : '${chabakDetail.placeName}',
-            evalPoint : $("#evalPoint").val(),
-            reviewContent : $("#reviewContent").val()
+            memberId: memberId,
+            memberNickname: nickName,
+            placeId: ${chabakDetail.placeId},
+            placeName: '${chabakDetail.placeName}',
+            evalPoint: $("#evalPoint").val(),
+            reviewContent: $("#reviewContent").val()
         };
 
         $.ajax({
-            url : "/member/chabak/review",
-            data : JSON.stringify(review),
-            type : "post",
-            contentType : "application/json; charset=UTF-8",
-            dataType : "json",
-            async : true,
-            success : function(resp) {
+            url: "/member/chabak/review",
+            data: JSON.stringify(review),
+            type: "post",
+            contentType: "application/json; charset=UTF-8",
+            dataType: "json",
+            async: true,
+            success: function (resp) {
                 console.log(resp);
-                if(resp > 0){
+                if (resp > 0) {
                     alert("리뷰가 성공적으로 작성되었습니다.");
                     window.location.reload();
-                }else{
+                } else {
                     alert("리뷰 작성에 실패했습니다. 잠시 후 다시 시도해 주세요.");
                 }
             },
-            error : function() {
+            error: function () {
                 alert("error")
             }
         });
     });
 
     <!-- 유효성 검사 -->
-    function invalidate_check(){
+    function invalidate_check() {
         // 리뷰 내용 공백 확인
-        if($("#reviewContent").val() == ""){
+        if ($("#reviewContent").val() == "") {
             alert("내용을 입력해주세요.");
             $("#reviewContent").focus();
             return false;
         }
-        if($("#evalPoint").val() == 0){
+        if ($("#evalPoint").val() == 0) {
             alert("점수를 선택해주세요.");
             $("#evalPoint").focus();
             return false;
@@ -534,13 +630,13 @@
 
     <c:forEach var="i" items="${fishingList}">
     var fishing = {
-        fishingspotId : '${i.fishingspotId}',
-        name : '${i.name}',
-        address : '${i.address}',
-        type : '${i.type}',
-        phone : '${i.phone}',
-        latitude : '${i.latitude}',
-        longitude : '${i.longitude}'
+        fishingspotId: '${i.fishingspotId}',
+        name: '${i.name}',
+        address: '${i.address}',
+        type: '${i.type}',
+        phone: '${i.phone}',
+        latitude: '${i.latitude}',
+        longitude: '${i.longitude}'
     };
     fishingList.push(fishing);
     </c:forEach>
@@ -551,49 +647,61 @@
 
     <c:forEach var="i" items="${toiletList}">
     var toilet = {
-        toiletId : '${i.toiletId}',
-        address : '${i.address}',
-        open_time : '${i.open_time}',
-        latitude : '${i.latitude}',
-        longitude : '${i.longitude}'
+        toiletId: '${i.toiletId}',
+        address: '${i.address}',
+        open_time: '${i.open_time}',
+        latitude: '${i.latitude}',
+        longitude: '${i.longitude}'
     };
     toiletList.push(toilet);
     </c:forEach>
 
-    function toiletPrevious(){
-        if(toiletIndex-1 < 0){toiletIndex = 0;
-        }else{toiletIndex--;}
+    function toiletPrevious() {
+        if (toiletIndex - 1 < 0) {
+            toiletIndex = 0;
+        } else {
+            toiletIndex--;
+        }
         setToiletInfo();
     }
 
-    function toiletNext(){
-        if(toiletIndex+1 >= toiletSize){toiletIndex = toiletSize-1;
-        }else{toiletIndex++;}
+    function toiletNext() {
+        if (toiletIndex + 1 >= toiletSize) {
+            toiletIndex = toiletSize - 1;
+        } else {
+            toiletIndex++;
+        }
         setToiletInfo();
     }
 
-    function fishingPrevious(){
-        if(fishingIndex-1 < 0){fishingIndex = 0;
-        }else{fishingIndex--;}
+    function fishingPrevious() {
+        if (fishingIndex - 1 < 0) {
+            fishingIndex = 0;
+        } else {
+            fishingIndex--;
+        }
         setFishingInfo();
     }
 
-    function fishingNext(){
-        if(fishingIndex+1 >= fishingSize){fishingIndex = fishingSize-1;
-        }else{fishingIndex++;}
+    function fishingNext() {
+        if (fishingIndex + 1 >= fishingSize) {
+            fishingIndex = fishingSize - 1;
+        } else {
+            fishingIndex++;
+        }
         setFishingInfo();
     }
 
-    function setFishingInfo(){
-        $("#fishing_num").html(fishingIndex+1);
+    function setFishingInfo() {
+        $("#fishing_num").html(fishingIndex + 1);
         $("#fishing_name").html(fishingList[fishingIndex].name);
         $("#fishing_address").html(fishingList[fishingIndex].address);
         $("#fishing_type").html(fishingList[fishingIndex].type);
         $("#fishing_phone").html(fishingList[fishingIndex].phone);
     }
 
-    function setToiletInfo(){
-        $("#toilet_num").html(toiletIndex+1);
+    function setToiletInfo() {
+        $("#toilet_num").html(toiletIndex + 1);
         $("#toilet_address").html(toiletList[toiletIndex].address);
         $("#toilet_openTime").html(toiletList[toiletIndex].open_time);
     }

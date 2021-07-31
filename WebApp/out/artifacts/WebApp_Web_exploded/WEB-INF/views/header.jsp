@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/static/css/custom_overlay.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabakMap.css?ver=1" type="text/css">
     <link rel="stylesheet" href="/static/css/chabakDetail.css?ver=2" type="text/css">
-    <link rel="stylesheet" href="/static/css/kakaoMap.css?ver=1" type="text/css">
+    <link rel="stylesheet" href="/static/css/kakaoMap.css?ver=2" type="text/css">
     <link rel="stylesheet" href="/static/css/JoinCSS.css?ver=3" type="text/css">
 
     <%-- JS --%>
