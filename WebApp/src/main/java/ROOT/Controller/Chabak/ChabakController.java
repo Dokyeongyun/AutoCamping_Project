@@ -89,6 +89,7 @@ public class ChabakController {
     @RequestMapping("/ranking/{sortBy}")
     public String ranking(Model model, @PathVariable String sortBy) {
         List<Chabak> list = chabakService.getPopularList(sortBy);
+        model.addAttribute("sortBy", sortBy);
         model.addAttribute("popularList", list);
         return "/chabak/chabakRanking";
     }

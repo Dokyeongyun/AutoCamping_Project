@@ -585,6 +585,8 @@
             reviewContent: $("#reviewContent").val()
         };
 
+        console.log(review);
+
         $.ajax({
             url: "/member/chabak/review",
             data: JSON.stringify(review),

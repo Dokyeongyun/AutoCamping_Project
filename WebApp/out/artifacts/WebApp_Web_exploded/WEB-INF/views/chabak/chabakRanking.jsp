@@ -10,8 +10,8 @@
         <div style="font-family: 'BM_Jua'; font-size: 18px; float: right">
             정렬방법
             <select id="sortMethod" class="form-control" style="width: 200px; display: inline-block; margin:0 10px;">
-                <option value="avg_point">별점 순으로 보기</option>
-                <option value="jjim">찜 개수 순으로 보기</option>
+                <option value="avg_point" <c:if test="${sortBy eq 'avg_point'}">selected</c:if>>별점 순으로 보기</option>
+                <option value="jjim" <c:if test="${sortBy eq 'jjim'}">selected</c:if>>찜 개수 순으로 보기</option>
             </select>
             <button type="button" class="btn btn-primary" onclick="function ChangeSortMethod() {
                 var sortBy = $('#sortMethod').val();
