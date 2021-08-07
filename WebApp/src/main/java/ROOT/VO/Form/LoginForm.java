@@ -11,6 +11,8 @@ public class LoginForm {
     @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
+    private String saveIdYN;
+
     public String getMemberId() {
         return memberId;
     }
@@ -27,11 +29,16 @@ public class LoginForm {
         this.password = password;
     }
 
+    public String getSaveIdYN() { return saveIdYN; }
+
+    public void setSaveIdYN(String saveIdYN) { this.saveIdYN = saveIdYN; }
+
     @Override
     public String toString() {
         return "LoginForm{" +
                 "memberId='" + memberId + '\'' +
                 ", password='" + password + '\'' +
+                ", saveIdYN='" + saveIdYN + '\'' +
                 '}';
     }
 }

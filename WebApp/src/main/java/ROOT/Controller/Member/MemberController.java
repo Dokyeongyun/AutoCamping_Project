@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -183,6 +185,7 @@ public class MemberController {
                         Errors errors,
                         Model model,
                         HttpServletRequest request,
+                        HttpServletResponse response,
                         @SessionAttribute Member sessionMember
     ) throws Exception {
         // 입력값 검사 실패 시
@@ -273,12 +276,29 @@ public class MemberController {
                 break;
             case "LOGIN_SUCCESS":
                 isSuccess = true;
-                sessionMember.setMember(loginMember);   // 세션 값 설정
 
+                // 세션 값 설정
+                sessionMember.setMember(loginMember);
+
+                // 아이디 기억하기 쿠키 설정
+                String isSaveId = form.getSaveIdYN();
+                if ("Y".equals(isSaveId)) {
+                    Cookie saveIdCookie = new Cookie("saveIdCookie", loginMember.getMemberId());
+                    saveIdCookie.setMaxAge(30 * 24 * 60 * 60); // 30일 설정
+                    saveIdCookie.setPath("/");
+                    response.addCookie(saveIdCookie);
+                } else {
+                    Cookie saveIdCookie = new Cookie("saveIdCookie", null);
+                    saveIdCookie.setMaxAge(0);
+                    saveIdCookie.setPath("/");
+                    response.addCookie(saveIdCookie);
+                }
+
+                // 로그인 락 해제
                 MemberLoginLock loginLock = new MemberLoginLock();
                 loginLock.setLoginLockMemberId(loginMember.getMemberId());
                 loginLock.setLoginLockTime("20000101010101");
-                memberService.updateLoginLockTime(loginLock);   // 락 해제
+                memberService.updateLoginLockTime(loginLock);
                 break;
         }
 
@@ -329,7 +349,7 @@ public class MemberController {
      */
     @ResponseBody
     @PostMapping("/chabak/dibs")
-    public boolean chabakDibsAjax(@RequestBody ChabakDibs dibs){
+    public boolean chabakDibsAjax(@RequestBody ChabakDibs dibs) {
         memberService.dibsChabak(dibs);
         return memberService.getChabakDibsStatus(dibs);
     }
@@ -339,7 +359,7 @@ public class MemberController {
      */
     @ResponseBody
     @PostMapping("/chabak/unDibs")
-    public boolean chabakUnDibsAjax(@RequestBody ChabakDibs dibs){
+    public boolean chabakUnDibsAjax(@RequestBody ChabakDibs dibs) {
         memberService.unDibsChabak(dibs);
         return memberService.getChabakDibsStatus(dibs);
     }
@@ -349,7 +369,7 @@ public class MemberController {
      */
     @ResponseBody
     @PostMapping("/chabak/review")
-    public int writeChabakReview(@RequestBody Review review){
+    public int writeChabakReview(@RequestBody Review review) {
         return memberService.writeChabakReview(review);
     }
 }

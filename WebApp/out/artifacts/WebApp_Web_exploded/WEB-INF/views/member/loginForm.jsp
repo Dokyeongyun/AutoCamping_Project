@@ -26,13 +26,11 @@
                         <h3 class="joinTitle"><label for="password">비밀번호</label></h3>
                         <div><form:password path="password" cssClass="joinFormInputBox"/></div>
                         <span><form:errors cssClass="joinErrorText" id="passwordMsg" path="password"/></span>
-                   </div>
+                    </div>
                         <%-- 아이디 기억하기 --%>
                     <div class="joinRow">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember">아이디 기억하기
-                            </label>
+                        <div style="margin-top: 10px;">
+                            <form:checkbox path="saveIdYN" id="saveIdYN" value="N" onchange="changeSaveIdCheckbox()"  cssStyle="margin-right: 5px;"/>아이디 기억하기
                         </div>
                     </div>
                 </div>
@@ -54,3 +52,36 @@
 </div>
 
 <jsp:include page="../footer.jsp"/>
+
+<script>
+    $(function(){
+
+        // 1. 쿠키값에 따른 아이디 기억하기 체크박스, 아이디 값 설정
+        initSaveIdCookie();
+    });
+
+    // 쿠키값에 따른 아이디 기억하기 체크박스, 아이디 값 설정
+    function initSaveIdCookie() {
+        let saveIdCookie = $.cookie("saveIdCookie");
+
+        if(saveIdCookie != null && saveIdCookie !== "") {
+            let saveIdYNObj = $("#saveIdYN");
+            saveIdYNObj.val("Y");
+            saveIdYNObj.attr("checked", "checked");
+            $("#memberId").val(saveIdCookie);
+            $("#password").focus();
+        } else {
+            $("#memberId").focus();
+        }
+    }
+
+    // =============================================
+    //      onClick and onChange Event Function
+    // =============================================
+
+    // 아이디 기억하기 체크박스 변경 이벤트
+    function changeSaveIdCheckbox() {
+        let saveIdYNObj = $("#saveIdYN");
+        saveIdYNObj.val(saveIdYNObj.val() === "N" ? "Y" : "N");
+    }
+</script>
