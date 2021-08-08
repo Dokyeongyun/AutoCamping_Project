@@ -13,6 +13,8 @@ public class LoginForm {
 
     private String saveIdYN;
 
+    private String autoLoginYN;
+
     public String getMemberId() {
         return memberId;
     }
@@ -33,12 +35,21 @@ public class LoginForm {
 
     public void setSaveIdYN(String saveIdYN) { this.saveIdYN = saveIdYN; }
 
+    public String getAutoLoginYN() {
+        return autoLoginYN;
+    }
+
+    public void setAutoLoginYN(String autoLoginYN) {
+        this.autoLoginYN = autoLoginYN;
+    }
+
     @Override
     public String toString() {
         return "LoginForm{" +
                 "memberId='" + memberId + '\'' +
                 ", password='" + password + '\'' +
                 ", saveIdYN='" + saveIdYN + '\'' +
+                ", autoLoginYN='" + autoLoginYN + '\'' +
                 '}';
     }
 }

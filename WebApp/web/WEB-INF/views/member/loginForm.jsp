@@ -27,10 +27,15 @@
                         <div><form:password path="password" cssClass="joinFormInputBox"/></div>
                         <span><form:errors cssClass="joinErrorText" id="passwordMsg" path="password"/></span>
                     </div>
-                        <%-- 아이디 기억하기 --%>
+                        <%-- 자동로그인 및 아이디 기억하기 --%>
                     <div class="joinRow">
-                        <div style="margin-top: 10px;">
-                            <form:checkbox path="saveIdYN" id="saveIdYN" value="N" onchange="changeSaveIdCheckbox()"  cssStyle="margin-right: 5px;"/>아이디 기억하기
+                        <div class="checkboxWrap">
+                            <input type="checkbox" id="saveIdYN" name="saveIdYN" value="N" onchange="changeSaveIdCheckbox()"/>
+                            <label for="saveIdYN"><span></span>아이디 기억하기</label>
+                        </div>
+                        <div class="checkboxWrap">
+                            <input type="checkbox" id="autoLoginYN" name="autoLoginYN" value="N" onchange="changeAutoLoginCheckbox()"/>
+                            <label for="autoLoginYN"><span></span>자동로그인</label>
                         </div>
                     </div>
                 </div>
@@ -78,6 +83,12 @@
     // =============================================
     //      onClick and onChange Event Function
     // =============================================
+
+    // 자동로그인 체크박스 변경 이벤트
+    function changeAutoLoginCheckbox() {
+        let autoLoginYNObj = $("#autoLoginYN");
+        autoLoginYNObj.val(autoLoginYNObj.val() === "N" ? "Y" : "N");
+    }
 
     // 아이디 기억하기 체크박스 변경 이벤트
     function changeSaveIdCheckbox() {
