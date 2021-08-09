@@ -41,7 +41,7 @@ public class ChabakServiceImpl implements ChabakService {
      */
     @Override
     public List<Chabak> getPopularList(String sortBy) {
-        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/popular/" + sortBy, List.class);
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/ranking/" + sortBy, List.class);
     }
 
     /**

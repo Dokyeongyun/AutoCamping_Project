@@ -29,7 +29,7 @@ public interface ChabakService {
     /**
      * 현재 인기있는 차박지 리스트 (별점 기준 상위 10개)
      */
-    @GetMapping(value = "/popular/{sortBy}")
+    @GetMapping(value = "/ranking/{sortBy}")
     List<Chabak> getPopularList(@PathVariable String sortBy);
 
     /**

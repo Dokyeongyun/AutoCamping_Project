@@ -88,13 +88,11 @@
     function changeAutoLoginCheckbox() {
         let autoLoginYNObj = $("#autoLoginYN");
         autoLoginYNObj.val(autoLoginYNObj.val() === "N" ? "Y" : "N");
-        alert(autoLoginYNObj.val());
     }
 
     // 아이디 기억하기 체크박스 변경 이벤트
     function changeSaveIdCheckbox() {
         let saveIdYNObj = $("#saveIdYN");
         saveIdYNObj.val(saveIdYNObj.val() === "N" ? "Y" : "N");
-        alert(saveIdYNObj.val());
     }
 </script>
