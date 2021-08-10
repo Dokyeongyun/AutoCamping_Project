@@ -82,15 +82,29 @@ public class ChabakController {
     /**
      * 차박지 랭킹화면
      *
-     * @param model 차박지 랭킹 정보 담을 리스트
+     * @param model  차박지 랭킹 정보 담을 리스트
      * @param sortBy 정렬 기준
      * @return 차박지 랭킹화면 ViewName
      */
     @RequestMapping("/ranking/{sortBy}")
-    public String ranking(Model model, @PathVariable String sortBy) {
-        List<Chabak> list = chabakService.getPopularList(sortBy);
+    public String ranking(Model model, @PathVariable String sortBy, HttpSession session) {
+        Chabak[] chabakList = chabakService.getPopularList(sortBy);
+        List<Boolean> dibsStatusList = new ArrayList<>();
+
+        Member sessionMember = (Member) session.getAttribute("sessionMember");
+        for (Chabak c : chabakList) {
+            boolean isDibs = false;
+            if (sessionMember != null) {
+                ChabakDibs chabakDibs = new ChabakDibs();
+                chabakDibs.setMemberId(sessionMember.getMemberId());
+                chabakDibs.setPlaceId(c.getPlaceId());
+                isDibs = memberService.getChabakDibsStatus(chabakDibs);
+            }
+            dibsStatusList.add(isDibs);
+        }
         model.addAttribute("sortBy", sortBy);
-        model.addAttribute("popularList", list);
+        model.addAttribute("popularList", chabakList);
+        model.addAttribute("dibsStatusList", dibsStatusList);
         return "/chabak/chabakRanking";
     }
 
@@ -119,10 +133,10 @@ public class ChabakController {
         System.out.println(Arrays.toString(chabaks));
         // TODO 수정필요
         List<Chabak> keywordResult = new ArrayList<>();
-        for(int i=0; i<chabaks.length; i++){
+        for (int i = 0; i < chabaks.length; i++) {
             Chabak temp = chabaks[i];
-            String text = temp.getAddress()+temp.getIntroduce()+temp.getPhone_number()+temp.getPlaceName()+temp;
-            if(text.contains(keyword)) {
+            String text = temp.getAddress() + temp.getIntroduce() + temp.getPhone_number() + temp.getPlaceName() + temp;
+            if (text.contains(keyword)) {
                 keywordResult.add(temp);
             }
         }

@@ -40,8 +40,8 @@ public class ChabakServiceImpl implements ChabakService {
      * 현재 인기있는 차박지 리스트 (별점 기준 상위 10개)
      */
     @Override
-    public List<Chabak> getPopularList(String sortBy) {
-        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/ranking/" + sortBy, List.class);
+    public Chabak[] getPopularList(String sortBy) {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/ranking/" + sortBy, Chabak[].class);
     }
 
     /**

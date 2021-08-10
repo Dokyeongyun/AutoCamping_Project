@@ -21,6 +21,7 @@
         </div>
     </div>
     <%-- 차박지 별점 순서대로 나열 --%>
+    <c:set var="index" value="0"/>
     <c:forEach var="i" items="${popularList}">
         <div class="cbj_detail_top" style="background-image: url('${i.filePath}'); cursor: pointer;" onclick="location.href='/chabak/${i.placeId}'">
             <div class="cbj_detail_top_upper">
@@ -28,16 +29,22 @@
             </div>
             <div class="cbj_detail_top_lower">
                 <div class="cbj_detail_overview">
-                    <img src="/static/img/heart_icon.PNG" style="width: 20px; margin-right: 4px;">${i.jjim}
-                    <img src="/static/img/star_icon.PNG" style="width: 20px; margin-right: 4px;">${i.avg_point}
+                    <img src="${pageContext.request.contextPath}/static/img/heart_icon.PNG" style="width: 20px; margin-right: 4px;" alt="찜개수">${i.jjim}
+                    <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" style="width: 20px; margin-right: 4px;" alt="평점">${i.avg_point}
                 </div>
                 <div class="cbj_detail_menu_img_region" style="float: right">
-                    <img src="/static/img/star_icon.PNG" class="circle_img">
-                    <img src="/static/img/share_icon.PNG" class="circle_img">
-                    <img src="/static/img/link_icon.PNG" class="circle_img">
+                    <c:if test="${dibsStatusList.get(index) eq true}">
+                        <img src="${pageContext.request.contextPath}/static/img/star_fill_icon.PNG" class="circle_img" style="background-color: rgb(230, 232, 169);" alt="찜상태" >
+                    </c:if>
+                    <c:if test="${dibsStatusList.get(index) eq false}">
+                        <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="circle_img" alt="찜하기">
+                    </c:if>
+                    <img src="${pageContext.request.contextPath}/static/img/share_icon.PNG" class="circle_img" alt="공유">
+                    <img src="${pageContext.request.contextPath}/static/img/link_icon.PNG" class="circle_img" alt="링크복사">
                 </div>
             </div>
         </div>
+        <c:set var="index" value="${index + 1}"/>
     </c:forEach>
 </div>
 </body>
