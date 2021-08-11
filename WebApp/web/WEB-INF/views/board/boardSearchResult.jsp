@@ -78,7 +78,7 @@
             </ul>
         </div>
         <div class="article_search_region">
-            <form name="frmSearch" action="/board/getArticleByKeyword" method="get">
+            <form name="frmSearch" action="${pageContext.request.contextPath}/board/getArticleByKeyword" method="get">
                 <select id="searchDate" class="form-control" style="width: 150px; display: inline-block">
                     <option value="all">전체기간</option>
                     <option value="1d">1일</option>

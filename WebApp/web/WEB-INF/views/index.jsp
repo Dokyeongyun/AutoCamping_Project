@@ -10,26 +10,26 @@
             <div class="searchFormDiv">
                 <input class="searchInputBox" type="text" name="searchKeyword" id="searchKeyword" placeholder="게시판 및 차박지 정보를 통합검색합니다."
                        title="게시판 및 차박지 정보를 통합검색합니다.">
-                <input type="image" src="/static/img/search_icon_blue.PNG" style="height: 100%" alt="검색" title="검색">
+                <input type="image" src="${pageContext.request.contextPath}/static/img/search_icon_blue.PNG" style="height: 100%" alt="검색" title="검색">
             </div>
         </form>
     </div>
     <hr>
     <div class="slideImgArea">
         <div id="slideDiv">
-            <div class="slideImgDiv"><img src="/static/img/notice1.PNG"></div>
-            <div class="slideImgDiv"><img src="/static/img/notice2.PNG"></div>
-            <div class="slideImgDiv"><img src="/static/img/notice3.PNG"></div>
-            <div class="slideImgDiv"><img src="/static/img/notice4.PNG"></div>
+            <div class="slideImgDiv"><img src="${pageContext.request.contextPath}/static/img/notice1.PNG"></div>
+            <div class="slideImgDiv"><img src="${pageContext.request.contextPath}/static/img/notice2.PNG"></div>
+            <div class="slideImgDiv"><img src="${pageContext.request.contextPath}/static/img/notice3.PNG"></div>
+            <div class="slideImgDiv"><img src="${pageContext.request.contextPath}/static/img/notice4.PNG"></div>
         </div>
     </div>
     <hr>
     <div class="contentArea">
         <div class="content1">
             <div class="contentTop">
-                <img src="/static/img/notice_icon.PNG">
+                <img src="${pageContext.request.contextPath}/static/img/notice_icon.PNG">
                 <h2>공지사항</h2>
-                <img src="/static/img/more_icon.PNG" style="float: right">
+                <img src="${pageContext.request.contextPath}/static/img/more_icon.PNG" style="float: right">
             </div>
             <div class="contentBottom">
                 <div class="noticeList">

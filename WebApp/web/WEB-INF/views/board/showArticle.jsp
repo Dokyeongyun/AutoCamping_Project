@@ -15,7 +15,7 @@
         <div class="myInfo_container">
             <div class="myInfo_top">
                 <div class="myInfo_img">
-                    <img src="/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
+                    <img src="${pageContext.request.contextPath}/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
                 </div>
                 <div class="myInfo_txt">
                     <div class="profile_txt">${sessionMember.memberId} 님</div>
@@ -58,7 +58,7 @@
                 <div class="board_type_nav_txt"><a href="#">자유게시판 ></a></div>
                 <div class="article_title_txt">${article.title}</div>
                 <div class="article_writer_info_region">
-                    <img src="/static/img/profile.PNG" class="profile_sm"/>
+                    <img src="${pageContext.request.contextPath}/static/img/profile.PNG" class="profile_sm"/>
                     <div class="article_writer_txt">${article.nickName}</div>
                     <div class="article_reg_time_txt">${article.createTime} 조회수 : 1</div>
                     <div class="ArticleTool">
@@ -105,7 +105,7 @@
                     <c:forEach var="i" items="${commentList}">
                         <div class="article_writer_info_region">
                             <div class="commentInfo" id="commentInfoRegion${i.commentId}">
-                                <img src="/static/img/profile.PNG" class="profile_sm"/>
+                                <img src="${pageContext.request.contextPath}/static/img/profile.PNG" class="profile_sm"/>
                                 <div class="article_writer_txt">${i.nickName}</div>
                                 <div class="comment_content_txt">${i.content}</div>
                                 <div class="article_reg_time_txt">${i.createTime}</div>
@@ -126,9 +126,9 @@
                                 <%-- 댓글 수정 폼 --%>
                             <div id="commentUpdateFormRegion${i.commentId}"
                                  style="display: none">
-                                <form action="/board/comment" method="post">
+                                <form action="${pageContext.request.contextPath}/board/comment" method="post">
                                     <div class="commentInfo" id="commentInfoRegion${i.commentId}">
-                                        <img src="/static/img/profile.PNG" class="profile_sm"/>
+                                        <img src="${pageContext.request.contextPath}/static/img/profile.PNG" class="profile_sm"/>
                                         <div class="article_writer_txt">${i.nickName}</div>
                                         <textarea rows="2" name="content" class="form-control noresize"
                                                   style="padding: 20px; margin-top: 40px">${i.content}</textarea>

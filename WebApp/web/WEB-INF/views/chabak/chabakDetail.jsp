@@ -27,7 +27,7 @@
     <%-- 차박지 사진 및 상세 정보 --%>
     <div class="cbj_detail_bottom">
         <div class="iconAndText_Region">
-            <img class="icon" src="/static/img/information_icon.PNG">
+            <img class="icon" src="${pageContext.request.contextPath}/static/img/information_icon.PNG">
             <div class="icon_text sub_title_txt">차박지 상세정보</div>
         </div>
         <div class="cbj_detail_img_region">
@@ -70,7 +70,7 @@
     <%-- 차박지 위치 및 주변 정보 지도상 표시 --%>
     <div class="cbj_detail_map_region">
         <div class="iconAndText_Region">
-            <img class="icon" src="/static/img/address_icon.PNG">
+            <img class="icon" src="${pageContext.request.contextPath}/static/img/address_icon.PNG">
             <div class="icon_text sub_title_txt">위치 및 주변정보</div>
         </div>
         <div id="mapwrap">
@@ -177,7 +177,7 @@
     <%-- 차박지 리뷰 --%>
     <div class="cbj_detail_review_region">
         <div class="iconAndText_Region">
-            <img class="icon" src="/static/img/review_icon.PNG">
+            <img class="icon" src="${pageContext.request.contextPath}/static/img/review_icon.PNG">
             <div class="icon_text sub_title_txt">차박지 리뷰</div>
             <div class="article_comment_region">
                 <div class="article_comment_header_region">
@@ -211,7 +211,7 @@
                                 ${sessionMember.nickName} 님
                             </c:if>
                         </div>
-                        <img src="/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
+                        <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="cbj_detail_review_star"/>
                         <select id="evalPoint" class="form-control"
                                 style="float: left; width: 100px;margin-left: 10px;height: 30px;">
                             <option value="0">점수</option>

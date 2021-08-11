@@ -12,7 +12,7 @@ body{background-color: #eee;}
     <div class="leftContainer">
         <div class="leftNav">
             <div class="leftNavMenu">
-                <a class="menuGroup all" href="/service/group/board_all">
+                <a class="menuGroup all" href="${pageContext.request.contextPath}/service/group/board_all">
                     <span class="menuOver">커뮤니티</span>
                 </a>
                 <a class="menuGroup" href="#">

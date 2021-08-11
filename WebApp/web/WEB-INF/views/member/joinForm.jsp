@@ -60,7 +60,7 @@
                     <button type="button" id="btnJoin" class="btnType btnPrimary">회원가입</button>
                 </div>
                 <div class="joinRow" style="text-align: right">
-                    <a href="/member/loginForm" style="font-weight: bold;">
+                    <a href="${pageContext.request.contextPath}/member/loginForm" style="font-weight: bold;">
                         이미 계정이 있으신가요?
                     </a>
                 </div>

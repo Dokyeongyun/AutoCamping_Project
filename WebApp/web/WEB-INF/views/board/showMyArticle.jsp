@@ -9,7 +9,7 @@
         <div class="myInfo_container">
             <div class="myInfo_top">
                 <div class="myInfo_img">
-                    <img src="/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
+                    <img src="${pageContext.request.contextPath}/static/img/profile.PNG" alt="profile" style="max-width: -webkit-fill-available;">
                 </div>
                 <div class="myInfo_txt">
                     <div class="profile_txt">${sessionScope.get("id")} 님</div>

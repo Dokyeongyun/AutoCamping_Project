@@ -3,7 +3,7 @@
     <div class="f_info_w">
         <div class="layout">
             <div style="width: 200px; height: fit-content;">
-                <img src="/static/img/logo.PNG" style="width: 100px; float: left; margin-left: 100px;"/>
+                <img src="${pageContext.request.contextPath}/static/img/logo.PNG" style="width: 100px; float: left; margin-left: 100px;"/>
                 <span class="skip">차박러 모여라</span>
             </div>
             <ul class="f_menu">

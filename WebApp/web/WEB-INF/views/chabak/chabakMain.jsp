@@ -65,7 +65,7 @@
             <div class="chabakjiInfo" onclick="location.href='/chabak/${i.placeId}'">
                 <div class="chabakji_img_region" >
                     <c:if test="${i.filePath == 'No image'}">
-                        <img class="chabakji_img" src="/static/img/no_image_icon.PNG"/>
+                        <img class="chabakji_img" src="${pageContext.request.contextPath}/static/img/no_image_icon.PNG"/>
                     </c:if>
                     <c:if test="${i.filePath != 'No image'}">
                         <img class="chabakji_img" src="${i.filePath}"/>
@@ -74,19 +74,19 @@
                 <div class="chabakji_info_region">
                     <div class="chabakji_name_txt">${i.placeName}</div>
                     <div class="iconAndText_Region">
-                        <img class="icon" src="/static/img/address_icon.PNG">
+                        <img class="icon" src="${pageContext.request.contextPath}/static/img/address_icon.PNG">
                         <div class="icon_text">${i.address}</div>
                     </div>
                     <div class="iconAndText_Region">
-                        <img class="icon" src="/static/img/star_icon.PNG">
+                        <img class="icon" src="${pageContext.request.contextPath}/static/img/star_icon.PNG">
                         <div class="icon_text">${i.avg_point} / 5.0</div>
                     </div>
                     <div class="iconAndText_Region">
-                        <img class="icon" src="/static/img/phone_icon.PNG">
+                        <img class="icon" src="${pageContext.request.contextPath}/static/img/phone_icon.PNG">
                         <div class="icon_text">${i.phone_number}</div>
                     </div>
                     <div class="iconAndText_Region">
-                        <img class="icon" src="/static/img/message_icon.PNG">
+                        <img class="icon" src="${pageContext.request.contextPath}/static/img/message_icon.PNG">
                         <div class="icon_text">${i.introduce}</div>
                     </div>
                 </div>
