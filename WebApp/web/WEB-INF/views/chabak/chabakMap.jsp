@@ -23,7 +23,7 @@
 
     <%-- 검색 결과를 출력할 container --%>
     <c:if test="${searchProvince != 'all'}">
-        <div>
+        <div id="searchResultRegion">
             <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">검색 결과</div>
             <c:if test="${searchResult.size()!=0}">
                 <div class="title_sub_txt">"${searchProvince}" 검색 결과 : 총 ${searchResult.size()} 개의 결과가 있습니다.</div>
@@ -70,6 +70,16 @@
     </c:if>
 </div>
 </body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    $(document).ready(function(){
+        let currentSearchProvince = "<c:out value="${param.province}"/>";
+        if(currentSearchProvince !== 'all'){
+            let offset = $('#searchResultRegion').offset();
+            $('body').animate({scrollTop : offset.top}, 400);
+        }
+    });
+</script>
 
 <%--변수--%>
 <script>
