@@ -17,30 +17,39 @@
                 var sortBy = $('#sortMethod').val();
                 location.href='/chabak/ranking/'+sortBy;
             }
-            ChangeSortMethod();">확인</button>
+            ChangeSortMethod();">확인
+            </button>
         </div>
     </div>
     <%-- 차박지 별점 순서대로 나열 --%>
     <c:set var="index" value="0"/>
     <c:forEach var="i" items="${popularList}">
-        <div class="cbj_detail_top" style="background-image: url('${i.filePath}'); cursor: pointer;" onclick="location.href='/chabak/${i.placeId}'">
+        <div class="cbj_detail_top" style="background-image: url('${i.filePath}'); cursor: pointer;"
+             onclick="goChabakDetail('<c:out value="${i.placeId}"/>')">
             <div class="cbj_detail_top_upper">
                 <p class="cbj_placeName_txt">${i.placeName}</p>
             </div>
             <div class="cbj_detail_top_lower">
                 <div class="cbj_detail_overview">
-                    <img src="${pageContext.request.contextPath}/static/img/heart_icon.PNG" style="width: 20px; margin-right: 4px;" alt="찜개수">${i.jjim}
-                    <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" style="width: 20px; margin-right: 4px;" alt="평점">${i.avg_point}
+                    <img src="${pageContext.request.contextPath}/static/img/heart_icon.PNG"
+                         style="width: 20px; margin-right: 4px;" alt="찜개수">${i.jjim}
+                    <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG"
+                         style="width: 20px; margin-right: 4px;" alt="평점">${i.avg_point}
                 </div>
                 <div class="cbj_detail_menu_img_region" style="float: right">
                     <c:if test="${dibsStatusList.get(index) eq true}">
-                        <img src="${pageContext.request.contextPath}/static/img/star_fill_icon.PNG" class="circle_img" style="background-color: rgb(230, 232, 169);" alt="찜상태" >
+                        <img src="${pageContext.request.contextPath}/static/img/star_fill_icon.PNG" class="circle_img"
+                             id="starIcon${i.placeId}" style="background-color: rgb(230, 232, 169);" alt="찜상태"
+                             onclick="changeIconName('dibs')">
                     </c:if>
                     <c:if test="${dibsStatusList.get(index) eq false}">
-                        <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="circle_img" alt="찜하기">
+                        <img src="${pageContext.request.contextPath}/static/img/star_icon.PNG" class="circle_img"
+                             id="starIcon${i.placeId}" alt="찜하기" onclick="changeIconName('dibs')">
                     </c:if>
-                    <img src="${pageContext.request.contextPath}/static/img/share_icon.PNG" class="circle_img" alt="공유">
-                    <img src="${pageContext.request.contextPath}/static/img/link_icon.PNG" class="circle_img" alt="링크복사">
+                    <img src="${pageContext.request.contextPath}/static/img/share_icon.PNG" class="circle_img"
+                         alt="공유" onclick="changeIconName('share')">
+                    <img src="${pageContext.request.contextPath}/static/img/link_icon.PNG" class="circle_img"
+                         alt="링크복사" onclick="changeIconName('copy')">
                 </div>
             </div>
         </div>
@@ -50,6 +59,126 @@
 </body>
 <jsp:include page="../footer.jsp"/>
 
+<script>
+    const starImgSrc = '/static/img/star_icon.PNG';
+    const starFillImgSrc = '/static/img/star_fill_icon.PNG';
+
+    /* 찜하기, 공유, 링크복사 아이콘 클릭을 확인하기 위한 변수 */
+    let clickedIconName = '';
+
+    /* 차박지 상세화면 이동 */
+    function goChabakDetail(placeId) {
+        if (clickedIconName !== '') {
+            if (clickedIconName === 'dibs') {
+                changeDibsStatus(placeId);
+            } else if (clickedIconName === 'share') {
+                shareChabakDetail();
+            } else if (clickedIconName === 'copy') {
+                copyChabakLink();
+            }
+            clickedIconName = '';
+        } else {
+            location.href = '/chabak/' + placeId;
+        }
+    }
+
+    /* 아이콘명 변수 값 변경 */
+    function changeIconName(iconName) {
+        clickedIconName = iconName;
+    }
+
+    /* 찜 아이콘 클릭 이벤트 내용 */
+    function changeDibsStatus(placeId) {
+        let starIconObj = $("#" + ('starIcon' + placeId));
+        let src = starIconObj.attr("src");
+        if (src === starImgSrc) {
+            if (dibs(placeId)) {
+                starIconObj.attr("src", starFillImgSrc);
+                starIconObj.css("backgroundColor", '#e6e8a9');
+            }
+        } else {
+            if (!unDibs(placeId)) {
+                starIconObj.attr("src", starImgSrc);
+                starIconObj.css("backgroundColor", '#fff');
+            }
+        }
+    }
+
+    /* 공유 아이콘 클릭 이벤트 내용 */
+    function shareChabakDetail() {
+        console.log('share');
+    }
+
+    /* 링크복사 아이콘 클릭 이벤트 내용 */
+    function copyChabakLink() {
+        console.log('copy');
+    }
+
+    function isLoginMember() {
+        let memberId = '${sessionMember.memberId}';
+        if (memberId === '') {
+            alert('로그인 후 이용해주세요.');
+            location.href = '/member/loginForm';
+            return false;
+        }
+        return true;
+    }
+
+    function dibs(placeId) {
+        if (!isLoginMember()) {
+            return false;
+        }
+
+        let result = '';
+        let dibs = {
+            memberId: '${sessionMember.memberId}',
+            placeId: placeId
+        };
+
+        $.ajax({
+            url: "/member/chabak/dibs",
+            data: JSON.stringify(dibs),
+            type: "post",
+            contentType: "application/json; charset=UTF-8",
+            dataType: "json",
+            async: false,
+            success: function (resp) {
+                result = resp;
+            },
+            error: function () {
+                alert("error")
+            }
+        });
+        return result;
+    }
+
+    function unDibs(placeId) {
+        let result = '';
+        if (!isLoginMember()) {
+            return false;
+        }
+        let dibs = {
+            memberId: '${sessionMember.memberId}',
+            placeId: placeId
+        };
+
+        $.ajax({
+            url: "/member/chabak/unDibs",
+            data: JSON.stringify(dibs),
+            type: "post",
+            contentType: "application/json; charset=UTF-8",
+            dataType: "json",
+            async: false,
+            success: function (resp) {
+                result = resp;
+            },
+            error: function () {
+                alert("error")
+            }
+        });
+        return result;
+    }
+</script>
 <style>
     .cbj_detail_overview {
         float: left;

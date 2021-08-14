@@ -82,11 +82,12 @@ public class ChabakController {
     /**
      * 차박지 랭킹화면
      *
-     * @param model  차박지 랭킹 정보 담을 리스트
+     * @param model 차박지 랭킹 정보 담을 리스트
      * @param sortBy 정렬 기준
+     * @param session 찜 아이콘 초기값 설정을 위해 필요한 세션정보
      * @return 차박지 랭킹화면 ViewName
      */
-    @RequestMapping("/ranking/{sortBy}")
+    @GetMapping("/ranking/{sortBy}")
     public String ranking(Model model, @PathVariable String sortBy, HttpSession session) {
         Chabak[] chabakList = chabakService.getPopularList(sortBy);
         List<Boolean> dibsStatusList = new ArrayList<>();
@@ -103,6 +104,7 @@ public class ChabakController {
             dibsStatusList.add(isDibs);
         }
         model.addAttribute("sortBy", sortBy);
+
         model.addAttribute("popularList", chabakList);
         model.addAttribute("dibsStatusList", dibsStatusList);
         return "/chabak/chabakRanking";
