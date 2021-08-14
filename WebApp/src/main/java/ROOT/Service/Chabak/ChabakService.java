@@ -14,7 +14,7 @@ public interface ChabakService {
     /**
      * 모든 차박지 리스트
      */
-    List<Chabak> getAllChabakList();
+    Chabak[] getAllChabakList();
 
     /**
      * 하나의 차박지 정보

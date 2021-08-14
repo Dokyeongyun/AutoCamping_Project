@@ -24,8 +24,8 @@ public class ChabakServiceImpl implements ChabakService {
      * 모든 차박지 리스트
      */
     @Override
-    public List<Chabak> getAllChabakList() {
-        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/chabaks", List.class);
+    public Chabak[] getAllChabakList() {
+        return restOperations.getForObject(APIServerInfo.API_SERVER_CONTEXT + "/chabak/chabaks", Chabak[].class);
     }
 
     /**

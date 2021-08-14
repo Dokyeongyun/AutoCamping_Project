@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../header.jsp"/>
@@ -49,23 +50,27 @@
     </div>
     <div class="small_txt">검색어</div>
     <div class="article_search_region">
-        <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요" style="width: 200px; display: inline-block"/>
-        <button class="btn" type="button" id="searchChabakBtn" onclick="filterSearch()" style="background-color: #77b7b4; color: white">검색</button>
+        <input type="text" id="searchKeyword" class="form-control" placeholder="검색어를 입력해주세요"
+               style="width: 200px; display: inline-block"/>
+        <button class="btn" type="button" id="searchChabakBtn" onclick="filterSearch()"
+                style="background-color: #77b7b4; color: white">검색
+        </button>
     </div>
 </div>
 
 <%-- 추천 차박지 보여주기, 차박지 랭킹 등 --%>
 <div class="container chabakMain_Container">
     <div class="title_txt" style="float: none; border-bottom: 1px solid #ddd">추천 차박지</div>
-    <div class="title_sub_txt">총 ${chabakList.size()} 개의 차박지가 있습니다.</div>
+    <div class="title_sub_txt">총 ${fn:length(chabakList)} 개의 차박지가 있습니다.</div>
 
     <%-- 차박지 정보 한 줄에 3개씩 출력하기 --%>
     <div class="chabakjiList_row">
         <c:forEach items="${chabakList}" var="i">
             <div class="chabakjiInfo" onclick="location.href='/chabak/${i.placeId}'">
-                <div class="chabakji_img_region" >
+                <div class="chabakji_img_region">
                     <c:if test="${i.filePath == 'No image'}">
-                        <img class="chabakji_img" src="${pageContext.request.contextPath}/static/img/no_image_icon.PNG"/>
+                        <img class="chabakji_img"
+                             src="${pageContext.request.contextPath}/static/img/no_image_icon.PNG"/>
                     </c:if>
                     <c:if test="${i.filePath != 'No image'}">
                         <img class="chabakji_img" src="${i.filePath}"/>

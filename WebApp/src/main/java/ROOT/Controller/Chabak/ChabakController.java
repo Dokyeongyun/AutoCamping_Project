@@ -32,7 +32,7 @@ public class ChabakController {
      */
     @GetMapping("/main")
     public String main(Model model) {
-        List<Chabak> chabaks = chabakService.getAllChabakList();
+        Chabak[] chabaks = chabakService.getAllChabakList();
         model.addAttribute("chabakList", chabaks);
         return "/chabak/chabakMain";
     }
@@ -126,13 +126,11 @@ public class ChabakController {
                                @RequestParam("keyword") String keyword) {
 
         Chabak[] filterResult = chabakService.chabakSearch(region, facility);
-
         System.out.println(Arrays.toString(filterResult));
 
-        List<Chabak> tempList = chabakService.getAllChabakList();
-        Chabak[] chabaks = tempList.toArray(new Chabak[tempList.size()]);
-
+        Chabak[] chabaks = chabakService.getAllChabakList();
         System.out.println(Arrays.toString(chabaks));
+
         // TODO 수정필요
         List<Chabak> keywordResult = new ArrayList<>();
         for (int i = 0; i < chabaks.length; i++) {
@@ -148,12 +146,11 @@ public class ChabakController {
         for (int i = 0; i < filterResult.length; i++) {
             for (int j = 0; j < keywordResult.size(); j++) {
                 if (filterResult[i].getPlaceId() == keywordResult.get(j).getPlaceId()) {
-                    finalResult.add(keywordResult.get(i));
+                    finalResult.add(keywordResult.get(j));
                     break;
                 }
             }
         }
-
         System.out.println(finalResult);
 
         model.addAttribute("searchResult", finalResult);
