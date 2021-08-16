@@ -105,6 +105,7 @@ public class MemberDAO {
      */
     public int changePassword(Member member) {
         try {
+            System.out.println(member);
             String encrypted = CryptoUtil.encryptAES256(member.getPassword(), member.getPassword().hashCode() + "");
             String sql = "UPDATE cb_member SET password = ? WHERE MEM_EMAIL = ?";
             return jdbcTemplate.update(sql, encrypted, member.getEmail());

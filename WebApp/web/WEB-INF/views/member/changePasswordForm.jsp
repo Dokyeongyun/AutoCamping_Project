@@ -184,8 +184,8 @@
         }
     }
 
-    function submit(){
-        if(!pwFlag) return;
+    function submit() {
+        if (!pwFlag) return;
 
         var email = '${email}';
         var password = $("#password").val();
@@ -202,7 +202,7 @@
             data: JSON.stringify(member),
             success: function () {
                 alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.")
-                location.href="/member/loginForm";
+                location.href = "/member/loginForm";
             },
             error: function () {
             }

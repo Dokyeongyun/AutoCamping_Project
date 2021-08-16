@@ -122,6 +122,7 @@ public class JoinAjaxController {
 
     @PostMapping("/changePassword")
     public void changePassword(@RequestBody Member member) {
+        System.out.println(member);
         memberService.changePassword(member);
     }
 }

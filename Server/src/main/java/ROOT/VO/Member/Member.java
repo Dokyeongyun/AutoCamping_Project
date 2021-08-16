@@ -1,13 +1,13 @@
 package ROOT.VO.Member;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 public class Member {
     private String memberId;
 
     private String nickName;
 
-    @JsonProperty("MEM_EMAIL")
+    @JsonAlias({"email", "MEM_EMAIL"})
     private String email;
 
     private String password;
