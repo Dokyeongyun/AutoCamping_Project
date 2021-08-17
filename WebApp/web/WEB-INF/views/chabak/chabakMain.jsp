@@ -182,20 +182,3 @@
 </body>
 
 <jsp:include page="../footer.jsp"/>
-
-
-<script>
-    function changeSearchRegionCheck(checkId) {
-        let regionCheckObj = $("#" + checkId);
-        let regionCheckParentObj = regionCheckObj.parent("td");
-        if (regionCheckObj.is(":checked")) {
-            regionCheckObj.prop('checked', false);
-            regionCheckParentObj.css("background", "#e1e1e1")
-            regionCheckParentObj.css("color", "black")
-        } else {
-            regionCheckObj.prop('checked', true);
-            regionCheckParentObj.css("background", "crimson")
-            regionCheckParentObj.css("color", "white")
-        }
-    }
-</script>
