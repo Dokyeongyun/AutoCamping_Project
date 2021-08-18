@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/chabak.css?ver=3" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/boardmain.css?ver=1" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/showArticle.css?ver=1" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/chabakmain.css?ver=2" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/chabakmain.css?ver=1" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/footer.css?ver=1" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom_overlay.css?ver=1" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/chabakMap.css?ver=1" type="text/css">

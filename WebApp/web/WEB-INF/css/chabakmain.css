@@ -18,8 +18,8 @@
 
 
 /* 검색조건 - 체크박스 */
-#searchRegionCheckArea {width: 100%; font-size: 14px; text-align: center; font-family: "BM_Jua", serif; }
-#searchRegionCheckArea tr {height: 60px; cursor: pointer;}
-#searchRegionCheckArea tr td {background: #e1e1e1; width: 20%; border: 1px solid white;}
-#searchRegionCheckArea tr td input[type="checkbox"] {display: none;}
-#searchRegionCheckArea tr td input[type="checkbox"] + label span {position: relative; vertical-align: middle; margin-right: 10px;display: inline-block; width:17px; height: 17px; border:2px solid #ddd;cursor: pointer; border-radius: 3px;}
+.searchRegionCheckTable {width: 100%; font-size: 14px; text-align: center; font-family: "BM_Jua", serif; }
+.searchRegionCheckTable tr {height: 60px; cursor: pointer;}
+.searchRegionCheckTable tr td {background: #e1e1e1; width: 20%; border: 1px solid white;}
+.searchRegionCheckTable tr td input[type="checkbox"] {display: none;}
+.searchRegionCheckTable tr td input[type="checkbox"] + label span {position: relative; vertical-align: middle; margin-right: 10px;display: inline-block; width:17px; height: 17px; border:2px solid #ddd;cursor: pointer; border-radius: 3px;}

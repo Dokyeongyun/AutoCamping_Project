@@ -12,11 +12,11 @@
         <div style="float: left; width: 48%; display: inline-block">
             <div class="small_txt">지역</div>
             <div class="search_option_region">
-                <table id="searchRegionCheckArea">
+                <table class="searchRegionCheckTable">
                     <tr>
                         <td onclick="changeSearchRegionCheck('region_ALL')">
                             <input type="checkbox" class="region_check" name="region_check" id="region_ALL"
-                                   value="전지역" onclick="changeSearchRegionCheckColor()"/>
+                                   value="전지역"/>
                             <label for="region_ALL"></label>전지역
                         </td>
                         <td onclick="changeSearchRegionCheck('region_Seoul')">
@@ -117,11 +117,34 @@
         <div style="float: right; width:48%; display: inline-block">
             <div class="small_txt">옵션</div>
             <div class="search_option_region">
-                <table style="width: 100%; font-size: 14px;">
+                <table class="searchRegionCheckTable">
                     <tr>
-                        <td><input type="checkbox" name="option_check" value="F"/>화장실</td>
-                        <td><input type="checkbox" name="option_check" value="F"/>낚시터</td>
-                        <td><input type="checkbox" name="option_check" value="F"/>편의점/마트</td>
+                        <td onclick="changeSearchOptionCheck('option_toilet')">
+                            <img src="${pageContext.request.contextPath}/static/img/toilet_icon.PNG" width="100%" alt="화장실">
+                        </td>
+                        <td onclick="changeSearchOptionCheck('option_fishing')">
+                            <img src="${pageContext.request.contextPath}/static/img/fishing_icon.PNG" width="100%" alt="낚시터">
+                        </td>
+                        <td onclick="changeSearchOptionCheck('option_mart')">
+                            <img src="${pageContext.request.contextPath}/static/img/toilet_icon.PNG" width="100%" alt="편의점/마트">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td onclick="changeSearchOptionCheck('option_toilet')">
+                            <input type="checkbox" class="option_check" name="option_check" id="option_toilet"
+                                   value="F"/>
+                            <label for="option_toilet"></label>화장실
+                        </td>
+                        <td onclick="changeSearchOptionCheck('option_fishing')">
+                            <input type="checkbox" class="option_check" name="option_check" id="option_fishing"
+                                   value="F"/>
+                            <label for="option_fishing"></label>낚시터
+                        </td>
+                        <td onclick="changeSearchOptionCheck('option_mart')">
+                            <input type="checkbox" class="option_check" name="option_check" id="option_mart"
+                                   value="F"/>
+                            <label for="option_mart"></label>편의점/마트
+                        </td>
                     </tr>
                 </table>
             </div>

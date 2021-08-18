@@ -37,3 +37,18 @@ function changeSearchRegionCheck(checkId) {
         regionCheckParentObj.css("color", "white")
     }
 }
+
+/* 차박지 검색조건 - 지역 선택 Checkbox 클릭 이벤트 */
+function changeSearchOptionCheck(checkId) {
+    let optionCheckObj = $("#" + checkId);
+    let optionCheckParentObj = optionCheckObj.parent("td");
+    if (optionCheckObj.is(":checked")) {
+        optionCheckObj.prop('checked', false);
+        optionCheckParentObj.css("background", "#e1e1e1")
+        optionCheckParentObj.css("color", "black")
+    } else {
+        optionCheckObj.prop('checked', true);
+        optionCheckParentObj.css("background", "crimson")
+        optionCheckParentObj.css("color", "white")
+    }
+}

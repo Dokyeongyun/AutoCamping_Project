@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/chabak.js?ver=2"></script>
+<script src="${pageContext.request.contextPath}/static/js/chabak.js?ver=4"></script>
 
 <nav class="navbar">
     <div style="border-top: 1px solid black; border-bottom: 1px solid black;">
