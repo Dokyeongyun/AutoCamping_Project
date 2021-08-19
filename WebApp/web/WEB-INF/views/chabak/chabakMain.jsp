@@ -127,7 +127,7 @@
                             <img src="${pageContext.request.contextPath}/static/img/fishing_icon.PNG" width="100%" alt="낚시터">
                         </td>
                         <td onclick="changeSearchOptionCheck('option_mart')">
-                            <img src="${pageContext.request.contextPath}/static/img/toilet_icon.PNG" width="100%" alt="편의점/마트">
+                            <img src="${pageContext.request.contextPath}/static/img/mart_icon.PNG" width="100%" alt="편의점/마트">
                         </td>
                     </tr>
                     <tr>
