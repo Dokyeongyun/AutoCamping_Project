@@ -1,5 +1,6 @@
-package ROOT.Service.Board;
+package ROOT.ServiceImpl.Board;
 
+import ROOT.Service.Board.FileUploadService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

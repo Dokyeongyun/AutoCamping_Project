@@ -1,5 +1,6 @@
-package ROOT.Service.Board;
+package ROOT.ServiceImpl.Board;
 
+import ROOT.Service.Board.BoardService;
 import ROOT.Utils.APIServerInfo;
 import ROOT.VO.Article.Article;
 import ROOT.VO.Article.ArticleFile;

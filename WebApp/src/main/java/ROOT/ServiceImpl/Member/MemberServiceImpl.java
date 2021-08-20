@@ -1,5 +1,6 @@
-package ROOT.Service.Member;
+package ROOT.ServiceImpl.Member;
 
+import ROOT.Service.Member.MemberService;
 import ROOT.Utils.APIServerInfo;
 import ROOT.Utils.CryptoUtils;
 import ROOT.VO.Chabak.ChabakDibs;
@@ -8,12 +9,10 @@ import ROOT.VO.Member.Member;
 import ROOT.VO.Member.MemberLoginHistory;
 import ROOT.VO.Member.MemberLoginLock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;

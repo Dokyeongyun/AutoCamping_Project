@@ -1,5 +1,6 @@
-package ROOT.Service.Chabak;
+package ROOT.ServiceImpl.Chabak;
 
+import ROOT.Service.Chabak.ChabakService;
 import ROOT.Utils.APIServerInfo;
 import ROOT.VO.Chabak.BestAndCount;
 import ROOT.VO.Chabak.Chabak;

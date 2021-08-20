@@ -1,5 +1,6 @@
-package ROOT.Service.Utils;
+package ROOT.ServiceImpl.Utils;
 
+import ROOT.Service.Utils.MailService;
 import ROOT.Utils.APIServerInfo;
 import ROOT.VO.Utils.Mail;
 import ROOT.VO.Utils.MailAuth;
